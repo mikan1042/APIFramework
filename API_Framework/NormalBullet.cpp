@@ -22,7 +22,7 @@ void NormalBullet::Initialize()
 int NormalBullet::Update(Transform& _rTransInfo)
 {
 	_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-	_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
+	_rTransInfo.Position.y -= _rTransInfo.Direction.y * Speed;
 
 	if (_rTransInfo.Position.x >= (WindowsWidth - 100))
 		return 1;
