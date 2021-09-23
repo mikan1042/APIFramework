@@ -26,7 +26,7 @@ void Logo::Initialize()
 
 	ImageList["Buffer"] = (new Bitmap)->LoadBmp(L"../Resource/Buffer.bmp");
 	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/BackGround.bmp");
-	ImageList["Hammer"] = (new Bitmap)->LoadBmp(L"../Resource/Hammer.bmp");
+	ImageList["Reimu"] = (new Bitmap)->LoadBmp(L"../Resource/Reimu.bmp");
 	ImageList["Mole"] = (new Bitmap)->LoadBmp(L"../Resource/Mole.bmp");
 	ImageList["Hole"] = (new Bitmap)->LoadBmp(L"../Resource/Hole.bmp");
 	ImageList["Effect"] = (new Bitmap)->LoadBmp(L"../Resource/Effect.bmp");

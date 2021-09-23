@@ -20,12 +20,12 @@ Player::~Player()
 void Player::Initialize()
 {
 	TransInfo.Position = Vector3(WindowsWidth / 2, WindowsHeight / 2);
-	TransInfo.Scale = Vector3(482.0f, 424.0f);
+	TransInfo.Scale = Vector3(33.0f, 50.0f);
 
-	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y - 20.0f);
+	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
 	Collider.Scale = Vector3(120.0f, 60.0f);
 
-	strKey = "Hammer";
+	strKey = "Reimu";
 	Active = false;
 
 	Speed = 3.0f;
@@ -38,7 +38,7 @@ void Player::Initialize()
 	JumpSpeed = 8.0f;
 	JumpTime = 0.0f;
 
-	Offset = Vector3(95.0f, -85.0f);
+	Offset = Vector3(0.0f, 0.0f);
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 }
@@ -77,8 +77,8 @@ int Player::Update()
 void Player::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc, // ** 최종 출력 위치
-		int(TransInfo.Position.x - (TransInfo.Scale.x / 2) + Offset.x),
-		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) + Offset.y),
+		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
+		int(TransInfo.Position.y - (TransInfo.Scale.y / 2)),
 		int(TransInfo.Scale.x),
 		int(TransInfo.Scale.y),
 		ImageList[strKey]->GetMemDC(),
