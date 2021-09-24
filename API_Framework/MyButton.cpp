@@ -38,19 +38,19 @@ int MyButton::Update()
 	Mouse.Position = InputManager::GetInstance()->GetMousePosition();
 	Mouse.Scale = Vector3(5.0f, 5.0f);
 
-	if (CollisionManager::EllipseCollision(TransInfo, Mouse))
-	{
-		DWORD dwKey = InputManager::GetInstance()->GetKey();
-
-		if (dwKey & KEY_LBUTTON)
-		{
-			Time = GetTickCount64();
-
-			Check();
-		}
-		else
-			MOVE = false;
-	}
+	// if (CollisionManager::EllipseCollision(TransInfo, Mouse))
+	// {
+	// 	DWORD dwKey = InputManager::GetInstance()->GetKey();
+	// 
+	// 	if (dwKey & KEY_LBUTTON)
+	// 	{
+	// 		Time = GetTickCount64();
+	// 
+	// 		Check();
+	// 	}
+	// 	else
+	// 		MOVE = false;
+	// }
 
 	return 0;
 }

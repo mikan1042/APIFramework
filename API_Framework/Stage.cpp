@@ -90,12 +90,6 @@ void Stage::Update()
 	if (m_pEffect->GetActive())
 		m_pEffect->Update();
 
-	if (((Player*)m_pPlayer)->GetSwing())
-	{
-		m_pEffect->SetActive(true);
-		m_pEffect->Initialize();
-	}
-
 	/*
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); )
@@ -130,6 +124,9 @@ void Stage::Update()
 		// ** 총알이 화면 밖을 넘어가게 되면 reutrn 1 을 반환 하고, 
 		// ** iResult == 1이면 총알은 삭제됨.
 		int iResult = (*iter)->Update();
+
+		if ((*iter)->GetPosition().y <= 10)
+			iResult = 1;
 
 		// ** Enemy 리스트의 progress
 		for (vector<Object*>::iterator iter2 = EnemyList->begin();

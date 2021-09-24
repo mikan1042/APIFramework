@@ -11,6 +11,9 @@ private:
 	float JumpTime;
 	int Frame;
 
+	// ** 캐릭터의 변경 여부
+	bool Player_Swap;
+
 	vector<Object*>* BulletList;
 public:
 	virtual void Initialize()override;
@@ -21,7 +24,6 @@ public:
 	virtual Object* Clone()override { return new Player(*this); }
 public:
 	bool GetJumpState() const { return bJump; }
-	void Jump();
 	void JumpOff() { bJump = false; }
 	int GetSwing() { return Frame; }
 

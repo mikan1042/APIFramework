@@ -5,6 +5,8 @@ class BulletBridge : public Bridge
 {
 protected:
 	float Speed;
+	map<string, Bitmap*> ImageList;
+	vector<Object*>* EnemyList;
 public:
 	virtual void Initialize()PURE;
 	virtual int Update(Transform& _rTransInfo)PURE;

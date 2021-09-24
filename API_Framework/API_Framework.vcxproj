@@ -155,11 +155,12 @@
     <ClInclude Include="Headers.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Logo.h" />
+    <ClInclude Include="LV2_Bullet.h" />
     <ClInclude Include="MainUpdate.h" />
     <ClInclude Include="MathManager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MyButton.h" />
-    <ClInclude Include="NormalBullet.h" />
+    <ClInclude Include="LV1_Bullet.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="ObjectManager.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Stage_Back.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Yukari_Bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp" />
@@ -185,11 +187,12 @@
     <ClCompile Include="HammerEffect.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Logo.cpp" />
+    <ClCompile Include="LV2_Bullet.cpp" />
     <ClCompile Include="MainUpdate.cpp" />
     <ClCompile Include="MathManager.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MyButton.cpp" />
-    <ClCompile Include="NormalBullet.cpp" />
+    <ClCompile Include="LV1_Bullet.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -199,6 +202,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage_Back.cpp" />
+    <ClCompile Include="Yukari_Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="API_Framework.rc" />

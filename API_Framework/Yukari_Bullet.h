@@ -1,7 +1,7 @@
 #pragma once
 #include "BulletBridge.h"
 
-class NormalBullet : public BulletBridge
+class Yukari_Bullet : public BulletBridge
 {
 public:
 	virtual void Initialize()override;
@@ -9,7 +9,7 @@ public:
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 public:
-	NormalBullet();
-	virtual ~NormalBullet();
+	Yukari_Bullet();
+	virtual ~Yukari_Bullet();
 };
 

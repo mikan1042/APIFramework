@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "ObjectManager.h"
 #include "MathManager.h"
-#include "NormalBullet.h"
+#include "LV1_Bullet.h"
 
 Bullet::Bullet() : BridgeObject(NULL)
 {
@@ -18,7 +18,7 @@ void Bullet::Initialize()
 {
 	TransInfo.Position = Vector3(0.0f, 0.0f);
 	TransInfo.Direction = Vector3(0.0f, 1.0f);
-	TransInfo.Scale = Vector3(30.0f, 30.0f);
+	TransInfo.Scale = Vector3(0.0f, 0.0f);
 
 	BridgeObject = NULL;
 
