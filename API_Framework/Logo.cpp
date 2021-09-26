@@ -6,6 +6,7 @@
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
 #include "BackGround.h"
+#include "Start.h"
 
 
 Logo::Logo()
@@ -32,6 +33,9 @@ void Logo::Initialize()
 	ImageList["Buffer"] = (new Bitmap)->LoadBmp(L"../Resource/Buffer.bmp");
 	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/BackGround.bmp");
 	ImageList["BGR"] = (new Bitmap)->LoadBmp(L"../Resource/BGR.bmp");
+
+
+	ImageList["Logo"] = (new Bitmap)->LoadBmp(L"../Resource/Logo.bmp");
 
 
 	
@@ -85,8 +89,8 @@ void Logo::Initialize()
 
 
 
-	Back_Ground = new BackGround;
-	Back_Ground->Initialize();
+	p_Start = new Start;
+	p_Start->Initialize();
 }
 
 void Logo::Update()
@@ -97,7 +101,10 @@ void Logo::Update()
  
 void Logo::Render(HDC _hdc)
 {
-	(ImageList["Buffer"]->GetMemDC());
+
+	p_Start->Render(ImageList["Buffer"]->GetMemDC());
+
+
 
 	BitBlt(_hdc,
 		0, 0,

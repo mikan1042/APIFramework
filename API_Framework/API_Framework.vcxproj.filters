@@ -136,6 +136,9 @@
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet">
       <UniqueIdentifier>{8ba99e07-255a-4b20-a68e-d108010e63db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Stage_Back\Start">
+      <UniqueIdentifier>{58e08f2f-afe3-4cb8-a883-78cbf69a22d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -258,6 +261,9 @@
     <ClInclude Include="aaa.h">
       <Filter>소스 파일\00. MainUpdate</Filter>
     </ClInclude>
+    <ClInclude Include="Start.h">
+      <Filter>소스 파일\02. Object\Stage_Back\Start</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -346,6 +352,9 @@
     </ClCompile>
     <ClCompile Include="Fairy.cpp">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Fairy</Filter>
+    </ClCompile>
+    <ClCompile Include="Start.cpp">
+      <Filter>소스 파일\02. Object\Stage_Back\Start</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

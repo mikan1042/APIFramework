@@ -6,7 +6,7 @@ class Logo : public Scene
 {
 private:
 	map<string, Bitmap*> ImageList;
-	Object* Back_Ground;
+	Object* p_Start;
 public:
 	virtual void Initialize()override;
 	virtual void Update()override;
