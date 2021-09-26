@@ -20,6 +20,7 @@ private:
 	bool Yukari_AT;
 
 	vector<Object*>* BulletList;
+	vector<Object*>* EnemyList;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;

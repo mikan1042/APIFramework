@@ -36,10 +36,10 @@ int Fairy::Update(Transform& _rTransInfo)
 void Fairy::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc, // ** 최종 출력 위치
-		int(600),
-		int(0),
-		int(25),
-		int(25),
+		int(400),
+		int(100),
+		int(100),
+		int(100),
 		ImageList[DrawKey]->GetMemDC(),
 		0, 0,
 		int(25),

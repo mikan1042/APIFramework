@@ -39,11 +39,6 @@ void Stage::Initialize()
 	Back_Ground = new BackGround;
 	Back_Ground->Initialize();
 
-
-
-	Bridge* pBridge = new Fairy;
-	Object* pFairy = ObjectFactory<Enemy>::CreateObject(600,400, pBridge);
-
 	m_pEffect = new HammerEffect;
 	m_pEffect->Initialize();
 
@@ -72,6 +67,15 @@ void Stage::Initialize()
 	}
 
 	ImageList = Object::GetImageList();
+
+
+
+
+
+
+
+	//------------------------------------------------------
+
 }
 
 void Stage::Update()

@@ -27,6 +27,7 @@ public:
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 public:
+public:
 	Stage();
 	virtual ~Stage();
 };

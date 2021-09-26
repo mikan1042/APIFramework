@@ -41,6 +41,7 @@ void Player::Initialize()
 	Offset = Vector3(0.0f, 0.0f);
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
+	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 }
 
 int Player::Update()
@@ -84,28 +85,17 @@ int Player::Update()
 			if (Time1 + 200 <= GetTickCount64())
 			{
 				BulletList->push_back(CreateBullet<LV1_Bullet>());
-				BulletList->push_back(CreateBullet<Fairy>());
 				Time1 = GetTickCount64();
 			}
 		}
-
-
-
-
-			// ** Z키를 누를경우 공격 ** //
-		// ULONGLONG Time = GetTickCount64();
-		//	if (GetAsyncKeyState('Z'))
-		//	{
-		//		while (true)
-		//		{
-		//			if (Time + 300 < GetTickCount64())
-		//			{
-		//				cout << "dsf" << endl;
-		//				Time = GetTickCount64();
-		//				BulletList->push_back(CreateBullet<LV1_Bullet>());
-		//			}
-		//		}
-		//	}
+		if (GetAsyncKeyState('X'))
+		{
+			if (Time1 + 200 <= GetTickCount64())
+			{
+				EnemyList->push_back(CreateBullet<Fairy>());
+				Time1 = GetTickCount64();
+			}
+		}
 	}
 	// ** 캐릭터가 유카리 일 경우 ** //
 	else

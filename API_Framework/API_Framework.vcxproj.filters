@@ -100,18 +100,6 @@
     <Filter Include="소스 파일\02. Object\UI\MyButton">
       <UniqueIdentifier>{ae79624f-0aef-49f0-8d40-c3d54972df1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet">
-      <UniqueIdentifier>{d95cb87d-7b24-4b34-8701-f77217289868}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV1_Bullet">
-      <UniqueIdentifier>{8158568a-9e7a-4da1-884a-02e88d0557b9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV2_Bullet">
-      <UniqueIdentifier>{f5081bb9-7484-4b3b-b72d-24b28c7084c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet">
-      <UniqueIdentifier>{8ba99e07-255a-4b20-a68e-d108010e63db}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02. Object\Stage_Back\BackGround">
       <UniqueIdentifier>{33fe7de2-0f71-4568-bf2d-5c75f3524bde}</UniqueIdentifier>
     </Filter>
@@ -135,6 +123,18 @@
     </Filter>
     <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\Fairy">
       <UniqueIdentifier>{dd02dfca-7392-49b3-bc9f-73500d2e1699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet">
+      <UniqueIdentifier>{d95cb87d-7b24-4b34-8701-f77217289868}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV1_Bullet">
+      <UniqueIdentifier>{8158568a-9e7a-4da1-884a-02e88d0557b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV2_Bullet">
+      <UniqueIdentifier>{f5081bb9-7484-4b3b-b72d-24b28c7084c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet">
+      <UniqueIdentifier>{8ba99e07-255a-4b20-a68e-d108010e63db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
