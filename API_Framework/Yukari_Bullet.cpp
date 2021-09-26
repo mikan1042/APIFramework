@@ -18,6 +18,8 @@ void Yukari_Bullet::Initialize()
 {
 	Speed = 7.0f;
 
+	DrawKey = "NomalBullet";
+
 	ImageList = Object::GetImageList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 }

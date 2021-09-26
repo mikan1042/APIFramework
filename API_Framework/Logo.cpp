@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
+#include "BackGround.h"
 
 
 Logo::Logo()
@@ -24,9 +25,17 @@ void Logo::Initialize()
 	ObjectManager::GetInstance()->SetPlayer(
 		ObjectFactory<Player>::CreateObject() );
 
+	
+	// 시작 화면
+	ImageList["Logo"] = (new Bitmap)->LoadBmp(L"../Resource/Logo.bmp");
 
 	ImageList["Buffer"] = (new Bitmap)->LoadBmp(L"../Resource/Buffer.bmp");
 	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/BackGround.bmp");
+	ImageList["BGR"] = (new Bitmap)->LoadBmp(L"../Resource/BGR.bmp");
+
+
+	
+
 
 
 
@@ -55,6 +64,12 @@ void Logo::Initialize()
 	// ** 유카리 비공격 모드 **//
 	ImageList["Off"] = (new Bitmap)->LoadBmp(L"../Resource/Yukari_AT_Off.bmp");
 
+	// ** 요정 **//
+	ImageList["Fairy"] = (new Bitmap)->LoadBmp(L"../Resource/Fairy.bmp");
+
+
+
+
 
 
 
@@ -67,6 +82,11 @@ void Logo::Initialize()
 	ImageList["on_off_Button"] = (new Bitmap)->LoadBmp(L"../Resource/on_off_Button.bmp");
 
 	Object::SetImageList(ImageList);
+
+
+
+	Back_Ground = new BackGround;
+	Back_Ground->Initialize();
 }
 
 void Logo::Update()
@@ -74,10 +94,18 @@ void Logo::Update()
 	if (GetAsyncKeyState('A'))
 		SceneManager::GetInstance()->SetScene(SCENEID::MENU);
 }
-
+ 
 void Logo::Render(HDC _hdc)
 {
-    
+	(ImageList["Buffer"]->GetMemDC());
+
+	BitBlt(_hdc,
+		0, 0,
+		WindowsWidth,
+		WindowsHeight,
+		ImageList["Buffer"]->GetMemDC(),
+		0, 0,
+		SRCCOPY);
 }
 
 void Logo::Release()

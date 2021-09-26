@@ -7,9 +7,11 @@ class Stage : public Scene
 {
 private:
 	Object* State_Back;
+	Object* Back_Ground;
 	Object* m_pPlayer;
 	Object* m_pEffect;
 	Object* m_pButton;
+	Object* m_Fairy;
 	vector<Object*>* EnemyList;
 	vector<Object*>* BulletList;
 	vector<Object*>* ObjectList;

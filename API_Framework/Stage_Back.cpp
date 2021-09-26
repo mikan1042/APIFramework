@@ -17,7 +17,6 @@ void Stage_Back::Initialize()
 	TransInfo.Direction = Vector3(0.0f, 0.0f);
 	TransInfo.Scale = Vector3(0.0f, 0.0f);
 
-	strKey = "Bullet";
 	Active = false;
 }
 
@@ -29,13 +28,17 @@ int Stage_Back::Update()
 
 void Stage_Back::Render(HDC _hdc)
 {
-	BitBlt(_hdc,
-		0, 0,
+	TransparentBlt(_hdc,
+		0,
+		0,
 		WindowsWidth,
 		WindowsHeight,
 		ImageList["BackGround"]->GetMemDC(),
-		0, 0,
-		SRCCOPY);
+		0,
+		0,
+		WindowsWidth,
+		WindowsHeight,
+		RGB(255, 0, 255));
 }
 
 void Stage_Back::Release()

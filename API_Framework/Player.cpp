@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include "LV1_Bullet.h"
 #include "Yukari_Bullet.h"
+#include "Fairy.h"
 
 
 Player::Player()
@@ -20,7 +21,7 @@ Player::~Player()
 
 void Player::Initialize()
 {
-	TransInfo.Position = Vector3(WindowsWidth / 2, WindowsHeight / 2);
+	TransInfo.Position = Vector3(420.0f, 640.0f);
 	TransInfo.Scale = Vector3(33.0f, 49.0f);
 
 	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
@@ -29,11 +30,13 @@ void Player::Initialize()
 	Active = false;
 
 	Frame = 0;
-	OldPositionY = 0.0f;
-	JumpSpeed = 8.0f;
-	JumpTime = 0.0f;
 
+	Time1 = GetTickCount64();
+
+	// ** 플레이어의 모습
 	Player_Swap = false;
+	// ** 유카리 모드일때 공격
+	Yukari_AT = false;
 
 	Offset = Vector3(0.0f, 0.0f);
 
@@ -67,22 +70,42 @@ int Player::Update()
 		Player_Swap = false;
 
 
-
-
-
-
 	// 캐릭터가 레이무 일 경우 ** //
 	if (!Player_Swap)
 	{
 		//** 레이무 기본 설정 ** //
 		Speed = 4.0f;
 
+		 
 
 
-
-		// ** Z키를 누를경우 공격 ** //
 		if (GetAsyncKeyState('Z'))
-			BulletList->push_back(CreateBullet<LV1_Bullet>());
+		{
+			if (Time1 + 200 <= GetTickCount64())
+			{
+				BulletList->push_back(CreateBullet<LV1_Bullet>());
+				BulletList->push_back(CreateBullet<Fairy>());
+				Time1 = GetTickCount64();
+			}
+		}
+
+
+
+
+			// ** Z키를 누를경우 공격 ** //
+		// ULONGLONG Time = GetTickCount64();
+		//	if (GetAsyncKeyState('Z'))
+		//	{
+		//		while (true)
+		//		{
+		//			if (Time + 300 < GetTickCount64())
+		//			{
+		//				cout << "dsf" << endl;
+		//				Time = GetTickCount64();
+		//				BulletList->push_back(CreateBullet<LV1_Bullet>());
+		//			}
+		//		}
+		//	}
 	}
 	// ** 캐릭터가 유카리 일 경우 ** //
 	else
@@ -95,11 +118,29 @@ int Player::Update()
 
 		// ** Z키를 누를경우 공격 ** //
 		if (GetAsyncKeyState('Z'))
+		{
 			BulletList->push_back(CreateBullet<Yukari_Bullet>());
+			Yukari_AT = true;
+		}
+		else
+			Yukari_AT = false;
 	}
 
 
 
+
+
+
+
+	// ** 캐릭터가 화면을 벗어나지 못하게 하기위해 설정 ** //
+	if (TransInfo.Position.x <= 60)
+		TransInfo.Position.x = 60;
+	if (TransInfo.Position.x >= 785)
+		TransInfo.Position.x = 785;
+	if (TransInfo.Position.y >= 670)
+		TransInfo.Position.y = 670;
+	if (TransInfo.Position.y <= 25)
+		TransInfo.Position.y = 25;
 
 
 	return 0;
@@ -136,6 +177,21 @@ void Player::Render(HDC _hdc)
 			int(TransInfo.Scale.x),
 			int(TransInfo.Scale.y),
 			RGB(255, 0, 255));
+
+		if (!Yukari_AT)
+		{
+			TransparentBlt(_hdc,
+				int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
+				int(TransInfo.Position.y - (TransInfo.Scale.y / 2)- 60),
+				int(32),
+				int(43),
+				ImageList["Off"]->GetMemDC(),
+				int(TransInfo.Scale.x * Frame),
+				int(TransInfo.Scale.y * 0),
+				int(32),
+				int(43),
+				RGB(255, 0, 255));
+		}
 	}
 }
 

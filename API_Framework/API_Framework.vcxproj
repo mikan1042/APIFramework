@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Bridge.h" />
     <ClInclude Include="Bullet.h" />
@@ -148,8 +149,10 @@
     <ClInclude Include="Constant.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyBridge.h" />
     <ClInclude Include="EnemyHole.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="Fairy.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HammerEffect.h" />
     <ClInclude Include="Headers.h" />
@@ -175,15 +178,19 @@
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Yukari_Bullet.h" />
+    <ClInclude Include="aaa.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletBridge.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyBridge.cpp" />
     <ClCompile Include="EnemyHole.cpp" />
+    <ClCompile Include="Fairy.cpp" />
     <ClCompile Include="HammerEffect.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Logo.cpp" />

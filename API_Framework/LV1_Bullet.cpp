@@ -16,7 +16,7 @@ LV1_Bullet::~LV1_Bullet()
 
 void LV1_Bullet::Initialize()
 {
-	Speed = 3.0f;
+	Speed = 7.0f;
 
 	DrawKey = "NomalBullet";
 

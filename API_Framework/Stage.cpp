@@ -2,12 +2,15 @@
 #include "SceneManager.h"
 #include "ObjectManager.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "EnemyHole.h"
 #include "HammerEffect.h"
 #include "ObjectFactory.h"
 #include "CollisionManager.h"
 #include "Stage_Back.h"
 #include "MyButton.h"
+#include "BackGround.h"
+#include "Fairy.h"
 
 
 Stage::Stage() : m_pPlayer(nullptr)
@@ -33,6 +36,13 @@ void Stage::Initialize()
 	State_Back = new Stage_Back;
 	State_Back->Initialize();
 
+	Back_Ground = new BackGround;
+	Back_Ground->Initialize();
+
+
+
+	Bridge* pBridge = new Fairy;
+	Object* pFairy = ObjectFactory<Enemy>::CreateObject(600,400, pBridge);
 
 	m_pEffect = new HammerEffect;
 	m_pEffect->Initialize();
@@ -43,23 +53,6 @@ void Stage::Initialize()
 	m_pButton = new MyButton;
 	m_pButton->Initialize();
 
-	/*
-	// ** Àû »ý¼º
-	for (int i = 0; i < 8; ++i)
-	{
-		Object* pObj = new Enemy;
-		pObj->Initialize();
-
-		Vector3 RandomPos = Vector3(
-			float(rand() % (WindowsWidth - 120) + 60),
-			float(rand() % (WindowsHeight - 120) + 60));
-
-		pObj->SetPosition(RandomPos.x, RandomPos.y);
-		pObj->SetColliderPosition(RandomPos.x, RandomPos.y);
-
-		EnemyList->push_back(pObj);
-	}
-	*/
 	
 	Vector3 Center = Vector3(WindowsWidth / 2.0f, WindowsHeight / 2.0f);
 
@@ -90,26 +83,6 @@ void Stage::Update()
 	if (m_pEffect->GetActive())
 		m_pEffect->Update();
 
-	/*
-	for (vector<Object*>::iterator iter = EnemyList->begin();
-		iter != EnemyList->end(); )
-	{
-		int Result = (*iter)->Update();
-
-		if (CollisionManager::EllipseCollision(
-			m_pPlayer->GetColliderTransform(),
-			(*iter)->GetColliderTransform()))
-		{
-			if (((Player*)m_pPlayer)->GetSwing())
-				Result = 1;
-		}
-
-		if (Result == 1)
-			iter = EnemyList->erase(iter);
-		else
-			++iter;
-	}
-	*/
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
@@ -161,7 +134,7 @@ void Stage::Update()
 
 void Stage::Render(HDC _hdc)
 {
-	State_Back->Render(ImageList["Buffer"]->GetMemDC());
+	Back_Ground->Render(ImageList["Buffer"]->GetMemDC());
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
@@ -177,6 +150,11 @@ void Stage::Render(HDC _hdc)
 	m_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
 
 	m_pButton->Render(ImageList["Buffer"]->GetMemDC());
+
+
+	State_Back->Render(ImageList["Buffer"]->GetMemDC());
+
+
 
 	BitBlt(_hdc,
 		0, 0,

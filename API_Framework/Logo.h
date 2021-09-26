@@ -1,10 +1,12 @@
 #pragma once
 #include "Scene.h"
+#include "Object.h"
 
 class Logo : public Scene
 {
 private:
 	map<string, Bitmap*> ImageList;
+	Object* Back_Ground;
 public:
 	virtual void Initialize()override;
 	virtual void Update()override;

@@ -112,6 +112,30 @@
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet">
       <UniqueIdentifier>{8ba99e07-255a-4b20-a68e-d108010e63db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Stage_Back\BackGround">
+      <UniqueIdentifier>{33fe7de2-0f71-4568-bf2d-5c75f3524bde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Stage_Back\Stage_Back">
+      <UniqueIdentifier>{0f6d6261-4df9-4399-981b-05b3eadbf7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge">
+      <UniqueIdentifier>{2408c45a-55f1-4b75-8691-438b462cf5af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\99.BaseBridge">
+      <UniqueIdentifier>{7d1fbe9b-aa69-49a9-8628-81414f467227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\99.BaseBullet">
+      <UniqueIdentifier>{cce9fec5-3e37-4efe-81f4-10e33a9825cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\99.BaseEnemy">
+      <UniqueIdentifier>{06e5031d-b551-4293-aec0-6063a025de47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\99.BaseBridge">
+      <UniqueIdentifier>{2e971905-db69-4d0f-9fda-2e386f0ce106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\Fairy">
+      <UniqueIdentifier>{dd02dfca-7392-49b3-bc9f-73500d2e1699}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -146,12 +170,6 @@
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>소스 파일\02. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>소스 파일\02. Object\Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>소스 파일\02. Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>소스 파일\02. Object\Player</Filter>
@@ -192,9 +210,6 @@
     <ClInclude Include="Bitmap.h">
       <Filter>소스 파일\99. Manager\RenderManager\Bitmap</Filter>
     </ClInclude>
-    <ClInclude Include="Stage_Back.h">
-      <Filter>소스 파일\02. Object\Stage_Back</Filter>
-    </ClInclude>
     <ClInclude Include="Headers.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -207,9 +222,6 @@
     <ClInclude Include="Bridge.h">
       <Filter>소스 파일\99. Manager\Pattern\Bridge</Filter>
     </ClInclude>
-    <ClInclude Include="BulletBridge.h">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge</Filter>
-    </ClInclude>
     <ClInclude Include="LV1_Bullet.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV1_Bullet</Filter>
     </ClInclude>
@@ -221,6 +233,30 @@
     </ClInclude>
     <ClInclude Include="Yukari_Bullet.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGround.h">
+      <Filter>소스 파일\02. Object\Stage_Back\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage_Back.h">
+      <Filter>소스 파일\02. Object\Stage_Back\Stage_Back</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletBridge.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\99.BaseBridge</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>소스 파일\02. Object\Bullet\99.BaseBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>소스 파일\02. Object\Enemy\99.BaseEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBridge.h">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\99.BaseBridge</Filter>
+    </ClInclude>
+    <ClInclude Include="Fairy.h">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Fairy</Filter>
+    </ClInclude>
+    <ClInclude Include="aaa.h">
+      <Filter>소스 파일\00. MainUpdate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -235,12 +271,6 @@
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\02. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>소스 파일\02. Object\Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>소스 파일\02. Object\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\02. Object\Player</Filter>
@@ -275,9 +305,6 @@
     <ClCompile Include="Bitmap.cpp">
       <Filter>소스 파일\99. Manager\RenderManager\Bitmap</Filter>
     </ClCompile>
-    <ClCompile Include="Stage_Back.cpp">
-      <Filter>소스 파일\02. Object\Stage_Back</Filter>
-    </ClCompile>
     <ClCompile Include="HammerEffect.cpp">
       <Filter>소스 파일\02. Object\HammerEffect</Filter>
     </ClCompile>
@@ -286,9 +313,6 @@
     </ClCompile>
     <ClCompile Include="Bridge.cpp">
       <Filter>소스 파일\99. Manager\Pattern\Bridge</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletBridge.cpp">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge</Filter>
     </ClCompile>
     <ClCompile Include="LV1_Bullet.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV1_Bullet</Filter>
@@ -301,6 +325,27 @@
     </ClCompile>
     <ClCompile Include="Yukari_Bullet.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>소스 파일\02. Object\Stage_Back\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage_Back.cpp">
+      <Filter>소스 파일\02. Object\Stage_Back\Stage_Back</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletBridge.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\99.BaseBridge</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일\02. Object\Bullet\99.BaseBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>소스 파일\02. Object\Enemy\99.BaseEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBridge.cpp">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\99.BaseBridge</Filter>
+    </ClCompile>
+    <ClCompile Include="Fairy.cpp">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Fairy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

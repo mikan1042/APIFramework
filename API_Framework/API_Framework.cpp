@@ -59,6 +59,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     ULONGLONG Time = GetTickCount64();
 
+
     while (msg.message != WM_QUIT)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
@@ -75,7 +76,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                 Main.Update();
                 Main.Render();
             }
+
         }
+        
     }
 
     /*
@@ -133,7 +136,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   RECT rcWindows = { 0, 0, WindowsWidth, WindowsHeight };
+   RECT rcWindows = { 0, 0, 1280, 755 };
 
    HWND hWnd = g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, rcWindows.right - rcWindows.left, rcWindows.bottom - rcWindows.top, nullptr, nullptr, hInstance, nullptr);
