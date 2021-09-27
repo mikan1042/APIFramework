@@ -1,4 +1,5 @@
 #include "Player.h"
+
 #include "InputManager.h"
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
@@ -6,7 +7,10 @@
 #include "Bullet.h"
 #include "LV1_Bullet.h"
 #include "Yukari_Bullet.h"
+
+#include "Enemy.h"
 #include "Fairy.h"
+#include "Boss.h"
 
 
 Player::Player()
@@ -42,6 +46,7 @@ void Player::Initialize()
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
+
 }
 
 int Player::Update()
@@ -75,13 +80,13 @@ int Player::Update()
 	if (!Player_Swap)
 	{
 		//** 레이무 기본 설정 ** //
-		Speed = 4.0f;
+		Speed = 5.0f;
 
 		 
-
-
+		// ** Z키를 누를경우
 		if (GetAsyncKeyState('Z'))
 		{
+
 			if (Time1 + 200 <= GetTickCount64())
 			{
 				BulletList->push_back(CreateBullet<LV1_Bullet>());
@@ -92,16 +97,25 @@ int Player::Update()
 		{
 			if (Time1 + 200 <= GetTickCount64())
 			{
-				EnemyList->push_back(CreateBullet<Fairy>());
+				EnemyList->push_back(CreateEnemy<Fairy>());
 				Time1 = GetTickCount64();
 			}
 		}
+		if (GetAsyncKeyState('C'))
+		{
+			if (Time1 + 200 <= GetTickCount64())
+			{
+				EnemyList->push_back(CreateEnemy<Boss>());
+				Time1 = GetTickCount64();
+			}
+		}
+
 	}
 	// ** 캐릭터가 유카리 일 경우 ** //
 	else
 	{
 		//** 유카리 기본 설정 ** //
-		Speed = 2.0f;
+		Speed = 1.5f;
 
 
 
@@ -109,8 +123,14 @@ int Player::Update()
 		// ** Z키를 누를경우 공격 ** //
 		if (GetAsyncKeyState('Z'))
 		{
-			BulletList->push_back(CreateBullet<Yukari_Bullet>());
-			Yukari_AT = true;
+			if (Time1 + 200 <= GetTickCount64())
+			{
+				Yukari_AT = true;
+				BulletList->push_back(CreateBullet<Yukari_Bullet>());
+
+				Time1 = GetTickCount64();
+
+			}
 		}
 		else
 			Yukari_AT = false;
@@ -123,14 +143,16 @@ int Player::Update()
 
 
 	// ** 캐릭터가 화면을 벗어나지 못하게 하기위해 설정 ** //
-	if (TransInfo.Position.x <= 60)
-		TransInfo.Position.x = 60;
-	if (TransInfo.Position.x >= 785)
-		TransInfo.Position.x = 785;
-	if (TransInfo.Position.y >= 670)
-		TransInfo.Position.y = 670;
-	if (TransInfo.Position.y <= 25)
-		TransInfo.Position.y = 25;
+	{
+		if (TransInfo.Position.x <= 60)
+			TransInfo.Position.x = 60;
+		if (TransInfo.Position.x >= 785)
+			TransInfo.Position.x = 785;
+		if (TransInfo.Position.y >= 670)
+			TransInfo.Position.y = 670;
+		if (TransInfo.Position.y <= 25)
+			TransInfo.Position.y = 25;
+	}
 
 
 	return 0;
@@ -182,6 +204,20 @@ void Player::Render(HDC _hdc)
 				int(43),
 				RGB(255, 0, 255));
 		}
+		//	else
+		//	{
+		//		TransparentBlt(_hdc,
+		//			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
+		//			int(TransInfo.Position.y - (TransInfo.Scale.y / 2) - 60),
+		//			int(33),
+		//			int(33),
+		//			ImageList["On"]->GetMemDC(),
+		//			int(TransInfo.Scale.x * Frame),
+		//			int(TransInfo.Scale.y * 0),
+		//			int(33),
+		//			int(33),
+		//			RGB(255, 0, 255));
+		//	}
 	}
 }
 
@@ -199,4 +235,14 @@ Object* Player::CreateBullet()
 	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, pBridge);
 
 	return pBullet;
+}
+
+template <typename T>
+Object* Player::CreateEnemy()
+{
+	Bridge* pBridge = new T;
+
+	Object* pEnemy = ObjectFactory<Enemy>::CreateObject(300,400, pBridge);
+
+	return pEnemy;
 }

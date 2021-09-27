@@ -6,6 +6,7 @@ class Enemy : public Object
 {
 private:
 	Bridge* BridgeObject;
+	int Hp;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;
@@ -13,6 +14,7 @@ public:
 	virtual void Release()override;
 
 	virtual Object* Clone()override { return new Enemy(*this); }
+	int GetHp() { return Hp; }
 public:
 	void SetBridge(Bridge* _pBridge) { BridgeObject = _pBridge; }
 public:

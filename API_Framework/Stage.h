@@ -12,6 +12,7 @@ private:
 	Object* m_pEffect;
 	Object* m_pButton;
 	Object* m_Fairy;
+
 	vector<Object*>* EnemyList;
 	vector<Object*>* BulletList;
 	vector<Object*>* ObjectList;

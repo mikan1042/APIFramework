@@ -1,31 +1,30 @@
-#include "Fairy.h"
+#include "Boss.h"
 
 #include "Object.h"
 #include "ObjectManager.h"
 
-Fairy::Fairy()
+Boss::Boss()
 {
 
 }
 
-Fairy::~Fairy()
+Boss::~Boss()
 {
 
 }
 
 
-void Fairy::Initialize()
+void Boss::Initialize()
 {
-
 	Speed = 1.5f;
 
-	DrawKey = "Fairy";
+	DrawKey = "Boss";
 
 	ImageList = Object::GetImageList();
 
 }
 
-int Fairy::Update(Transform& _rTransInfo)
+int Boss::Update(Transform& _rTransInfo)
 {
 	_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 	_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
@@ -34,21 +33,21 @@ int Fairy::Update(Transform& _rTransInfo)
 }
 
 
-void Fairy::Render(HDC _hdc)
+void Boss::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc, // ** 최종 출력 위치
-		int(400),
+		int(500),
 		int(100),
-		int(25),
-		int(25),
+		int(46),
+		int(67),
 		ImageList[DrawKey]->GetMemDC(),
 		0, 0,
-		int(25),
-		int(25),
+		int(46),
+		int(67),
 		RGB(255, 0, 255));
 }
 
-void Fairy::Release()
+void Boss::Release()
 {
 
 }

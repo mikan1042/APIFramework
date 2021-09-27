@@ -142,6 +142,7 @@
     <ClInclude Include="API_Framework.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Bitmap.h" />
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="Bridge.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletBridge.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="API_Framework.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Bitmap.cpp" />
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="Bridge.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletBridge.cpp" />

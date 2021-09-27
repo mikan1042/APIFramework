@@ -16,9 +16,10 @@ Yukari_Bullet::~Yukari_Bullet()
 
 void Yukari_Bullet::Initialize()
 {
+
 	Speed = 7.0f;
 
-	DrawKey = "NomalBullet";
+	DrawKey = "On";
 
 	ImageList = Object::GetImageList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
@@ -38,13 +39,14 @@ void Yukari_Bullet::Render(HDC _hdc)
 	TransparentBlt(_hdc, // ** 최종 출력 위치
 		int(RealObject->GetPosition().x - 8),
 		int(RealObject->GetPosition().y - (12)),
-		int(12),
-		int(16),
+		int(33),
+		int(33),
 		ImageList[DrawKey]->GetMemDC(),
 		0, 0,
-		int(12),
-		int(16),
+		int(33),
+		int(33),
 		RGB(255, 0, 255));
+
 }
 
 void Yukari_Bullet::Release()

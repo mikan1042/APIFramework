@@ -21,6 +21,8 @@ private:
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
+
+
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;
@@ -35,6 +37,9 @@ public:
 
 	template <typename T>
 	Object* CreateBullet();
+
+	template <typename T>
+	Object* CreateEnemy();
 public:
 	Player();
 	Player(const Transform& _rTransInfo) : Object(_rTransInfo) { }

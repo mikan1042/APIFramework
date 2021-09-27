@@ -22,6 +22,8 @@ void Enemy::Initialize()
 	Collider.Position = Vector3(0.0f, 0.0f);
 	Collider.Scale = Vector3(100.0f, 100.0f);
 
+	BridgeObject = NULL;
+
 	strKey = "Enemy";
 	Active = false;
 }

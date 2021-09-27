@@ -27,15 +27,15 @@ void Logo::Initialize()
 		ObjectFactory<Player>::CreateObject() );
 
 	
-	// 시작 화면
+	// ** 시작 화면
 	ImageList["Logo"] = (new Bitmap)->LoadBmp(L"../Resource/Logo.bmp");
 
+	// ** Buffer 및 배경
 	ImageList["Buffer"] = (new Bitmap)->LoadBmp(L"../Resource/Buffer.bmp");
 	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/BackGround.bmp");
 	ImageList["BGR"] = (new Bitmap)->LoadBmp(L"../Resource/BGR.bmp");
 
 
-	ImageList["Logo"] = (new Bitmap)->LoadBmp(L"../Resource/Logo.bmp");
 
 
 	
@@ -74,6 +74,14 @@ void Logo::Initialize()
 
 
 
+	// ** 요정 **//
+	ImageList["Boss"] = (new Bitmap)->LoadBmp(L"../Resource/Boss.bmp");
+
+
+
+
+
+
 
 
 
@@ -88,7 +96,7 @@ void Logo::Initialize()
 	Object::SetImageList(ImageList);
 
 
-
+	// ** 시작화면 ** //
 	p_Start = new Start;
 	p_Start->Initialize();
 }
@@ -101,7 +109,7 @@ void Logo::Update()
  
 void Logo::Render(HDC _hdc)
 {
-
+	// ** 시작화면 ** //
 	p_Start->Render(ImageList["Buffer"]->GetMemDC());
 
 

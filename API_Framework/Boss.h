@@ -1,18 +1,17 @@
 #pragma once
-#include "BulletBridge.h"
+#include "EnemyBridge.h"
 
-class Yukari_Bullet : public BulletBridge
+class Boss : public EnemyBridge
 {
-public:
-
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 
+
 public:
-	Yukari_Bullet();
-	virtual ~Yukari_Bullet();
+	Boss();
+	virtual ~Boss();
 };
 

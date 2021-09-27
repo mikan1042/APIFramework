@@ -33,6 +33,9 @@ void Stage::Initialize()
 	// ** 오브젝트 매니저에서 몬스터 리스트를 받아옴. (포인터로...)
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 	
+	ImageList = Object::GetImageList();
+
+
 	State_Back = new Stage_Back;
 	State_Back->Initialize();
 
@@ -66,7 +69,6 @@ void Stage::Initialize()
 		}
 	}
 
-	ImageList = Object::GetImageList();
 
 
 
@@ -75,6 +77,9 @@ void Stage::Initialize()
 
 
 	//------------------------------------------------------
+
+
+
 
 }
 
@@ -122,7 +127,7 @@ void Stage::Update()
 				// ** 이유 : 총알 1개에 오브젝 1개를 삭제하기 위함. 
 				break;
 
-				//** break 가 안되면 총알이 생성된 시점에에서 충돌체가 여러개일때 모두 충돌후 삭제됨.
+				//** break 가 안되면 총알이 생성된 시점에서 충돌체가 여러개일때 모두 충돌후 삭제됨.
 			}
 			else
 				++iter2;

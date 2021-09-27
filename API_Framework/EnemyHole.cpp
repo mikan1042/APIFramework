@@ -26,16 +26,11 @@ void EnemyHole::Initialize()
 	strKey = "Hole";
 
 	Speed = 0.0f;
-
-	EnemyMole = new Enemy;
-	EnemyMole->Initialize();
 }
 
 //Transform& _TrnasPos
 int EnemyHole::Update()
 {
-	EnemyMole->SetPosition(TransInfo.Position.x, TransInfo.Position.y);
-	EnemyMole->Update();
 
 	return 0;
 }
@@ -53,7 +48,6 @@ void EnemyHole::Render(HDC _hdc)
 		int(TransInfo.Scale.y),
 		RGB(255, 0, 255));
 
-	EnemyMole->Render(_hdc);
 }
 
 void EnemyHole::Release()

@@ -109,18 +109,6 @@
     <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge">
       <UniqueIdentifier>{2408c45a-55f1-4b75-8691-438b462cf5af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\99.BaseBridge">
-      <UniqueIdentifier>{7d1fbe9b-aa69-49a9-8628-81414f467227}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\99.BaseBullet">
-      <UniqueIdentifier>{cce9fec5-3e37-4efe-81f4-10e33a9825cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. Object\Enemy\99.BaseEnemy">
-      <UniqueIdentifier>{06e5031d-b551-4293-aec0-6063a025de47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\99.BaseBridge">
-      <UniqueIdentifier>{2e971905-db69-4d0f-9fda-2e386f0ce106}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\Fairy">
       <UniqueIdentifier>{dd02dfca-7392-49b3-bc9f-73500d2e1699}</UniqueIdentifier>
     </Filter>
@@ -138,6 +126,21 @@
     </Filter>
     <Filter Include="소스 파일\02. Object\Stage_Back\Start">
       <UniqueIdentifier>{58e08f2f-afe3-4cb8-a883-78cbf69a22d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\BaseEnemy">
+      <UniqueIdentifier>{06e5031d-b551-4293-aec0-6063a025de47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BaseBullet">
+      <UniqueIdentifier>{cce9fec5-3e37-4efe-81f4-10e33a9825cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\BaseBridge">
+      <UniqueIdentifier>{2e971905-db69-4d0f-9fda-2e386f0ce106}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\BaseBridge">
+      <UniqueIdentifier>{7d1fbe9b-aa69-49a9-8628-81414f467227}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\Boss">
+      <UniqueIdentifier>{5680935e-efbf-43ef-aa99-489945fca12a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -244,16 +247,16 @@
       <Filter>소스 파일\02. Object\Stage_Back\Stage_Back</Filter>
     </ClInclude>
     <ClInclude Include="BulletBridge.h">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\99.BaseBridge</Filter>
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\BaseBridge</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>소스 파일\02. Object\Bullet\99.BaseBullet</Filter>
+      <Filter>소스 파일\02. Object\Bullet\BaseBullet</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>소스 파일\02. Object\Enemy\99.BaseEnemy</Filter>
+      <Filter>소스 파일\02. Object\Enemy\BaseEnemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBridge.h">
-      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\99.BaseBridge</Filter>
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\BaseBridge</Filter>
     </ClInclude>
     <ClInclude Include="Fairy.h">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Fairy</Filter>
@@ -263,6 +266,9 @@
     </ClInclude>
     <ClInclude Include="Start.h">
       <Filter>소스 파일\02. Object\Stage_Back\Start</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -339,22 +345,25 @@
       <Filter>소스 파일\02. Object\Stage_Back\Stage_Back</Filter>
     </ClCompile>
     <ClCompile Include="BulletBridge.cpp">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\99.BaseBridge</Filter>
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\BaseBridge</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>소스 파일\02. Object\Bullet\99.BaseBullet</Filter>
+      <Filter>소스 파일\02. Object\Bullet\BaseBullet</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
-      <Filter>소스 파일\02. Object\Enemy\99.BaseEnemy</Filter>
+      <Filter>소스 파일\02. Object\Enemy\BaseEnemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBridge.cpp">
-      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\99.BaseBridge</Filter>
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\BaseBridge</Filter>
     </ClCompile>
     <ClCompile Include="Fairy.cpp">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Fairy</Filter>
     </ClCompile>
     <ClCompile Include="Start.cpp">
       <Filter>소스 파일\02. Object\Stage_Back\Start</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
