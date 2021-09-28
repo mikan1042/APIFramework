@@ -153,7 +153,7 @@
     <ClInclude Include="EnemyBridge.h" />
     <ClInclude Include="EnemyHole.h" />
     <ClInclude Include="Enum.h" />
-    <ClInclude Include="Fairy.h" />
+    <ClInclude Include="FairyEnemy.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="HammerEffect.h" />
     <ClInclude Include="Headers.h" />
@@ -193,7 +193,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyBridge.cpp" />
     <ClCompile Include="EnemyHole.cpp" />
-    <ClCompile Include="Fairy.cpp" />
+    <ClCompile Include="FairyEnemy.cpp" />
     <ClCompile Include="HammerEffect.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Logo.cpp" />

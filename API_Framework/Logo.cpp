@@ -69,7 +69,7 @@ void Logo::Initialize()
 	ImageList["Off"] = (new Bitmap)->LoadBmp(L"../Resource/Yukari_AT_Off.bmp");
 
 	// ** ¿äÁ¤ **//
-	ImageList["Fairy"] = (new Bitmap)->LoadBmp(L"../Resource/Fairy.bmp");
+	ImageList["FairyEnemy"] = (new Bitmap)->LoadBmp(L"../Resource/Fairy.bmp");
 
 
 

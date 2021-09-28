@@ -1,31 +1,30 @@
-#include "Fairy.h"
+#include "FairyEnemy.h"
 
 #include "Object.h"
 #include "ObjectManager.h"
 
-Fairy::Fairy()
+FairyEnemy::FairyEnemy()
 {
 
 }
 
-Fairy::~Fairy()
+FairyEnemy::~FairyEnemy()
 {
 
 }
 
 
-void Fairy::Initialize()
+void FairyEnemy::Initialize()
 {
-
 	Speed = 1.5f;
 
-	DrawKey = "Fairy";
+	DrawKey = "FairyEnemy";
 
 	ImageList = Object::GetImageList();
 
 }
 
-int Fairy::Update(Transform& _rTransInfo)
+int FairyEnemy::Update(Transform& _rTransInfo)
 {
 	_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 	_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
@@ -34,11 +33,11 @@ int Fairy::Update(Transform& _rTransInfo)
 }
 
 
-void Fairy::Render(HDC _hdc)
+void FairyEnemy::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc, // ** 최종 출력 위치
-		int(400),
-		int(100),
+		int(RealObject->GetPosition().x - 50),
+		int(RealObject->GetPosition().y - 50),
 		int(25),
 		int(25),
 		ImageList[DrawKey]->GetMemDC(),
@@ -48,7 +47,7 @@ void Fairy::Render(HDC _hdc)
 		RGB(255, 0, 255));
 }
 
-void Fairy::Release()
+void FairyEnemy::Release()
 {
 
 }

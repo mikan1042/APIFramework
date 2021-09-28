@@ -109,9 +109,6 @@
     <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge">
       <UniqueIdentifier>{2408c45a-55f1-4b75-8691-438b462cf5af}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\Fairy">
-      <UniqueIdentifier>{dd02dfca-7392-49b3-bc9f-73500d2e1699}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet">
       <UniqueIdentifier>{d95cb87d-7b24-4b34-8701-f77217289868}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,9 @@
     </Filter>
     <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\Boss">
       <UniqueIdentifier>{5680935e-efbf-43ef-aa99-489945fca12a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy">
+      <UniqueIdentifier>{dd02dfca-7392-49b3-bc9f-73500d2e1699}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -258,8 +258,8 @@
     <ClInclude Include="EnemyBridge.h">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\BaseBridge</Filter>
     </ClInclude>
-    <ClInclude Include="Fairy.h">
-      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Fairy</Filter>
+    <ClInclude Include="FairyEnemy.h">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy</Filter>
     </ClInclude>
     <ClInclude Include="aaa.h">
       <Filter>소스 파일\00. MainUpdate</Filter>
@@ -356,8 +356,8 @@
     <ClCompile Include="EnemyBridge.cpp">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\BaseBridge</Filter>
     </ClCompile>
-    <ClCompile Include="Fairy.cpp">
-      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Fairy</Filter>
+    <ClCompile Include="FairyEnemy.cpp">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy</Filter>
     </ClCompile>
     <ClCompile Include="Start.cpp">
       <Filter>소스 파일\02. Object\Stage_Back\Start</Filter>

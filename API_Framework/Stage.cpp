@@ -10,7 +10,7 @@
 #include "Stage_Back.h"
 #include "MyButton.h"
 #include "BackGround.h"
-#include "Fairy.h"
+#include "FairyEnemy.h"
 
 
 Stage::Stage() : m_pPlayer(nullptr)

@@ -9,7 +9,7 @@
 #include "Yukari_Bullet.h"
 
 #include "Enemy.h"
-#include "Fairy.h"
+#include "FairyEnemy.h"
 #include "Boss.h"
 
 
@@ -97,7 +97,7 @@ int Player::Update()
 		{
 			if (Time1 + 200 <= GetTickCount64())
 			{
-				EnemyList->push_back(CreateEnemy<Fairy>());
+				EnemyList->push_back(CreateEnemy<FairyEnemy>());
 				Time1 = GetTickCount64();
 			}
 		}
@@ -242,7 +242,7 @@ Object* Player::CreateEnemy()
 {
 	Bridge* pBridge = new T;
 
-	Object* pEnemy = ObjectFactory<Enemy>::CreateObject(300,400, pBridge);
+	Object* pEnemy = ObjectFactory<Enemy>::CreateObject(600,300, pBridge);
 
 	return pEnemy;
 }

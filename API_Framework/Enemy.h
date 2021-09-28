@@ -14,7 +14,6 @@ public:
 	virtual void Release()override;
 
 	virtual Object* Clone()override { return new Enemy(*this); }
-	int GetHp() { return Hp; }
 public:
 	void SetBridge(Bridge* _pBridge) { BridgeObject = _pBridge; }
 public:

@@ -7,7 +7,7 @@ TransparentBlt
 
 hdcDest						// ** 핸들
 xoriginDest, yoriginDest	// ** 출력할 위치 X,Y
-wDest, hDest				// ** 출력할 이미지의 크기 
+wDest, hDest				// ** 출력할 이미지의 크기	
 hdcSrc						// ** 이미지의 핸들
 xoriginSrc, yoriginSrc		// ** 이미지의 시작지점 
 wSrc, hSrc					// ** 잘라낼 크기
@@ -31,6 +31,16 @@ crTransparent				// ** 마젠타색상
 
 
 // 실제작업한 날은 하루 전 날짜 (엑셀 양식과 맞추기 위함)
+
+// ** 9월 28일 ** //
+/*
+*
+*   ** C키를 누를경우 보스 생성
+*	** 프레임워크 수정
+
+※※※ 요정과 탄막간의 충돌이 일어나지않아서 수정 예정
+
+*/
 
 // ** 9월 27일 ** //
 /*
