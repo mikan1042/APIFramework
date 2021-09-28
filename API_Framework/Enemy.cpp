@@ -16,7 +16,7 @@ Enemy::~Enemy()
 
 void Enemy::Initialize()
 {
-	TransInfo.Position = Vector3(-12.5f, 0.0f);
+	TransInfo.Position = Vector3(0.0f, 0.0f);
 	TransInfo.Direction = Vector3(0.0f, 0.0f);
 	TransInfo.Scale = Vector3(25.0f, 25.0f);
 
@@ -41,7 +41,6 @@ void Enemy::Render(HDC _hdc)
 
 	if (BridgeObject)
 		BridgeObject->Render(_hdc);
-
 
 
 }

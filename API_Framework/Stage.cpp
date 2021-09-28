@@ -115,7 +115,7 @@ void Stage::Update()
 			iter2 != EnemyList->end(); )
 		{
 			// ** 충돌 처리
-			if (CollisionManager::EllipseCollision((*iter), (*iter2)))
+			if (CollisionManager::RectCollision((*iter), (*iter2)))
 			{
 				// ** 몬스터 삭제
 				iter2 = EnemyList->erase(iter2);
