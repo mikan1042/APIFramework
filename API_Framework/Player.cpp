@@ -163,6 +163,7 @@ int Player::Update()
 
 void Player::Render(HDC _hdc)
 {
+	//플레이어의 판정박스
 	Rectangle(_hdc,
 		int(Collider.Position.x - (Collider.Scale.x / 2)),
 		int(Collider.Position.y - (Collider.Scale.y / 2)),
