@@ -51,26 +51,6 @@ void Stage::Initialize()
 	m_pButton = new MyButton;
 	m_pButton->Initialize();
 
-	
-	Vector3 Center = Vector3(WindowsWidth / 2.0f, WindowsHeight / 2.0f);
-
-	for (int y = 0; y < TileHeightCnt; ++y)
-	{
-		for (int x = 0; x < TileWidthCnt; ++x)
-		{
-			Object* pObj = new EnemyHole;
-			pObj->Initialize();
-
-			pObj->SetPosition(
-				(Center.x - ((TileWidthCnt / 2) * pObj->GetScale().x )) + pObj->GetScale().x * x,
-				(Center.y - ((TileHeightCnt / 2) * pObj->GetScale().y)) + pObj->GetScale().y * y);
-
-			EnemyList->push_back(pObj);
-		}
-	}
-
-
-
 
 
 
@@ -91,6 +71,16 @@ void Stage::Update()
 
 	if (m_pEffect->GetActive())
 		m_pEffect->Update();
+
+
+	for (vector<Object*>::iterator iter = EnemyList->begin();
+		iter != EnemyList->end(); ++iter)
+	{
+		if (CollisionManager::RectCollision((*iter), m_pPlayer))
+		{
+			cout << "플레이어의 죽음" << endl;
+		}
+	}
 
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();

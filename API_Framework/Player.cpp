@@ -29,7 +29,7 @@ void Player::Initialize()
 	TransInfo.Scale = Vector3(33.0f, 49.0f);
 
 	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
-	Collider.Scale = Vector3(120.0f, 60.0f);
+	Collider.Scale = Vector3(TransInfo.Scale.x, TransInfo.Scale.y);
 
 	Active = false;
 
@@ -51,6 +51,9 @@ void Player::Initialize()
 
 int Player::Update()
 {
+
+
+	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
 
 	// ** 두 캐릭터 공통으로 사용 ** //
 
@@ -160,6 +163,13 @@ int Player::Update()
 
 void Player::Render(HDC _hdc)
 {
+	Rectangle(_hdc,
+		int(Collider.Position.x - (Collider.Scale.x / 2)),
+		int(Collider.Position.y - (Collider.Scale.y / 2)),
+		int(Collider.Position.x + (Collider.Scale.x / 2)),
+		int(Collider.Position.y + (Collider.Scale.y / 2)));
+
+
 	// ** 레이무 인 경우 출력방식 ** //
 	if (!Player_Swap)
 	{

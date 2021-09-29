@@ -35,15 +35,21 @@ int Boss::Update(Transform& _rTransInfo)
 
 void Boss::Render(HDC _hdc)
 {
+	Rectangle(_hdc,
+		int(RealObject->GetPosition().x - (RealObject->GetScale().x / 2)),
+		int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2)),
+		int(RealObject->GetPosition().x + (RealObject->GetScale().x / 2)),
+		int(RealObject->GetPosition().y + (RealObject->GetScale().y / 2)));
+
 	TransparentBlt(_hdc, // ** 최종 출력 위치
-		int(500),
-		int(100),
-		int(46),
-		int(67),
+		int(RealObject->GetPosition().x - 12.5f),
+		int(RealObject->GetPosition().y - 12.5f),
+		int(RealObject->GetScale().x),
+		int(RealObject->GetScale().y),
 		ImageList[DrawKey]->GetMemDC(),
 		0, 0,
-		int(46),
-		int(67),
+		int(RealObject->GetScale().x),
+		int(RealObject->GetScale().y),
 		RGB(255, 0, 255));
 }
 

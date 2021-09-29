@@ -43,6 +43,8 @@ public:
 	// ** ÁÂÇ¥¸¦ Setting (_x, _y)
 	void SetPosition(float _x, float _y) { TransInfo.Position.x = _x; TransInfo.Position.y = _y; }
 
+	void SetScale(float _x, float _y) { TransInfo.Scale.x = _x; TransInfo.Scale.y = _y; }
+
 	// ** ÁÂÇ¥¸¦ Vector3·Î out
 	Vector3 GetPosition() { return TransInfo.Position; }
 
