@@ -1,17 +1,15 @@
-#pragma once
-#include "BulletBridge.h"
+#include "ItemBirdge.h"
 
-class LV2_Bullet : public BulletBridge
+class Power : public ItemBirdge
 {
-public:
-	Object* Target;
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
-public:
-	LV2_Bullet();
-	virtual ~LV2_Bullet();
-};
 
+
+public:
+	Power();
+	virtual ~Power();
+};

@@ -3,14 +3,16 @@
 #include "ObjectManager.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "EnemyHole.h"
-#include "HammerEffect.h"
 #include "ObjectFactory.h"
 #include "CollisionManager.h"
 #include "Stage_Back.h"
 #include "MyButton.h"
 #include "BackGround.h"
 #include "FairyEnemy.h"
+#include "Item.h"
+#include "Power.h"
+#include "Boom.h"
+#include "ScheduleManager.h"
 
 
 Stage::Stage() : m_pPlayer(nullptr)
@@ -32,7 +34,12 @@ void Stage::Initialize()
 
 	// ** 오브젝트 매니저에서 몬스터 리스트를 받아옴. (포인터로...)
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
-	
+
+	// ** 오브젝트 매니저에서 아이템 리스트를 받아옴. (포인터로...)
+	ItemList = ObjectManager::GetInstance()->GetItemList();
+
+
+	// ** 
 	ImageList = Object::GetImageList();
 
 
@@ -42,14 +49,12 @@ void Stage::Initialize()
 	Back_Ground = new BackGround;
 	Back_Ground->Initialize();
 
-	m_pEffect = new HammerEffect;
-	m_pEffect->Initialize();
-
-	TileHeightCnt = 4;
-	TileWidthCnt = 4;
 
 	m_pButton = new MyButton;
 	m_pButton->Initialize();
+
+	m_Schedule = new ScheduleManager;
+	m_Schedule->Initialize();
 
 
 
@@ -65,12 +70,11 @@ void Stage::Initialize()
 
 void Stage::Update()
 {
+	m_Schedule->Update();
 	m_pPlayer->Update();
 
 	m_pButton->Update();
 
-	if (m_pEffect->GetActive())
-		m_pEffect->Update();
 
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();
@@ -82,9 +86,36 @@ void Stage::Update()
 		}
 	}
 
+	for (vector<Object*>::iterator iter = ItemList->begin();
+		iter != ItemList->end();)
+	{
+		if (CollisionManager::RectCollision((*iter), m_pPlayer))
+		{
+			string Key = (*iter)->GetDrawKey();
+
+			if (Key == "Power")
+			{
+				int Pow = m_pPlayer->GetPower();
+				++Pow;
+				m_pPlayer->SetPower(Pow);
+				cout << "파워" << endl;
+			}
+			if (Key == "Boom")
+				cout << "폭탄" << endl;
+
+			iter = ItemList->erase(iter);
+		}
+		else
+			++iter;
+	}
+
 
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
+		(*iter)->Update();
+
+	for (vector<Object*>::iterator iter = ItemList->begin();
+		iter != ItemList->end(); ++iter)
 		(*iter)->Update();
 
 
@@ -97,7 +128,7 @@ void Stage::Update()
 		// ** iResult == 1이면 총알은 삭제됨.
 		int iResult = (*iter)->Update();
 
-		if ((*iter)->GetPosition().y <= 10)
+ 		if ((*iter)->GetPosition().y <= 10)
 			iResult = 1;
 
 		// ** Enemy 리스트의 progress
@@ -105,10 +136,33 @@ void Stage::Update()
 			iter2 != EnemyList->end(); )
 		{
 			// ** 충돌 처리
-			if (CollisionManager::RectCollision((*iter), (*iter2)))
+			if (CollisionManager::BulletCollision((*iter), (*iter2)))
 			{
-				// ** 몬스터 삭제
-				iter2 = EnemyList->erase(iter2);
+				//Hp의 값을 받아온다
+				float Hp = (*iter2)->GetHp();
+				// ** 몬스터 체력 감소
+				--Hp;
+				// 체력이 0이하일 경우
+				if (Hp <= 0)
+				{
+					srand((unsigned)time(NULL));
+					int Ritem = (rand() % 2) + 1;
+
+
+					if(Ritem == 1)
+					ItemList->push_back(CreateItem<Power>((*iter2)->GetPosition(), "Power"));
+					else if (Ritem == 2)
+					ItemList->push_back(CreateItem<Boom>((*iter2)->GetPosition(),"Boom"));
+
+
+					//적을 제거한다.
+					iter2 = EnemyList->erase(iter2);
+
+				}
+				else
+				//줄어든 Hp의 값을 보내준다.
+				(*iter2)->SetHp(Hp);
+
 
 				// ** 삭제할 오브젝트로 지정한뒤
 				iResult = 1;
@@ -138,13 +192,15 @@ void Stage::Render(HDC _hdc)
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
+
+	for (vector<Object*>::iterator iter = ItemList->begin();
+		iter != ItemList->end(); ++iter)
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 	
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
-	if (m_pEffect->GetActive())
-		m_pEffect->Render(ImageList["Buffer"]->GetMemDC());
 
 	m_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
 
@@ -167,4 +223,14 @@ void Stage::Render(HDC _hdc)
 void Stage::Release()
 {
 
+}
+
+template <typename T>
+Object* Stage::CreateItem(Vector3 _vPos, string _Key)
+{
+	Bridge* pBridge = new T;
+
+	Object* pItem = ObjectFactory<Item>::CreateObject(_vPos, _Key, pBridge);
+
+	return pItem;
 }

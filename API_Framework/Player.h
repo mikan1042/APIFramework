@@ -10,6 +10,7 @@ private:
 	float OldPositionY;
 	float JumpTime;
 	int Frame;
+	Object* Target;
 
 	ULONGLONG Time1;
 
@@ -21,6 +22,7 @@ private:
 
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
+	vector<Object*>* ItemList;
 
 
 public:
@@ -36,10 +38,10 @@ public:
 	int GetSwing() { return Frame; }
 
 	template <typename T>
-	Object* CreateBullet();
+	Object* CreateBullet(float _x, Vector3 _sPos);
 
 	template <typename T>
-	Object* CreateEnemy();
+	Object* CreateEnemy(float _x, float _y, float _a, float _b, float _z);
 public:
 	Player();
 	Player(const Transform& _rTransInfo) : Object(_rTransInfo) { }

@@ -3,14 +3,17 @@
 #include "InputManager.h"
 #include "ObjectManager.h"
 #include "ObjectFactory.h"
+#include "MathManager.h"
 
 #include "Bullet.h"
 #include "LV1_Bullet.h"
+#include "LV2_Bullet.h"
 #include "Yukari_Bullet.h"
 
 #include "Enemy.h"
 #include "FairyEnemy.h"
 #include "Boss.h"
+#include "Power.h"
 
 
 Player::Player()
@@ -46,6 +49,10 @@ void Player::Initialize()
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
+	ItemList = ObjectManager::GetInstance()->GetItemList();
+
+	Power = 2;
+	Boom = 3;
 
 }
 
@@ -89,26 +96,30 @@ int Player::Update()
 		// ** Z키를 누를경우
 		if (GetAsyncKeyState('Z'))
 		{
-
-			if (Time1 + 200 <= GetTickCount64())
+			if (Power == 1)
 			{
-				BulletList->push_back(CreateBullet<LV1_Bullet>());
-				Time1 = GetTickCount64();
+				if (Time1 + 200 <= GetTickCount64())
+				{
+					BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
+					Time1 = GetTickCount64();
+				}
 			}
-		}
-		if (GetAsyncKeyState('X'))
-		{
-			if (Time1 + 200 <= GetTickCount64())
+			if (Power == 2)
 			{
-				EnemyList->push_back(CreateEnemy<FairyEnemy>());
-				Time1 = GetTickCount64();
+				if (Time1 + 200 <= GetTickCount64())
+				{
+					BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
+					BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f)));
+					BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f)));
+					Time1 = GetTickCount64();
+				}
 			}
 		}
 		if (GetAsyncKeyState('C'))
 		{
 			if (Time1 + 200 <= GetTickCount64())
 			{
-				EnemyList->push_back(CreateEnemy<Boss>());
+				EnemyList->push_back(CreateEnemy<Boss>(300, 200,46,67,100));
 				Time1 = GetTickCount64();
 			}
 		}
@@ -129,7 +140,20 @@ int Player::Update()
 			if (Time1 + 200 <= GetTickCount64())
 			{
 				Yukari_AT = true;
-				BulletList->push_back(CreateBullet<Yukari_Bullet>());
+
+				Target = ObjectManager::GetInstance()->GetTarget(TransInfo.Position);
+
+				if (EnemyList != nullptr)
+					Yukari_AT = false;
+
+				if (Target)
+				{
+					TransInfo.Direction = MathManager::GetDirection(TransInfo.Position, Target->GetPosition());
+
+					TransInfo.Position.x += TransInfo.Direction.x * Speed;
+					TransInfo.Position.x += TransInfo.Direction.x * Speed;
+
+				}
 
 				Time1 = GetTickCount64();
 
@@ -239,21 +263,21 @@ void Player::Release()
 
 
 template <typename T>
-Object* Player::CreateBullet()
+Object* Player::CreateBullet(float _x, Vector3 _sPos)
 {
 	Bridge* pBridge = new T;
 
-	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, pBridge);
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, _sPos, _x, pBridge);
 
 	return pBullet;
 }
 
 template <typename T>
-Object* Player::CreateEnemy()
+Object* Player::CreateEnemy(float _x, float _y, float _a, float _b, float _z)
 {
 	Bridge* pBridge = new T;
 
-	Object* pEnemy = ObjectFactory<Enemy>::CreateObject(600,300, pBridge);
+	Object* pEnemy = ObjectFactory<Enemy>::CreateObject(_x, _y, _a, _b, _z, pBridge);
 
 	return pEnemy;
 }

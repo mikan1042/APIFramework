@@ -1,20 +1,20 @@
-#include "Enemy.h"
+#include "Item.h"
 #include "ObjectManager.h"
-#include "FairyEnemy.h"
+#include "Power.h"
 
 
-Enemy::Enemy() : BridgeObject(NULL)
+Item::Item() : BridgeObject(NULL)
 {
 
 }
 
-Enemy::~Enemy()
+Item::~Item()
 {
 	Release();
 }
 
 
-void Enemy::Initialize()
+void Item::Initialize()
 {
 	TransInfo.Position = Vector3(0.0f, 0.0f);
 	TransInfo.Direction = Vector3(0.0f, 1.0f);
@@ -22,12 +22,10 @@ void Enemy::Initialize()
 
 
 	Active = false;
-	strKey = "Enemy";
-
-	Speed = 1.5f;
+	strKey = "Item";
 }
 
-int Enemy::Update()
+int Item::Update()
 {
 
 	if (BridgeObject)
@@ -36,7 +34,7 @@ int Enemy::Update()
 	return 0;
 }
 
-void Enemy::Render(HDC _hdc)
+void Item::Render(HDC _hdc)
 {
 
 	if (BridgeObject)
@@ -45,7 +43,7 @@ void Enemy::Render(HDC _hdc)
 
 }
 
-void Enemy::Release()
+void Item::Release()
 {
 	delete BridgeObject;
 	BridgeObject = nullptr;

@@ -36,6 +36,10 @@ void Logo::Initialize()
 	ImageList["BGR"] = (new Bitmap)->LoadBmp(L"../Resource/BGR.bmp");
 
 
+	// ** 적 사망 시 나오는 아이템
+	ImageList["Power"] = (new Bitmap)->LoadBmp(L"../Resource/Item_Power.bmp");
+	ImageList["Boom"] = (new Bitmap)->LoadBmp(L"../Resource/Item_Boom.bmp");
+
 
 
 	
@@ -50,11 +54,12 @@ void Logo::Initialize()
 
 	// ** 레이무 기본 공격 **//
 	ImageList["NomalBullet"] = (new Bitmap)->LoadBmp(L"../Resource/NomalBullet.bmp");
+	ImageList["guidedBullet"] = (new Bitmap)->LoadBmp(L"../Resource/guidedBullet.bmp");
 
 
 
 
-
+	
 
 
 
@@ -71,24 +76,15 @@ void Logo::Initialize()
 	// ** 요정 **//
 	ImageList["FairyEnemy"] = (new Bitmap)->LoadBmp(L"../Resource/Fairy.bmp");
 
+	
+	// ** 요정의 공격 **//
+	ImageList["Enemy_Bullet"] = (new Bitmap)->LoadBmp(L"../Resource/Enemy_Bullet.bmp");
 
 
 
-	// ** 요정 **//
+
+	// ** 보스 **//
 	ImageList["Boss"] = (new Bitmap)->LoadBmp(L"../Resource/Boss.bmp");
-
-
-
-
-
-
-
-
-
-
-	ImageList["Mole"] = (new Bitmap)->LoadBmp(L"../Resource/Mole.bmp");
-	ImageList["Hole"] = (new Bitmap)->LoadBmp(L"../Resource/Hole.bmp");
-	ImageList["Effect"] = (new Bitmap)->LoadBmp(L"../Resource/Effect.bmp");
 
 	ImageList["on_off_Back"] = (new Bitmap)->LoadBmp(L"../Resource/on_off_Back.bmp");
 	ImageList["on_off_Button"] = (new Bitmap)->LoadBmp(L"../Resource/on_off_Button.bmp");

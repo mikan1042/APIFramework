@@ -1,12 +1,10 @@
 #pragma once
 #include "Bridge.h"
 
-class BulletBridge : public Bridge
+class ItemBirdge : public Bridge
 {
 protected:
 	float Speed;
-
-	bool ATon;
 	map<string, Bitmap*> ImageList;
 	vector<Object*>* EnemyList;
 public:
@@ -15,8 +13,7 @@ public:
 	virtual void Render(HDC _hdc)PURE;
 	virtual void Release()PURE;
 public:
-
-	BulletBridge();
-	virtual ~BulletBridge();
+	ItemBirdge();
+	virtual ~ItemBirdge();
 };
 

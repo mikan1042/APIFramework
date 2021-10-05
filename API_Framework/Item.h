@@ -2,22 +2,21 @@
 #include "Object.h"
 
 class Bridge;
-class Enemy : public Object
+class Item : public Object
 {
 private:
 	Bridge* BridgeObject;
-	float Hp;
 public:
 	virtual void Initialize()override;
 	virtual int Update()override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 
-	virtual Object* Clone()override { return new Enemy(*this); }
+	virtual Object* Clone()override { return new Item(*this); }
 public:
 	void SetBridge(Bridge* _pBridge) { BridgeObject = _pBridge; }
 public:
-	Enemy();
-	Enemy(const Transform& _rTransInfo) : Object(_rTransInfo) { }
-	virtual ~Enemy();
+	Item();
+	Item(const Transform& _rTransInfo) : Object(_rTransInfo) { }
+	virtual ~Item();
 };

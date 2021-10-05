@@ -16,7 +16,7 @@ LV1_Bullet::~LV1_Bullet()
 
 void LV1_Bullet::Initialize()
 {
-	Speed = 0.0f;
+	Speed = 7.0f;
 
 	DrawKey = "NomalBullet";
 
@@ -39,19 +39,13 @@ void LV1_Bullet::Render(HDC _hdc)
 	TransparentBlt(_hdc, // ** 최종 출력 위치
 		int(RealObject->GetPosition().x - 6),
 		int(RealObject->GetPosition().y - 36),
-		int(RealObject->GetScale().x),
-		int(RealObject->GetScale().y),
+		int(RealObject->GetScale().x * 1.3f),
+		int(RealObject->GetScale().y * 1.3f),
 		ImageList[DrawKey]->GetMemDC(),
 		0, 0,
 		int(RealObject->GetScale().x),
 		int(RealObject->GetScale().y),
 		RGB(255, 0, 255));
-
-	Rectangle(_hdc,
-		int(RealObject->GetPosition().x - (RealObject->GetScale().x / 2)),
-		int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2)),
-		int(RealObject->GetPosition().x + (RealObject->GetScale().x / 2)),
-		int(RealObject->GetPosition().y + (RealObject->GetScale().y / 2)));
 }
 
 void LV1_Bullet::Release()

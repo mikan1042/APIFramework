@@ -4,7 +4,7 @@
 class Yukari_Bullet : public BulletBridge
 {
 public:
-
+	Object* Target;
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;

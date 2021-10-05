@@ -82,12 +82,6 @@
     <Filter Include="소스 파일\02. Object\Stage_Back">
       <UniqueIdentifier>{2c929ed0-c929-4160-958b-ae0494390414}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. Object\HammerEffect">
-      <UniqueIdentifier>{65f7cea3-2c63-4726-ab4e-935cfbc6f7bc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\02. Object\EnemyHole">
-      <UniqueIdentifier>{fd2dc172-e18e-4054-962d-a13e21893790}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\99. Manager\Pattern\Bridge">
       <UniqueIdentifier>{c4d1bd83-aff2-4aa2-8d00-d8d24fc923b9}</UniqueIdentifier>
     </Filter>
@@ -141,6 +135,33 @@
     </Filter>
     <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy">
       <UniqueIdentifier>{dd02dfca-7392-49b3-bc9f-73500d2e1699}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Item">
+      <UniqueIdentifier>{d38e01a5-fadd-4125-8918-ee0b5771e857}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Item\BaseItem">
+      <UniqueIdentifier>{e693f611-3268-4a3a-821f-6dcf37c0b94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Item\ItemBirdge">
+      <UniqueIdentifier>{fa92bafb-e9e6-43f9-b047-50eb29907a91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Item\ItemBirdge\BaseBrodge">
+      <UniqueIdentifier>{28b5fae2-4180-4dc6-bff4-c99c25fd16c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Item\ItemBirdge\Power">
+      <UniqueIdentifier>{b9e828fd-ddd6-487b-bd1a-abeec00ceb04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Item\ItemBirdge\Boom">
+      <UniqueIdentifier>{19608574-fa5c-4806-82f3-3978f76fcb30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\99. Manager\ScoreManager">
+      <UniqueIdentifier>{12f6228d-317e-4cb7-a7e6-05bc3d7b66d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\ScheduleManager">
+      <UniqueIdentifier>{b164ce41-8c27-451e-88a0-28c678a7894f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet">
+      <UniqueIdentifier>{655d7abc-5fe8-42d0-96a6-8d380c4fcfb2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,12 +240,6 @@
     <ClInclude Include="Headers.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="HammerEffect.h">
-      <Filter>소스 파일\02. Object\HammerEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyHole.h">
-      <Filter>소스 파일\02. Object\EnemyHole</Filter>
-    </ClInclude>
     <ClInclude Include="Bridge.h">
       <Filter>소스 파일\99. Manager\Pattern\Bridge</Filter>
     </ClInclude>
@@ -269,6 +284,27 @@
     </ClInclude>
     <ClInclude Include="Boss.h">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>소스 파일\02. Object\Item\BaseItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBirdge.h">
+      <Filter>소스 파일\02. Object\Item\ItemBirdge\BaseBrodge</Filter>
+    </ClInclude>
+    <ClInclude Include="Power.h">
+      <Filter>소스 파일\02. Object\Item\ItemBirdge\Power</Filter>
+    </ClInclude>
+    <ClInclude Include="Boom.h">
+      <Filter>소스 파일\02. Object\Item\ItemBirdge\Boom</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>소스 파일\99. Manager\ScoreManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ScheduleManager.h">
+      <Filter>소스 파일\02. Object\ScheduleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster_Bullet.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -317,12 +353,6 @@
     <ClCompile Include="Bitmap.cpp">
       <Filter>소스 파일\99. Manager\RenderManager\Bitmap</Filter>
     </ClCompile>
-    <ClCompile Include="HammerEffect.cpp">
-      <Filter>소스 파일\02. Object\HammerEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyHole.cpp">
-      <Filter>소스 파일\02. Object\EnemyHole</Filter>
-    </ClCompile>
     <ClCompile Include="Bridge.cpp">
       <Filter>소스 파일\99. Manager\Pattern\Bridge</Filter>
     </ClCompile>
@@ -364,6 +394,27 @@
     </ClCompile>
     <ClCompile Include="Boss.cpp">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>소스 파일\02. Object\Item\BaseItem</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBirdge.cpp">
+      <Filter>소스 파일\02. Object\Item\ItemBirdge\BaseBrodge</Filter>
+    </ClCompile>
+    <ClCompile Include="Power.cpp">
+      <Filter>소스 파일\02. Object\Item\ItemBirdge\Power</Filter>
+    </ClCompile>
+    <ClCompile Include="Boom.cpp">
+      <Filter>소스 파일\02. Object\Item\ItemBirdge\Boom</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>소스 파일\99. Manager\ScoreManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ScheduleManager.cpp">
+      <Filter>소스 파일\02. Object\ScheduleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster_Bullet.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

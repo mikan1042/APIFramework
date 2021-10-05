@@ -13,8 +13,12 @@ protected:
 	Vector3 Offset;
 
 	string strKey;
+	string DrawKey;
 	bool Active;
 	float Speed;
+	float Hp;
+
+	int Power, Boom;
 
 	// ** 출력 이미지 보관
 	static map<string, Bitmap*> ImageList;
@@ -28,6 +32,18 @@ public:
 
 	virtual Object* Clone()PURE;
 public:
+	void SetHp(float _h) { Hp = _h; }
+	float GetHp() { return Hp; }
+
+	void SetPower(float _P) { Power = _P; }
+	int GetPower() { return Power; }
+
+	void SetBoom(float _B) { Boom = _B; }
+	int SetBoom() { return Boom; }
+
+	void SetDrawKey(string _D) { DrawKey = _D; }
+	string GetDrawKey() { return DrawKey; }
+
 	// ** map으로 생성된 Image 보관 컨테이너틑 Setting
 	static void SetImageList(const map<string, Bitmap*>& _ImageList) { ImageList = _ImageList; }
 
@@ -43,10 +59,15 @@ public:
 	// ** 좌표를 Setting (_x, _y)
 	void SetPosition(float _x, float _y) { TransInfo.Position.x = _x; TransInfo.Position.y = _y; }
 
+	void SetDirection(Vector3 _direction) { TransInfo.Direction = _direction; }
+
 	void SetScale(float _x, float _y) { TransInfo.Scale.x = _x; TransInfo.Scale.y = _y; }
+	void SetScale(Vector3 _Scale) { TransInfo.Scale = _Scale; }
 
 	// ** 좌표를 Vector3로 out
 	Vector3 GetPosition() { return TransInfo.Position; }
+
+	Vector3 GetDirection() { return TransInfo.Direction; }
 
 	// ** 크기를 Vector3로 out
 	Vector3 GetScale() { return TransInfo.Scale; }

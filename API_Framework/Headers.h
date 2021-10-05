@@ -6,6 +6,8 @@
 #include <list>
 #include <vector>
 #include <string>
+#include <stack>
+
 
 using namespace std;
 
