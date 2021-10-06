@@ -25,6 +25,7 @@ private:
 	list<Object*> EnableList;
 	vector<Object*> EnemyList;
 	vector<Object*> BulletList;
+	vector<Object*> EnemyBulletList;
 	vector<Object*> ItemList;
 	map<string, list<Object*>> DisableList;
 public:
@@ -51,6 +52,7 @@ public:
 
 	// ** 현재 타겟의 위치를 갖는다.
 	Object* GetTarget(Vector3 _Pos);
+	Object* GetPlayerTarget(Vector3 _Pos);
 
 
 	void Release();
@@ -66,6 +68,7 @@ public:
 
 	
 	vector<Object*>* GetBulletList() { return &BulletList; }
+	vector<Object*>* GetEnemyBulletList() { return &EnemyBulletList; }
 	vector<Object*>* GetEnemyList() { return &EnemyList; }
 	vector<Object*>* GetItemList() { return &ItemList; }
 

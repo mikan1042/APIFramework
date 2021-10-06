@@ -20,33 +20,57 @@ void Monster_Bullet::Initialize()
 	Speed = 7.0f;
 
 	DrawKey = "Enemy_Bullet";
-
+	EnemyBulletList = ObjectManager::GetInstance()->GetEnemyBulletList();
 	ImageList = Object::GetImageList();
 
-	AT = true;
+
+	Player = ObjectManager::GetInstance()->GetPlayer();
+	AT = false;
+
+
 }
 
 int Monster_Bullet::Update(Transform& _rTransInfo)
 {
-	if (AT)
-	{
-		Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
+
+
+
+		Target = ObjectManager::GetInstance()->GetPlayerTarget(Player->GetPosition());
 
 		if (Target)
+		{
+			if(!AT)
 			_rTransInfo.Direction = MathManager::GetDirection(_rTransInfo.Position, Target->GetPosition());
+			AT = true;
 
-		AT = false;
-	}
 
-		_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-		_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
+			cout << "fdfa" << endl;
+			_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
+			_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
+
+		}
+		else
+		{
+			_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
+			_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
+		}
+	
 
 	return 0;
 }
 
 void Monster_Bullet::Render(HDC _hdc)
 {
-
+		TransparentBlt(_hdc, // ** 최종 출력 위치
+		int(RealObject->GetPosition().x - 6),
+		int(RealObject->GetPosition().y - 36),
+		int(RealObject->GetScale().x * 1.3f),
+		int(RealObject->GetScale().y * 1.3f),
+		ImageList[DrawKey]->GetMemDC(),
+		0, 0,
+		int(RealObject->GetScale().x),
+		int(RealObject->GetScale().y),
+		RGB(255, 0, 255));
 }
 
 void Monster_Bullet::Release()

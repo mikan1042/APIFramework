@@ -5,6 +5,8 @@ class Monster_Bullet : public BulletBridge
 {
 public:
 	Object* Target;
+	Object* Player;
+	Object* MB;
 	bool AT;
 public:
 	virtual void Initialize()override;

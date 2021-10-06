@@ -23,6 +23,7 @@ private:
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
 	vector<Object*>* ItemList;
+	vector<Object*>* EnemyBulletList;
 
 
 public:

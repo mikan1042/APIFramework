@@ -26,6 +26,7 @@ void FairyEnemy::Initialize()
 
 int FairyEnemy::Update(Transform& _rTransInfo)
 {
+
 	_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 	_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
 

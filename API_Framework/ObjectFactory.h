@@ -51,6 +51,22 @@ public:
 		return pObj;
 	}
 
+	static Object* CreateObject(Vector3 _vPos, Vector3 _sPos, Bridge* pBridge)
+	{
+		Object* pObj = new T;
+
+		pObj->Initialize();
+		pObj->SetPosition(_vPos);
+		pObj->SetScale(_sPos);
+
+		pBridge->SetObject(pObj);
+		pBridge->Initialize();
+
+		((T*)pObj)->SetBridge(pBridge);
+
+		return pObj;
+	}
+
 	static Object* CreateObject(Vector3 _vPos, string _Key, Bridge* pBridge)
 	{
 		Object* pObj = new T;

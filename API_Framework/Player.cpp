@@ -15,7 +15,6 @@
 #include "Boss.h"
 #include "Power.h"
 
-
 Player::Player()
 {
 
@@ -50,6 +49,7 @@ void Player::Initialize()
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 	ItemList = ObjectManager::GetInstance()->GetItemList();
+	EnemyBulletList = ObjectManager::GetInstance()->GetEnemyBulletList();
 
 	Power = 2;
 	Boom = 3;
@@ -59,7 +59,7 @@ void Player::Initialize()
 int Player::Update()
 {
 
-
+	// 충돌 좌표 = 현재 좌표 
 	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
 
 	// ** 두 캐릭터 공통으로 사용 ** //
@@ -96,18 +96,24 @@ int Player::Update()
 		// ** Z키를 누를경우
 		if (GetAsyncKeyState('Z'))
 		{
-			if (Power == 1)
+			// ** 파워가 1이상 30 이하일 경우
+			if (Power > 1 || Power < 30)
 			{
+				// ** 0.2초마다 실행한다.
 				if (Time1 + 200 <= GetTickCount64())
 				{
+					// ** BulletLIst에 탄막을 추가한다.
 					BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
 					Time1 = GetTickCount64();
 				}
 			}
-			if (Power == 2)
+			// ** 파워가 31이상 60 이하일 경우
+			if (Power > 31 || Power < 60)
 			{
+				// ** 0.2초마다 실행한다.
 				if (Time1 + 200 <= GetTickCount64())
 				{
+					// ** BulletList에 탄막을 추가한다. 
 					BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
 					BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f)));
 					BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f)));
@@ -115,10 +121,13 @@ int Player::Update()
 				}
 			}
 		}
+		// ** C키를 누를경우
 		if (GetAsyncKeyState('C'))
 		{
+			// ** 0.2초마다 실행한다.
 			if (Time1 + 200 <= GetTickCount64())
 			{
+				// ** EnemyList에 보스를 추가한다.
 				EnemyList->push_back(CreateEnemy<Boss>(300, 200,46,67,100));
 				Time1 = GetTickCount64();
 			}
@@ -137,13 +146,18 @@ int Player::Update()
 		// ** Z키를 누를경우 공격 ** //
 		if (GetAsyncKeyState('Z'))
 		{
+			// ** 0.2초마다 실행한다.
 			if (Time1 + 200 <= GetTickCount64())
 			{
+				// ** 유카리의 공격 모드를 true로 변경
 				Yukari_AT = true;
 
+				// ** Target의 위치를 잡아준다.
 				Target = ObjectManager::GetInstance()->GetTarget(TransInfo.Position);
 
+				// ** EnemyhList가 없을경우 
 				if (EnemyList != nullptr)
+					// ** 유카리 공격모드를 false로 변경
 					Yukari_AT = false;
 
 				if (Target)

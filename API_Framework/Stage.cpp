@@ -38,11 +38,14 @@ void Stage::Initialize()
 	// ** 오브젝트 매니저에서 아이템 리스트를 받아옴. (포인터로...)
 	ItemList = ObjectManager::GetInstance()->GetItemList();
 
+	// **  오브젝트 매니저에서 몬스터탄막 리스트를 받아옴. (포인터로...)
+	EnemyBulletList = ObjectManager::GetInstance()->GetEnemyBulletList();
 
-	// ** 
+	// ** 이미지 리스트를 받아온다.
 	ImageList = Object::GetImageList();
 
 
+	// ** 사용하기전 초기설정
 	State_Back = new Stage_Back;
 	State_Back->Initialize();
 
@@ -70,25 +73,30 @@ void Stage::Initialize()
 
 void Stage::Update()
 {
+	// ** 업데이트를 실행시켜준다.
 	m_Schedule->Update();
+
 	m_pPlayer->Update();
 
 	m_pButton->Update();
 
 
-
+	// ** EnemyList를 순회한다.
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
 	{
+		// ** 적과 플레이어가 충돌했을경우
 		if (CollisionManager::RectCollision((*iter), m_pPlayer))
 		{
+			// ** 콘솔에 대화를 출력
 			cout << "플레이어의 죽음" << endl;
 		}
 	}
-
+	// ** ItemList를 순회한다.
 	for (vector<Object*>::iterator iter = ItemList->begin();
 		iter != ItemList->end();)
 	{
+		// ** 아이템과 플레이어가 충돌했을경우 
 		if (CollisionManager::RectCollision((*iter), m_pPlayer))
 		{
 			string Key = (*iter)->GetDrawKey();
@@ -116,6 +124,10 @@ void Stage::Update()
 
 	for (vector<Object*>::iterator iter = ItemList->begin();
 		iter != ItemList->end(); ++iter)
+		(*iter)->Update();
+
+	for (vector<Object*>::iterator iter = EnemyBulletList->begin();
+		iter != EnemyBulletList->end(); ++iter)
 		(*iter)->Update();
 
 
@@ -183,6 +195,18 @@ void Stage::Update()
 		else
 			++iter;
 	}
+
+	//플레이어와 요정의 공격이 부딪혔을경우
+	for (vector<Object*>::iterator iter = EnemyBulletList->begin();
+		iter != EnemyBulletList->end();)
+	{
+		if (CollisionManager::RectCollision((*iter), m_pPlayer))
+		{
+			iter = EnemyBulletList->erase(iter);
+		}
+		else
+			++iter;
+	}
 }
 
 void Stage::Render(HDC _hdc)
@@ -200,6 +224,11 @@ void Stage::Render(HDC _hdc)
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
+
+	for (vector<Object*>::iterator iter = EnemyBulletList->begin();
+		iter != EnemyBulletList->end(); ++iter)
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
+
 
 
 	m_pPlayer->Render(ImageList["Buffer"]->GetMemDC());

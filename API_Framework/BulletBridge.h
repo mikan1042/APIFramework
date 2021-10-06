@@ -9,6 +9,7 @@ protected:
 	bool ATon;
 	map<string, Bitmap*> ImageList;
 	vector<Object*>* EnemyList;
+	vector<Object*>* EnemyBulletList;
 public:
 	virtual void Initialize()PURE;
 	virtual int Update(Transform& _rTransInfo)PURE;

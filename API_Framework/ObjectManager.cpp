@@ -186,6 +186,60 @@ Object* ObjectManager::GetTarget(Vector3 _Pos)
 	return FindTargetList.begin()->second;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Object* ObjectManager::GetPlayerTarget(Vector3 _Pos)
+{
+	// ** 멀티맵을 만든다. Key = 거리, value = Object
+	multimap<float, Object*> FindTargetList;
+
+	// ** 멀티맵에 Current 와 Target 의 거리를 구해서 추가한다.
+		FindTargetList.insert(
+			make_pair(
+				MathManager::GetDistance(_Pos, ObjectManager::GetInstance()->GetPlayer()->GetPosition()),	// ** Key
+				ObjectManager::GetInstance()->GetPlayer()));	// ** Value
+
+	// ** 만약에 리스트에 아무것도 없다면....
+	if (FindTargetList.empty())
+		return nullptr;
+
+	// ** 모든 오브젝트의 추가작업이 끝나면 가장 첫번째에 있는 오브젝트를 반환한다.
+	return FindTargetList.begin()->second;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void ObjectManager::Release()
 {
 	// ** 안전한 삭제.
