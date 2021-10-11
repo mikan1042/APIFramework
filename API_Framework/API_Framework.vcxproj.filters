@@ -163,6 +163,15 @@
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet">
       <UniqueIdentifier>{655d7abc-5fe8-42d0-96a6-8d380c4fcfb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet">
+      <UniqueIdentifier>{2707878b-73d6-45c1-928f-c6ec69527bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\UI\UI_Hp">
+      <UniqueIdentifier>{74638ad8-40b3-40a6-a72b-6353895008d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Boom">
+      <UniqueIdentifier>{da59b7e2-32a1-4b7b-a310-885c8db482f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -306,6 +315,15 @@
     <ClInclude Include="Monster_Bullet.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Ellipse_Bullet.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Hp.h">
+      <Filter>소스 파일\02. Object\UI\UI_Hp</Filter>
+    </ClInclude>
+    <ClInclude Include="Reimu_Boom.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Boom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -415,6 +433,15 @@
     </ClCompile>
     <ClCompile Include="Monster_Bullet.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse_Bullet.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Hp.cpp">
+      <Filter>소스 파일\02. Object\UI\UI_Hp</Filter>
+    </ClCompile>
+    <ClCompile Include="Reimu_Boom.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Boom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

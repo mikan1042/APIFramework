@@ -39,7 +39,7 @@ public:
 	int GetPower() { return Power; }
 
 	void SetBoom(float _B) { Boom = _B; }
-	int SetBoom() { return Boom; }
+	int GetBoom() { return Boom; }
 
 	void SetDrawKey(string _D) { DrawKey = _D; }
 	string GetDrawKey() { return DrawKey; }

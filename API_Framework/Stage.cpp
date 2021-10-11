@@ -13,6 +13,7 @@
 #include "Power.h"
 #include "Boom.h"
 #include "ScheduleManager.h"
+#include "UI_Hp.h"
 
 
 Stage::Stage() : m_pPlayer(nullptr)
@@ -41,6 +42,10 @@ void Stage::Initialize()
 	// **  오브젝트 매니저에서 몬스터탄막 리스트를 받아옴. (포인터로...)
 	EnemyBulletList = ObjectManager::GetInstance()->GetEnemyBulletList();
 
+	// **  오브젝트 매니저에서 몬스터탄막 리스트를 받아옴. (포인터로...)
+	PlayerBoom = ObjectManager::GetInstance()->GetPlayerBoom();
+
+
 	// ** 이미지 리스트를 받아온다.
 	ImageList = Object::GetImageList();
 
@@ -59,6 +64,8 @@ void Stage::Initialize()
 	m_Schedule = new ScheduleManager;
 	m_Schedule->Initialize();
 
+	m_uHp = new UI_Hp;
+	m_uHp->Initialize();
 
 
 
@@ -80,6 +87,9 @@ void Stage::Update()
 
 	m_pButton->Update();
 
+	m_uHp->Update();
+
+
 
 	// ** EnemyList를 순회한다.
 	for (vector<Object*>::iterator iter = EnemyList->begin();
@@ -88,8 +98,14 @@ void Stage::Update()
 		// ** 적과 플레이어가 충돌했을경우
 		if (CollisionManager::RectCollision((*iter), m_pPlayer))
 		{
-			// ** 콘솔에 대화를 출력
-			cout << "플레이어의 죽음" << endl;
+			// ** 플레이어의 HP를 받아온다
+			int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
+			// ** HP를 1줄인다
+			--pHp;
+			// ** 변경한 HP값을 보내준다.
+			ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
+			// ** 플레이어의 위치를 재조정한다.
+			ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
 		}
 	}
 	// ** ItemList를 순회한다.
@@ -130,6 +146,10 @@ void Stage::Update()
 		iter != EnemyBulletList->end(); ++iter)
 		(*iter)->Update();
 
+
+	for (vector<Object*>::iterator iter = PlayerBoom->begin();
+		iter != PlayerBoom->end(); ++iter)
+		(*iter)->Update();
 
 
 	// ** 총알 리스트의 progress
@@ -207,6 +227,22 @@ void Stage::Update()
 		else
 			++iter;
 	}
+
+
+	 //플레이어의 폭탄과 요정& 요정의 공격의 충돌판정
+	 for (vector<Object*>::iterator iter = PlayerBoom->begin();
+	 	iter != PlayerBoom->end();)
+	 {
+	 	for (vector<Object*>::iterator iter1 = EnemyBulletList->begin();
+	 		iter1 != EnemyBulletList->end();)
+	 	{
+	 		if (CollisionManager::RectCollision((*iter), (*iter1)))
+	 		{
+	 			//iter1 = EnemyBulletList->erase(iter1);
+	 		}
+	 		
+	 	}
+	 }
 }
 
 void Stage::Render(HDC _hdc)
@@ -229,8 +265,11 @@ void Stage::Render(HDC _hdc)
 		iter != EnemyBulletList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
+	for (vector<Object*>::iterator iter = PlayerBoom->begin();
+		iter != PlayerBoom->end(); ++iter)
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
-
+	
 	m_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
 
 	m_pButton->Render(ImageList["Buffer"]->GetMemDC());
@@ -238,6 +277,7 @@ void Stage::Render(HDC _hdc)
 
 	State_Back->Render(ImageList["Buffer"]->GetMemDC());
 
+	m_uHp->Render(ImageList["Buffer"]->GetMemDC());
 
 
 	BitBlt(_hdc,

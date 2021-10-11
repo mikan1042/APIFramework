@@ -6,6 +6,7 @@ class Player : public Object
 private:
 	bool bJump;
 	bool Drop;
+	bool BoomOn;
 	float JumpSpeed;
 	float OldPositionY;
 	float JumpTime;
@@ -23,6 +24,7 @@ private:
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyList;
 	vector<Object*>* ItemList;
+	vector<Object*>* PlayerBoom;
 	vector<Object*>* EnemyBulletList;
 
 

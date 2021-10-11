@@ -7,6 +7,7 @@
 
 #include "FairyEnemy.h"
 #include "Monster_Bullet.h"
+#include "Ellipse_Bullet.h"
 
 
 
@@ -24,7 +25,7 @@ int ScheduleManager::Update()
 	if (Time1 + 1000 <= GetTickCount64())
 	{
 		// 요정 생성 및 요정공격 
-		this->Fairy1();
+		this->Fairy2();
 		Time1 = GetTickCount64();
 	}
 
@@ -63,6 +64,37 @@ void ScheduleManager::Fairy1()
 			 EnemyBulletList->push_back(CreateBullet<Monster_Bullet>(0,(*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 
 		 }
+	}
+}
+
+void ScheduleManager::Fairy2()
+{
+
+	// 요정을 랜덤으로 생성한다.
+	EnemyList->push_back(CreateEnemy<FairyEnemy>(float(rand() % (WindowsWidth - 600) + 60), -50, 25, 25, 5));
+
+	// EnemyList를 순회한다.
+	for (vector<Object*>::iterator iter = EnemyList->begin();
+		iter != EnemyList->end(); ++iter)
+	{
+		// List에 있는 Object의 Y좌표가 120을 넘어갔을때
+		if ((*iter)->GetPosition().y > 120)
+		{
+			// Object의 이동방향을 0으로 초기화 시켜 움직이지 못하게한다.
+			(*iter)->SetDirection(Vector3(0.0f, 0.0f));
+
+			// angle을 선언
+			int angle;
+
+			// 원탄을 발사하기 위해 탄막을 60개 생성
+			for (int i = 0; i < 60; i++)
+			{
+				// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
+				angle = i * 6;
+				// EnemyBulletList에 요정의 공격을 추가한다. 
+				EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet>(angle, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+			}
+		}
 	}
 }
 

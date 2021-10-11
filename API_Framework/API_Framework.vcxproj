@@ -142,6 +142,7 @@
     <ClInclude Include="API_Framework.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Boom.h" />
+    <ClInclude Include="Ellipse_Bullet.h" />
     <ClInclude Include="ItemBirdge.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Boss.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Power.h" />
     <ClInclude Include="Prototype.h" />
+    <ClInclude Include="Reimu_Boom.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
@@ -184,6 +186,7 @@
     <ClInclude Include="Start.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="UI_Hp.h" />
     <ClInclude Include="Yukari_Bullet.h" />
     <ClInclude Include="aaa.h" />
   </ItemGroup>
@@ -191,6 +194,7 @@
     <ClCompile Include="API_Framework.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Boom.cpp" />
+    <ClCompile Include="Ellipse_Bullet.cpp" />
     <ClCompile Include="ItemBirdge.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Boss.cpp" />
@@ -215,6 +219,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Power.cpp" />
     <ClCompile Include="Prototype.cpp" />
+    <ClCompile Include="Reimu_Boom.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -223,6 +228,7 @@
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage_Back.cpp" />
     <ClCompile Include="Start.cpp" />
+    <ClCompile Include="UI_Hp.cpp" />
     <ClCompile Include="Yukari_Bullet.cpp" />
   </ItemGroup>
   <ItemGroup>

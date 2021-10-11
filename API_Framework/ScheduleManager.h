@@ -19,15 +19,11 @@ public:
 	ULONGLONG Time1;
 
 public:
-	// 몬스터 생성
+	// 몬스터 생성 및 추격탄 
 	void Fairy1();
+	// 몬스터 생성 및 원탄
+	void Fairy2();
 
-
-
-
-
-	//몬스터의 공격
-	void FairyAT();
 
 	template <typename T>
 	Object* CreateBullet(float _x, Vector3 _vPos, Vector3 _sPos);

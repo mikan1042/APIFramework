@@ -12,11 +12,13 @@ private:
 	Object* m_pButton;
 	Object* m_Fairy;
 	Object* m_Schedule;
+	Object* m_uHp;
 
 	vector<Object*>* EnemyList;
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyBulletList;
 	vector<Object*>* ItemList;
+	vector<Object*>* PlayerBoom;
 	vector<Object*>* ObjectList;
 
 	map<string, Bitmap*> ImageList;

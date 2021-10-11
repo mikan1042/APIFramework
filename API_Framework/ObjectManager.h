@@ -26,6 +26,7 @@ private:
 	vector<Object*> EnemyList;
 	vector<Object*> BulletList;
 	vector<Object*> EnemyBulletList;
+	vector<Object*> PlayerBoom;
 	vector<Object*> ItemList;
 	map<string, list<Object*>> DisableList;
 public:
@@ -71,6 +72,7 @@ public:
 	vector<Object*>* GetEnemyBulletList() { return &EnemyBulletList; }
 	vector<Object*>* GetEnemyList() { return &EnemyList; }
 	vector<Object*>* GetItemList() { return &ItemList; }
+	vector<Object*>* GetPlayerBoom() { return &PlayerBoom; }
 
 	void AddBullet(Vector3 _vPos);
 

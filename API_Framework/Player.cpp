@@ -14,6 +14,7 @@
 #include "FairyEnemy.h"
 #include "Boss.h"
 #include "Power.h"
+#include "Reimu_Boom.h"
 
 Player::Player()
 {
@@ -43,16 +44,20 @@ void Player::Initialize()
 	Player_Swap = false;
 	// ** 유카리 모드일때 공격
 	Yukari_AT = false;
+	
+	BoomOn = false;
 
 	Offset = Vector3(0.0f, 0.0f);
 
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 	ItemList = ObjectManager::GetInstance()->GetItemList();
+	PlayerBoom = ObjectManager::GetInstance()->GetPlayerBoom();
 	EnemyBulletList = ObjectManager::GetInstance()->GetEnemyBulletList();
 
-	Power = 2;
+	Power = 31;
 	Boom = 3;
+	Hp = 3;
 
 }
 
@@ -96,19 +101,19 @@ int Player::Update()
 		// ** Z키를 누를경우
 		if (GetAsyncKeyState('Z'))
 		{
-			// ** 파워가 1이상 30 이하일 경우
-			if (Power > 1 || Power < 30)
-			{
-				// ** 0.2초마다 실행한다.
-				if (Time1 + 200 <= GetTickCount64())
-				{
-					// ** BulletLIst에 탄막을 추가한다.
-					BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
-					Time1 = GetTickCount64();
-				}
-			}
+			// // ** 파워가 1이상 30 이하일 경우
+			// if (Power > 1 || Power < 30)
+			// {
+			// 	// ** 0.2초마다 실행한다.
+			// 	if (Time1 + 200 <= GetTickCount64())
+			// 	{
+			// 		// ** BulletLIst에 탄막을 추가한다.
+			// 		BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
+			// 		Time1 = GetTickCount64();
+			// 	}
+			// }
 			// ** 파워가 31이상 60 이하일 경우
-			if (Power > 31 || Power < 60)
+			if (Power > 1)
 			{
 				// ** 0.2초마다 실행한다.
 				if (Time1 + 200 <= GetTickCount64())
@@ -118,6 +123,31 @@ int Player::Update()
 					BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f)));
 					BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f)));
 					Time1 = GetTickCount64();
+				}
+			}
+		}
+		// ** X키를 누를경우
+		if (GetAsyncKeyState('X'))
+		{
+			// 폭탄이 있는경우
+			if (Boom >= 0)
+			{
+				// 폭탄 트리거가 false일 경우
+				if (!BoomOn)
+				{
+					//폭탄을 생성한다.
+					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(120, Vector3(86.0f, 85.0f)));				//수정예정 리스트
+					// 폭탄 트리거를 true를 시켜 연속해서 폭탄을 사용하지 못하게 막는다
+					BoomOn = true;
+				}
+				if (BoomOn)
+				{
+					if (Time1 + 2000 <= GetTickCount64())
+					{
+						//다시 폭탄을 사용할 수 있도록 트리거를 false로 변경한다.
+						BoomOn = false;
+						Time1 = GetTickCount64();
+					}
 				}
 			}
 		}

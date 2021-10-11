@@ -35,6 +35,12 @@ void Logo::Initialize()
 	ImageList["BackGround"] = (new Bitmap)->LoadBmp(L"../Resource/BackGround.bmp");
 	ImageList["BGR"] = (new Bitmap)->LoadBmp(L"../Resource/BGR.bmp");
 
+	// ** 체력,폭탄 UI
+	ImageList["Hp"] = (new Bitmap)->LoadBmp(L"../Resource/Hp.bmp");
+	ImageList["U_Boom"] = (new Bitmap)->LoadBmp(L"../Resource/Boom.bmp");
+
+
+
 
 	// ** 적 사망 시 나오는 아이템
 	ImageList["Power"] = (new Bitmap)->LoadBmp(L"../Resource/Item_Power.bmp");
@@ -55,6 +61,9 @@ void Logo::Initialize()
 	// ** 레이무 기본 공격 **//
 	ImageList["NomalBullet"] = (new Bitmap)->LoadBmp(L"../Resource/NomalBullet.bmp");
 	ImageList["guidedBullet"] = (new Bitmap)->LoadBmp(L"../Resource/guidedBullet.bmp");
+
+	// ** 레이무 폭탄 공격 **//
+	ImageList["Reimu_Boom"] = (new Bitmap)->LoadBmp(L"../Resource/player_Boom.bmp");
 
 
 

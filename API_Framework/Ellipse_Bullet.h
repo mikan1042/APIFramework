@@ -1,18 +1,20 @@
 #pragma once
 #include "BulletBridge.h"
 
-class LV2_Bullet : public BulletBridge
+class Ellipse_Bullet : public BulletBridge
 {
 public:
 	Object* Target;
-	ULONGLONG Time1;
+	Object* Player;
+	Object* MB;
+	bool AT;
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
 public:
-	LV2_Bullet();
-	virtual ~LV2_Bullet();
+	Ellipse_Bullet();
+	virtual ~Ellipse_Bullet();
 };
 
