@@ -135,14 +135,22 @@ int Player::Update()
 				// 폭탄 트리거가 false일 경우
 				if (!BoomOn)
 				{
+				//폭탄이 중복해서 생성되지 못하도록 입력 딜레이를 준다. 
 					//폭탄을 생성한다.
-					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(120, Vector3(86.0f, 85.0f)));				//수정예정 리스트
+					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
 					// 폭탄 트리거를 true를 시켜 연속해서 폭탄을 사용하지 못하게 막는다
 					BoomOn = true;
+
 				}
+				// 폭탄 트리거가 true일 경우
 				if (BoomOn)
 				{
-					if (Time1 + 2000 <= GetTickCount64())
+					// 폭탄을 사용한뒤 4초후 다시 폭탄을 사용할 수 있도록 한다.
+					if (Time1 + 3000 <= GetTickCount64())
 					{
 						//다시 폭탄을 사용할 수 있도록 트리거를 false로 변경한다.
 						BoomOn = false;

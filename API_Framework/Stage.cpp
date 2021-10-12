@@ -133,26 +133,41 @@ void Stage::Update()
 			++iter;
 	}
 
-
+	// 적들의 움직임을 업데이트
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
 		(*iter)->Update();
-
+	
+	//아이템의 움직임을 업데이트
 	for (vector<Object*>::iterator iter = ItemList->begin();
 		iter != ItemList->end(); ++iter)
 		(*iter)->Update();
 
-	for (vector<Object*>::iterator iter = EnemyBulletList->begin();
-		iter != EnemyBulletList->end(); ++iter)
-		(*iter)->Update();
 
-
+	// 플레이어의 폭탄움직임을 업데이트 & 폭탄과 요정과의 충돌 
 	for (vector<Object*>::iterator iter = PlayerBoom->begin();
 		iter != PlayerBoom->end(); ++iter)
+	{
 		(*iter)->Update();
 
+		for (vector<Object*>::iterator iter1 = EnemyList->begin();
+			iter1 != EnemyList->end(); ++iter1)
+		{
+			if (CollisionManager::RectCollision((*iter), (*iter1)))
+			{
+				iter1 = EnemyList->erase(iter1);
+				break;
+			}
+			else
+				++iter1;
+		}
+		++iter;
 
-	// ** 총알 리스트의 progress
+
+	}
+
+
+	// ** 플레이어의 탄막과 요정이 부딪혔을 경우
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); )
 	{
@@ -219,9 +234,21 @@ void Stage::Update()
 	//플레이어와 요정의 공격이 부딪혔을경우
 	for (vector<Object*>::iterator iter = EnemyBulletList->begin();
 		iter != EnemyBulletList->end();)
-	{
-		if (CollisionManager::RectCollision((*iter), m_pPlayer))
+	{	
+
+		// 요정의 탄막과 플레이어가 부딪혔을경우
+ 		if (CollisionManager::RectCollision((*iter), m_pPlayer))
 		{
+			// 요정의 탄막을 제거한다.
+			iter = EnemyBulletList->erase(iter);
+		}
+		// 요정의 탄막이 화면밖을 벗어났을 경우
+		else if ((*iter)->GetPosition().x > 800||
+				(*iter)->GetPosition().x < 50 ||
+				(*iter)->GetPosition().y < 0 ||
+				(*iter)->GetPosition().y > 720)
+		{
+			// 요정의 탄막을 제거한다.
 			iter = EnemyBulletList->erase(iter);
 		}
 		else
@@ -229,20 +256,37 @@ void Stage::Update()
 	}
 
 
-	 //플레이어의 폭탄과 요정& 요정의 공격의 충돌판정
-	 for (vector<Object*>::iterator iter = PlayerBoom->begin();
-	 	iter != PlayerBoom->end();)
-	 {
-	 	for (vector<Object*>::iterator iter1 = EnemyBulletList->begin();
-	 		iter1 != EnemyBulletList->end();)
-	 	{
-	 		if (CollisionManager::RectCollision((*iter), (*iter1)))
-	 		{
-	 			//iter1 = EnemyBulletList->erase(iter1);
-	 		}
-	 		
-	 	}
-	 }
+	 // 플레이어의 폭탄과 요정의 공격의 충돌판정
+	for (vector<Object*>::iterator iter = EnemyBulletList->begin();
+		iter != EnemyBulletList->end();)
+	{
+		int iResult = (*iter)->Update();
+
+		for (vector<Object*>::iterator iter1 = PlayerBoom->begin();
+			iter1 != PlayerBoom->end();)
+		{
+
+			if (CollisionManager::RectCollision((*iter1), (*iter)))
+			{
+				iResult = 1;
+				break;
+			}
+			else if ((*iter)->GetPosition().x > 800 ||
+				(*iter)->GetPosition().x < 50 ||
+				(*iter)->GetPosition().y < 0 ||
+				(*iter)->GetPosition().y > 720)
+			{
+				iResult = 1;
+				break;
+			}
+			else
+				++iter1;
+		}
+		if (iResult == 1)
+			iter = EnemyBulletList->erase(iter);
+		else
+		++iter;
+	}
 }
 
 void Stage::Render(HDC _hdc)

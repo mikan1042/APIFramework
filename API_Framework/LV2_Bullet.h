@@ -6,6 +6,8 @@ class LV2_Bullet : public BulletBridge
 public:
 	Object* Target;
 	ULONGLONG Time1;
+	vector<Object*>* EnemyList;
+
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;
