@@ -24,6 +24,7 @@ private:
 	// ** 오브젝트 리스트
 	list<Object*> EnableList;
 	vector<Object*> EnemyList;
+	vector<Object*> EnemyList1;
 	vector<Object*> BulletList;
 	vector<Object*> EnemyBulletList;
 	vector<Object*> PlayerBoom;
@@ -71,6 +72,7 @@ public:
 	vector<Object*>* GetBulletList() { return &BulletList; }
 	vector<Object*>* GetEnemyBulletList() { return &EnemyBulletList; }
 	vector<Object*>* GetEnemyList() { return &EnemyList; }
+	vector<Object*>* GetEnemyList1() { return &EnemyList1; }
 	vector<Object*>* GetItemList() { return &ItemList; }
 	vector<Object*>* GetPlayerBoom() { return &PlayerBoom; }
 

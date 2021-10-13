@@ -15,14 +15,25 @@ public:
 
 public:
 	vector<Object*>* EnemyList;
+	vector<Object*>* EnemyList1;
 	vector<Object*>* EnemyBulletList;
 	ULONGLONG Time1;
+	ULONGLONG Time2;
+	ULONGLONG Time3;
+
+	float angle;
+
+	float TimeCount;
 
 public:
 	// 몬스터 생성 및 추격탄 
-	void Fairy1();
+	void Fairy1(int _x, int _y, float _t, float _tt);
+	void Fairy2(int _x, int _y, float _t , float _tt);
 	// 몬스터 생성 및 원탄
-	void Fairy2();
+	void Fairy3(int _x, int _y, float _t, float _tt);
+
+	// 이동값 받아오기
+	Vector3 Getangle(float _x);
 
 
 	template <typename T>

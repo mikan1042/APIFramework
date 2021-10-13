@@ -130,7 +130,7 @@ int Player::Update()
 		if (GetAsyncKeyState('X'))
 		{
 			// 폭탄이 있는경우
-			if (Boom >= 0)
+			if (Boom > 0)
 			{
 				// 폭탄 트리거가 false일 경우
 				if (!BoomOn)
@@ -142,9 +142,13 @@ int Player::Update()
 					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
 					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
 					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+
+					// 폭탄의 개수를 하나 줄인다
+					--Boom;
+					// 줄인 폭탄의 개수를 보내준다.
+					ObjectManager::GetInstance()->GetPlayer()->SetBoom(Boom);
 					// 폭탄 트리거를 true를 시켜 연속해서 폭탄을 사용하지 못하게 막는다
 					BoomOn = true;
-
 				}
 				// 폭탄 트리거가 true일 경우
 				if (BoomOn)
