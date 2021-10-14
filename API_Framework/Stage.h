@@ -13,6 +13,7 @@ private:
 	Object* m_Fairy;
 	Object* m_Schedule;
 	Object* m_uHp;
+	Object* m_Chat;
 
 	vector<Object*>* EnemyList;
 	vector<Object*>* EnemyList1;

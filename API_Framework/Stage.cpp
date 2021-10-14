@@ -14,6 +14,7 @@
 #include "Boom.h"
 #include "ScheduleManager.h"
 #include "UI_Hp.h"
+#include "Chat.h"
 
 
 Stage::Stage() : m_pPlayer(nullptr)
@@ -29,7 +30,6 @@ Stage::~Stage()
 void Stage::Initialize()
 {
 	m_pPlayer = ObjectManager::GetInstance()->GetPlayer();
-
 	// ** 오브젝트 매니저에서 총알 리스트를 받아옴. (포인터로...)
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
 
@@ -68,6 +68,8 @@ void Stage::Initialize()
 	m_uHp = new UI_Hp;
 	m_uHp->Initialize();
 
+	m_Chat = new Chat;
+	m_Chat->Initialize();
 
 
 
@@ -89,6 +91,8 @@ void Stage::Update()
 	m_pButton->Update();
 
 	m_uHp->Update();
+
+	m_Chat->Update();
 
 
 
@@ -481,6 +485,8 @@ void Stage::Render(HDC _hdc)
 	State_Back->Render(ImageList["Buffer"]->GetMemDC());
 
 	m_uHp->Render(ImageList["Buffer"]->GetMemDC());
+
+	m_Chat->Render(ImageList["Buffer"]->GetMemDC());
 
 
 	BitBlt(_hdc,

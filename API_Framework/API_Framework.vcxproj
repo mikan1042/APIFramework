@@ -30,7 +30,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -142,6 +142,7 @@
     <ClInclude Include="API_Framework.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Boom.h" />
+    <ClInclude Include="Chat.h" />
     <ClInclude Include="Ellipse_Bullet.h" />
     <ClInclude Include="ItemBirdge.h" />
     <ClInclude Include="Bitmap.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="API_Framework.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Boom.cpp" />
+    <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Ellipse_Bullet.cpp" />
     <ClCompile Include="ItemBirdge.cpp" />
     <ClCompile Include="Bitmap.cpp" />

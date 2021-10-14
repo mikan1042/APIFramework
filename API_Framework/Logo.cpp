@@ -48,7 +48,11 @@ void Logo::Initialize()
 
 
 
-	
+	// ** 채팅창
+	ImageList["Chat"] = (new Bitmap)->LoadBmp(L"../Resource/Chat.bmp");
+	// ** 레이무의 일러스트
+	ImageList["C_Reimu"] = (new Bitmap)->LoadBmp(L"../Resource/C_Reimu.bmp");
+
 
 
 
@@ -104,6 +108,7 @@ void Logo::Initialize()
 	// ** 시작화면 ** //
 	p_Start = new Start;
 	p_Start->Initialize();
+
 }
 
 void Logo::Update()
@@ -126,6 +131,7 @@ void Logo::Render(HDC _hdc)
 		ImageList["Buffer"]->GetMemDC(),
 		0, 0,
 		SRCCOPY);
+
 }
 
 void Logo::Release()

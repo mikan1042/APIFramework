@@ -17,7 +17,7 @@ LV2_Bullet::~LV2_Bullet()
 
 void LV2_Bullet::Initialize()
 {
-	Speed = 7.0f;
+	Speed = 4.0f;
 
 	DrawKey = "guidedBullet";
 
@@ -40,12 +40,6 @@ int LV2_Bullet::Update(Transform& _rTransInfo)
 		_rTransInfo.Position.x += vx * Speed;
 		_rTransInfo.Position.y += vy * Speed;
 		
-		//	for (vector<Object*>::iterator iter = EnemyList->begin();
-		//		iter != EnemyList->end();)
-		//	{
-		//		if ((*iter)->GetPosition().y > 60)
-		//		{
-
 					Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
 
 					if (Target)
@@ -62,10 +56,7 @@ int LV2_Bullet::Update(Transform& _rTransInfo)
 						_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 						_rTransInfo.Position.y += _rTransInfo.Direction.y;
 					}
-		// 		}
-				
-		// 			++iter;
-		// 	}
+
 
 
 	return 0;

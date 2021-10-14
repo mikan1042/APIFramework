@@ -15,11 +15,12 @@ protected:
 	string strKey;
 	string DrawKey;
 	bool Active;
+	bool Chat;
 	float Speed;
 	float Hp;
 
 	int Power, Boom;
-
+	int Chat1;
 	// ** 출력 이미지 보관
 	static map<string, Bitmap*> ImageList;
 	//Object* Target;
@@ -40,6 +41,12 @@ public:
 
 	void SetBoom(float _B) { Boom = _B; }
 	int GetBoom() { return Boom; }
+
+	bool GetChat() { return Chat; }
+	void SetChat(bool _Chat) { Chat = _Chat; }
+
+	int GetChat1() { return Chat1; }
+	void SetChat1(int _Chat1) { Chat1 = _Chat1; }
 
 	void SetDrawKey(string _D) { DrawKey = _D; }
 	string GetDrawKey() { return DrawKey; }

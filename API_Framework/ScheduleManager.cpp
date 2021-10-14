@@ -46,14 +46,6 @@ int ScheduleManager::Update()
 		this->Fairy2(630, -50, 4.0f, 7.5f);
 		}
 
-
-
-
-		Time1 = GetTickCount64();
-	}
-
-	if (Time2 + 1500 <= GetTickCount64())
-	{
 		// 세번째 패턴 요정이 내려와 원탄을 발사
 		if (TimeCount < 13.0f)
 		{
@@ -62,8 +54,23 @@ int ScheduleManager::Update()
 
 		}
 
-		Time2 = GetTickCount64();
+		if (TimeCount == 17.0f)
+		{
+			// ** 이야기를 진행
+			ObjectManager::GetInstance()->GetPlayer()->SetChat(true);
+		}
 
+
+
+
+
+
+
+
+
+
+
+		Time1 = GetTickCount64();
 	}
 
 
@@ -155,7 +162,7 @@ void ScheduleManager::Fairy3(int _x, int _y, float _t, float _tt)
 		iter != EnemyList1->end(); ++iter)
 	{
 		// List에 있는 Object의 Y좌표가 120을 넘어갔을때
-		if ((*iter)->GetPosition().y > 120)
+		if ((*iter)->GetPosition().y > 120 && (*iter)->GetPosition().x == _x)
 		{
 			// Object의 이동방향을 0으로 초기화 시켜 움직이지 못하게한다.
 			(*iter)->SetDirection(Vector3(0.0f, 0.0f));
@@ -171,8 +178,10 @@ void ScheduleManager::Fairy3(int _x, int _y, float _t, float _tt)
 				// EnemyBulletList에 요정의 공격을 추가한다. 
 				EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet>(angle, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 			}
+			(*iter)->SetDirection(Getangle(90.0f));
 
 		}
+
 	}
 }
 

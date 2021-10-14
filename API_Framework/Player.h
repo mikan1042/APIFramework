@@ -14,6 +14,7 @@ private:
 	Object* Target;
 
 	ULONGLONG Time1;
+	ULONGLONG Time2;
 
 	// ** 캐릭터의 변경 여부
 	bool Player_Swap;

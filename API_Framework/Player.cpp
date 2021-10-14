@@ -39,6 +39,7 @@ void Player::Initialize()
 	Frame = 0;
 
 	Time1 = GetTickCount64();
+	Time2 = GetTickCount64();
 
 	// ** 플레이어의 모습
 	Player_Swap = false;
@@ -46,6 +47,7 @@ void Player::Initialize()
 	Yukari_AT = false;
 	
 	BoomOn = false;
+	Chat = false;
 
 	Offset = Vector3(0.0f, 0.0f);
 
@@ -91,6 +93,13 @@ int Player::Update()
 		Player_Swap = false;
 
 
+	// 이야기진행여부
+	if (ObjectManager::GetInstance()->GetPlayer()->GetChat())
+	{
+	
+	}
+	else
+	{
 	// 캐릭터가 레이무 일 경우 ** //
 	if (!Player_Swap)
 	{
@@ -154,11 +163,11 @@ int Player::Update()
 				if (BoomOn)
 				{
 					// 폭탄을 사용한뒤 4초후 다시 폭탄을 사용할 수 있도록 한다.
-					if (Time1 + 3000 <= GetTickCount64())
+					if (Time2 + 3000 <= GetTickCount64())
 					{
 						//다시 폭탄을 사용할 수 있도록 트리거를 false로 변경한다.
 						BoomOn = false;
-						Time1 = GetTickCount64();
+						Time2 = GetTickCount64();
 					}
 				}
 			}
@@ -218,6 +227,8 @@ int Player::Update()
 		else
 			Yukari_AT = false;
 	}
+	}
+
 
 
 

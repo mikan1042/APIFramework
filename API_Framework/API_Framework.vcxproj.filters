@@ -172,6 +172,9 @@
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Reimu_Boom">
       <UniqueIdentifier>{da59b7e2-32a1-4b7b-a310-885c8db482f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\UI\Chat">
+      <UniqueIdentifier>{7305bc22-ef60-4906-b2e0-3d27b9e2e805}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -324,6 +327,9 @@
     <ClInclude Include="Reimu_Boom.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Boom</Filter>
     </ClInclude>
+    <ClInclude Include="Chat.h">
+      <Filter>소스 파일\02. Object\UI\Chat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -442,6 +448,9 @@
     </ClCompile>
     <ClCompile Include="Reimu_Boom.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Boom</Filter>
+    </ClCompile>
+    <ClCompile Include="Chat.cpp">
+      <Filter>소스 파일\02. Object\UI\Chat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
