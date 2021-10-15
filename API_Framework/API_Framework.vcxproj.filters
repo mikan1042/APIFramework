@@ -175,6 +175,12 @@
     <Filter Include="소스 파일\02. Object\UI\Chat">
       <UniqueIdentifier>{7305bc22-ef60-4906-b2e0-3d27b9e2e805}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy1">
+      <UniqueIdentifier>{22f3da88-fbe4-48a2-a84a-39bcc7457d89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy2">
+      <UniqueIdentifier>{5fe5fe76-8629-4af4-96a3-c3fc6face966}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -330,6 +336,12 @@
     <ClInclude Include="Chat.h">
       <Filter>소스 파일\02. Object\UI\Chat</Filter>
     </ClInclude>
+    <ClInclude Include="FairyEnemy1.h">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy1</Filter>
+    </ClInclude>
+    <ClInclude Include="FairyEnemy2.h">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy2</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -451,6 +463,12 @@
     </ClCompile>
     <ClCompile Include="Chat.cpp">
       <Filter>소스 파일\02. Object\UI\Chat</Filter>
+    </ClCompile>
+    <ClCompile Include="FairyEnemy1.cpp">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy1</Filter>
+    </ClCompile>
+    <ClCompile Include="FairyEnemy2.cpp">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy2</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -177,6 +177,16 @@ Object* ObjectManager::GetTarget(Vector3 _Pos)
 			MathManager::GetDistance(_Pos, (*iter)->GetPosition()),	// ** Key
 			(*iter)));	// ** Value
 	}
+	// ** 모든 적 유닛리스트를 돌면서 확인한다.
+	for (vector<Object*>::iterator iter = EnemyList1.begin();
+		iter != EnemyList1.end(); ++iter)
+	{
+		// ** 멀티맵에 Current 와 Target 의 거리를 구해서 추가한다.
+		FindTargetList.insert(
+			make_pair(
+				MathManager::GetDistance(_Pos, (*iter)->GetPosition()),	// ** Key
+				(*iter)));	// ** Value
+	}
 
 	// ** 만약에 리스트에 아무것도 없다면....
 	if (FindTargetList.empty())

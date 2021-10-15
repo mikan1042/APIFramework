@@ -1,20 +1,20 @@
-#include "FairyEnemy.h"
+#include "FairyEnemy2.h"
 
 #include "Object.h"
 #include "ObjectManager.h"
 
-FairyEnemy::FairyEnemy()
+FairyEnemy2::FairyEnemy2()
 {
 
 }
 
-FairyEnemy::~FairyEnemy()
+FairyEnemy2::~FairyEnemy2()
 {
 
 }
 
 
-void FairyEnemy::Initialize()
+void FairyEnemy2::Initialize()
 {
 	Speed = 5.0f;
 
@@ -24,9 +24,8 @@ void FairyEnemy::Initialize()
 
 }
 
-int FairyEnemy::Update(Transform& _rTransInfo)
+int FairyEnemy2::Update(Transform& _rTransInfo)
 {
-	Speed -= 0.05f;
 
 	_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 	_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
@@ -35,7 +34,7 @@ int FairyEnemy::Update(Transform& _rTransInfo)
 }
 
 
-void FairyEnemy::Render(HDC _hdc)
+void FairyEnemy2::Render(HDC _hdc)
 {
 
 
@@ -44,7 +43,7 @@ void FairyEnemy::Render(HDC _hdc)
 		int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2)),
 		int(RealObject->GetPosition().x + (RealObject->GetScale().x / 2)),
 		int(RealObject->GetPosition().y + (RealObject->GetScale().y / 2)));
-	
+
 
 	TransparentBlt(_hdc, // ** 최종 출력 위치
 		int(RealObject->GetPosition().x - 12.5f),
@@ -60,7 +59,7 @@ void FairyEnemy::Render(HDC _hdc)
 
 }
 
-void FairyEnemy::Release()
+void FairyEnemy2::Release()
 {
 
 }

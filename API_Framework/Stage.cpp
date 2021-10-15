@@ -9,6 +9,8 @@
 #include "MyButton.h"
 #include "BackGround.h"
 #include "FairyEnemy.h"
+#include "FairyEnemy1.h"
+#include "FairyEnemy2.h"
 #include "Item.h"
 #include "Power.h"
 #include "Boom.h"
@@ -36,6 +38,7 @@ void Stage::Initialize()
 	// ** 오브젝트 매니저에서 몬스터 리스트를 받아옴. (포인터로...)
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
 	EnemyList1 = ObjectManager::GetInstance()->GetEnemyList1();
+	EnemyList2 = ObjectManager::GetInstance()->GetEnemyList2();
 
 	// ** 오브젝트 매니저에서 아이템 리스트를 받아옴. (포인터로...)
 	ItemList = ObjectManager::GetInstance()->GetItemList();
@@ -130,7 +133,22 @@ void Stage::Update()
 			ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
 		}
 	}
-
+	for (vector<Object*>::iterator iter = EnemyList2->begin();
+		iter != EnemyList2->end(); ++iter)
+	{
+		// ** 적과 플레이어가 충돌했을경우
+		if (CollisionManager::RectCollision((*iter), m_pPlayer))
+		{
+			// ** 플레이어의 HP를 받아온다
+			int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
+			// ** HP를 1줄인다
+			--pHp;
+			// ** 변경한 HP값을 보내준다.
+			ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
+			// ** 플레이어의 위치를 재조정한다.
+			ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+		}
+	}
 
 
 
@@ -171,7 +189,7 @@ void Stage::Update()
 
 
 
-	// ** 플레이어의 폭탄과 적의 충돌
+	// ** 플레이어의 폭탄과 적의 충돌								** 몬스터가 화면밖을 벗어날 경우 삭제
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end();)
 	{
@@ -199,7 +217,7 @@ void Stage::Update()
 		else
 			++iter;
 	}
-	// ** 플레이어의 폭탄과 적의 충돌
+	// ** 플레이어의 폭탄과 적의 충돌								** 몬스터가 화면밖을 벗어날 경우 삭제
 	for (vector<Object*>::iterator iter = EnemyList1->begin();
 		iter != EnemyList1->end();)
 	{
@@ -223,6 +241,42 @@ void Stage::Update()
 			(*iter)->GetPosition().y > 720)
 		{
 			iter = EnemyList1->erase(iter);
+		}
+		else if ((*iter)->GetPosition().y < -100)
+		{
+			iter = EnemyList1->erase(iter);
+		}
+		else
+			++iter;
+	}
+	// ** 플레이어의 폭탄과 적의 충돌								** 몬스터가 화면밖을 벗어날 경우 삭제
+	for (vector<Object*>::iterator iter = EnemyList2->begin();
+		iter != EnemyList2->end();)
+	{
+		int iResult = (*iter)->Update();
+
+		for (vector<Object*>::iterator iter1 = PlayerBoom->begin();
+			iter1 != PlayerBoom->end();)
+		{
+			if (CollisionManager::RectCollision((*iter1), (*iter)))
+			{
+				iResult = 1;
+				break;
+			}
+			else
+				++iter1;
+		}
+		if (iResult == 1)
+			iter = EnemyList2->erase(iter);
+		else if ((*iter)->GetPosition().x > 800 ||
+			(*iter)->GetPosition().x < 50 ||
+			(*iter)->GetPosition().y > 720)
+		{
+			iter = EnemyList2->erase(iter);
+		}
+		else if ((*iter)->GetPosition().y < -100)
+		{
+			iter = EnemyList2->erase(iter);
 		}
 		else
 			++iter;
@@ -458,6 +512,10 @@ void Stage::Render(HDC _hdc)
 
 	for (vector<Object*>::iterator iter = EnemyList1->begin();
 		iter != EnemyList1->end(); ++iter)
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
+
+	for (vector<Object*>::iterator iter = EnemyList2->begin();
+		iter != EnemyList2->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
 	for (vector<Object*>::iterator iter = ItemList->begin();

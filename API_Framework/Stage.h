@@ -17,6 +17,7 @@ private:
 
 	vector<Object*>* EnemyList;
 	vector<Object*>* EnemyList1;
+	vector<Object*>* EnemyList2;
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyBulletList;
 	vector<Object*>* ItemList;

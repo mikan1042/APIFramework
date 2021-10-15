@@ -48,6 +48,7 @@ void Player::Initialize()
 	
 	BoomOn = false;
 	Chat = false;
+	angle = 0;
 
 	Offset = Vector3(0.0f, 0.0f);
 
@@ -124,6 +125,7 @@ int Player::Update()
 			// ** 파워가 31이상 60 이하일 경우
 			if (Power > 1)
 			{
+				
 				// ** 0.2초마다 실행한다.
 				if (Time1 + 200 <= GetTickCount64())
 				{
@@ -197,6 +199,7 @@ int Player::Update()
 		// ** Z키를 누를경우 공격 ** //
 		if (GetAsyncKeyState('Z'))
 		{
+
 			// ** 0.2초마다 실행한다.
 			if (Time1 + 200 <= GetTickCount64())
 			{

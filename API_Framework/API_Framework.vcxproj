@@ -23,14 +23,14 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4c2a5a03-b275-4587-adbe-d125974b89dc}</ProjectGuid>
     <RootNamespace>APIFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -144,6 +144,8 @@
     <ClInclude Include="Boom.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="Ellipse_Bullet.h" />
+    <ClInclude Include="FairyEnemy1.h" />
+    <ClInclude Include="FairyEnemy2.h" />
     <ClInclude Include="ItemBirdge.h" />
     <ClInclude Include="Bitmap.h" />
     <ClInclude Include="Boss.h" />
@@ -197,6 +199,8 @@
     <ClCompile Include="Boom.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Ellipse_Bullet.cpp" />
+    <ClCompile Include="FairyEnemy1.cpp" />
+    <ClCompile Include="FairyEnemy2.cpp" />
     <ClCompile Include="ItemBirdge.cpp" />
     <ClCompile Include="Bitmap.cpp" />
     <ClCompile Include="Boss.cpp" />

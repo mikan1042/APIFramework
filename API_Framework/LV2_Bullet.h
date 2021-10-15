@@ -7,6 +7,10 @@ public:
 	Object* Target;
 	ULONGLONG Time1;
 	vector<Object*>* EnemyList;
+	vector<Object*>* EnemyList1;
+
+	float vx;
+	float vy;
 
 public:
 	virtual void Initialize()override;

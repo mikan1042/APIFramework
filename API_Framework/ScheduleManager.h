@@ -16,6 +16,7 @@ public:
 public:
 	vector<Object*>* EnemyList;
 	vector<Object*>* EnemyList1;
+	vector<Object*>* EnemyList2;
 	vector<Object*>* EnemyBulletList;
 	ULONGLONG Time1;
 	ULONGLONG Time2;
@@ -23,9 +24,19 @@ public:
 
 	float angle;
 
-	float TimeCount;
+	float Time1Count;
+	float Time2Count;
+	float Time3Count;
+
+	int a;
+	int b;
 
 public:
+	// 몬스터 생성 및 원탄
+	void Fairymove1(int _x, int _y, float _t, float _tt);
+	void Fairymove2(int _x, int _y, float _t, float _tt);
+	void Fairymove3(int _x, int _y, float _t, float _tt);
+
 	// 몬스터 생성 및 추격탄 
 	void Fairy1(int _x, int _y, float _t, float _tt);
 	void Fairy2(int _x, int _y, float _t , float _tt);

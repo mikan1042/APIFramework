@@ -11,6 +11,7 @@ private:
 	float OldPositionY;
 	float JumpTime;
 	int Frame;
+	int angle;
 	Object* Target;
 
 	ULONGLONG Time1;

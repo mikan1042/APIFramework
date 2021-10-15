@@ -25,6 +25,7 @@ private:
 	list<Object*> EnableList;
 	vector<Object*> EnemyList;
 	vector<Object*> EnemyList1;
+	vector<Object*> EnemyList2;
 	vector<Object*> BulletList;
 	vector<Object*> EnemyBulletList;
 	vector<Object*> PlayerBoom;
@@ -73,6 +74,7 @@ public:
 	vector<Object*>* GetEnemyBulletList() { return &EnemyBulletList; }
 	vector<Object*>* GetEnemyList() { return &EnemyList; }
 	vector<Object*>* GetEnemyList1() { return &EnemyList1; }
+	vector<Object*>* GetEnemyList2() { return &EnemyList2; }
 	vector<Object*>* GetItemList() { return &ItemList; }
 	vector<Object*>* GetPlayerBoom() { return &PlayerBoom; }
 

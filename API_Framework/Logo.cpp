@@ -52,6 +52,8 @@ void Logo::Initialize()
 	ImageList["Chat"] = (new Bitmap)->LoadBmp(L"../Resource/Chat.bmp");
 	// ** 레이무의 일러스트
 	ImageList["C_Reimu"] = (new Bitmap)->LoadBmp(L"../Resource/C_Reimu.bmp");
+	// ** 리글의 일러스트
+	ImageList["C_Ligle"] = (new Bitmap)->LoadBmp(L"../Resource/C_Ligle.bmp");
 
 
 
