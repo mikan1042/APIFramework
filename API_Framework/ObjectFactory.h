@@ -42,9 +42,30 @@ public:
 		pObj->SetPosition(_vPos);
 		pObj->SetScale(_sPos);
 
+
 		pBridge->SetObject(pObj);
 		pBridge->Initialize();
 		pBridge->Setangle(_x);
+
+		((T*)pObj)->SetBridge(pBridge);
+
+		return pObj;
+	}
+
+	static Object* CreateObject(Vector3 _vPos, Vector3 _sPos, float _x, float _s, Bridge* pBridge)
+	{
+		Object* pObj = new T;
+
+		pObj->Initialize();
+		pObj->SetPosition(_vPos);
+		pObj->SetScale(_sPos);
+		
+
+
+		pBridge->SetObject(pObj);
+		pBridge->Initialize();
+		pBridge->Setangle(_x);
+		pBridge->SetSpeed(_s);
 
 		((T*)pObj)->SetBridge(pBridge);
 

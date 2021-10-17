@@ -17,8 +17,7 @@ Monster_Bullet::~Monster_Bullet()
 
 void Monster_Bullet::Initialize()
 {
-	Speed = 7.0f;
-
+	Speed = 5.0f;
 	DrawKey = "Enemy_Bullet";
 	EnemyBulletList = ObjectManager::GetInstance()->GetEnemyBulletList();
 	ImageList = Object::GetImageList();
@@ -43,8 +42,6 @@ int Monster_Bullet::Update(Transform& _rTransInfo)
 			_rTransInfo.Direction = MathManager::GetDirection(_rTransInfo.Position, Target->GetPosition());
 			AT = true;
 
-
-			cout << "fdfa" << endl;
 			_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
 			_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;
 

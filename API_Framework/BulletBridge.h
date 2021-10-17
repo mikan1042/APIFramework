@@ -4,12 +4,11 @@
 class BulletBridge : public Bridge
 {
 protected:
-	float Speed;
-
 	bool ATon;
 	map<string, Bitmap*> ImageList;
 	vector<Object*>* EnemyList;
 	vector<Object*>* EnemyBulletList;
+	vector<Object*>* EnemyBulletList1;
 public:
 	virtual void Initialize()PURE;
 	virtual int Update(Transform& _rTransInfo)PURE;

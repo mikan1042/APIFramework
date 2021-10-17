@@ -48,6 +48,9 @@ void Player::Initialize()
 	
 	BoomOn = false;
 	Chat = false;
+	GodMode = false;
+	BossMode = false;
+	BossOn = false;
 	angle = 0;
 
 	Offset = Vector3(0.0f, 0.0f);
@@ -66,6 +69,14 @@ void Player::Initialize()
 
 int Player::Update()
 {
+	if (ObjectManager::GetInstance()->GetPlayer()->GetGodMode())
+	{
+		if (Time2 + 2000 <= GetTickCount64())
+		{
+			ObjectManager::GetInstance()->GetPlayer()->SetGodMode(false);
+			Time2 = GetTickCount64();
+		}
+	}
 
 	// 충돌 좌표 = 현재 좌표 
 	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
@@ -160,30 +171,22 @@ int Player::Update()
 					ObjectManager::GetInstance()->GetPlayer()->SetBoom(Boom);
 					// 폭탄 트리거를 true를 시켜 연속해서 폭탄을 사용하지 못하게 막는다
 					BoomOn = true;
+					ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
 				}
 				// 폭탄 트리거가 true일 경우
-				if (BoomOn)
+				else
 				{
-					// 폭탄을 사용한뒤 4초후 다시 폭탄을 사용할 수 있도록 한다.
-					if (Time2 + 3000 <= GetTickCount64())
+					// 폭탄을 사용한뒤 2초후 다시 폭탄을 사용할 수 있도록 한다.
+					if (Time2 + 2000 <= GetTickCount64())
 					{
 						//다시 폭탄을 사용할 수 있도록 트리거를 false로 변경한다.
 						BoomOn = false;
 						Time2 = GetTickCount64();
 					}
 				}
+
 			}
-		}
-		// ** C키를 누를경우
-		if (GetAsyncKeyState('C'))
-		{
-			// ** 0.2초마다 실행한다.
-			if (Time1 + 200 <= GetTickCount64())
-			{
-				// ** EnemyList에 보스를 추가한다.
-				EnemyList->push_back(CreateEnemy<Boss>(300, 200,46,67,100));
-				Time1 = GetTickCount64();
-			}
+
 		}
 
 	}
@@ -257,14 +260,6 @@ int Player::Update()
 
 void Player::Render(HDC _hdc)
 {
-	//플레이어의 판정박스
-	Rectangle(_hdc,
-		int(Collider.Position.x - (Collider.Scale.x / 2)),
-		int(Collider.Position.y - (Collider.Scale.y / 2)),
-		int(Collider.Position.x + (Collider.Scale.x / 2)),
-		int(Collider.Position.y + (Collider.Scale.y / 2)));
-
-
 	// ** 레이무 인 경우 출력방식 ** //
 	if (!Player_Swap)
 	{

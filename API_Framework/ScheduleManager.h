@@ -14,13 +14,16 @@ public:
 	virtual Object* Clone()override { return new ScheduleManager(*this); }
 
 public:
+	vector<Object*>* BossList;
 	vector<Object*>* EnemyList;
 	vector<Object*>* EnemyList1;
 	vector<Object*>* EnemyList2;
 	vector<Object*>* EnemyBulletList;
+	vector<Object*>* EnemyBulletList1;
 	ULONGLONG Time1;
 	ULONGLONG Time2;
 	ULONGLONG Time3;
+	ULONGLONG Time4;
 
 	float angle;
 
@@ -43,12 +46,23 @@ public:
 	// 몬스터 생성 및 원탄
 	void Fairy3(int _x, int _y, float _t, float _tt);
 
+
+	// 보스의 공격 패턴
+	void BossAT1 ();
+	void BossAT1_1 ();
+	void BossAT2();
+	void BossAT2_1();
+
+
 	// 이동값 받아오기
 	Vector3 Getangle(float _x);
 
 
 	template <typename T>
 	Object* CreateBullet(float _x, Vector3 _vPos, Vector3 _sPos);
+
+	template <typename T>
+	Object* CreateBullet(float _x,float _s, Vector3 _vPos, Vector3 _sPos);
 
 	template <typename T>
 	Object* CreateEnemy(float _x, float _y, float _a, float _b, float _z);

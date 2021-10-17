@@ -23,7 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{4c2a5a03-b275-4587-adbe-d125974b89dc}</ProjectGuid>
     <RootNamespace>APIFramework</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -142,6 +142,10 @@
     <ClInclude Include="API_Framework.h" />
     <ClInclude Include="BackGround.h" />
     <ClInclude Include="Boom.h" />
+    <ClInclude Include="BossHp.h" />
+    <ClInclude Include="Boss_Bullet.h" />
+    <ClInclude Include="Boss_Bullet1.h" />
+    <ClInclude Include="Boss_Bullet2.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="Ellipse_Bullet.h" />
     <ClInclude Include="FairyEnemy1.h" />
@@ -169,12 +173,14 @@
     <ClInclude Include="MathManager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Monster_Bullet.h" />
+    <ClInclude Include="Monster_Bullet1.h" />
     <ClInclude Include="MyButton.h" />
     <ClInclude Include="LV1_Bullet.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectFactory.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerLife.h" />
     <ClInclude Include="Power.h" />
     <ClInclude Include="Prototype.h" />
     <ClInclude Include="Reimu_Boom.h" />
@@ -197,6 +203,10 @@
     <ClCompile Include="API_Framework.cpp" />
     <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Boom.cpp" />
+    <ClCompile Include="BossHp.cpp" />
+    <ClCompile Include="Boss_Bullet.cpp" />
+    <ClCompile Include="Boss_Bullet1.cpp" />
+    <ClCompile Include="Boss_Bullet2.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Ellipse_Bullet.cpp" />
     <ClCompile Include="FairyEnemy1.cpp" />
@@ -218,11 +228,13 @@
     <ClCompile Include="MathManager.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Monster_Bullet.cpp" />
+    <ClCompile Include="Monster_Bullet1.cpp" />
     <ClCompile Include="MyButton.cpp" />
     <ClCompile Include="LV1_Bullet.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerLife.cpp" />
     <ClCompile Include="Power.cpp" />
     <ClCompile Include="Prototype.cpp" />
     <ClCompile Include="Reimu_Boom.cpp" />

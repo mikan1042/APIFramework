@@ -42,14 +42,6 @@ int FairyEnemy1::Update(Transform& _rTransInfo)
 void FairyEnemy1::Render(HDC _hdc)
 {
 
-
-	Rectangle(_hdc,
-		int(RealObject->GetPosition().x - (RealObject->GetScale().x / 2)),
-		int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2)),
-		int(RealObject->GetPosition().x + (RealObject->GetScale().x / 2)),
-		int(RealObject->GetPosition().y + (RealObject->GetScale().y / 2)));
-
-
 	TransparentBlt(_hdc, // ** 최종 출력 위치
 		int(RealObject->GetPosition().x - 12.5f),
 		int(RealObject->GetPosition().y - 12.5f),

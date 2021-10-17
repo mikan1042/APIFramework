@@ -1,5 +1,8 @@
 #include "Chat.h"
+#include "Boss.h"
 #include "ObjectManager.h"
+#include "Enemy.h"
+#include "ObjectFactory.h"
 
 Chat::Chat()
 {
@@ -20,11 +23,22 @@ void Chat::Initialize()
 	Chat2 = 1;
 	Time1 = GetTickCount64();
 
+	BossList = ObjectManager::GetInstance()->GetBossList();
+
 }
 
 int Chat::Update()
 {
 	Chat1 = ObjectManager::GetInstance()->GetPlayer()->GetChat();
+
+	for (vector<Object*>::iterator iter = BossList->begin();
+		iter != BossList->end(); ++iter)
+	{
+		if ((*iter)->GetPosition().y > 130)
+		{
+			(*iter)->SetDirection(Vector3(0.0f, 0.0f));
+		}
+	}
 
 
 	if (GetAsyncKeyState('Z'))
@@ -98,7 +112,16 @@ void Chat::Render(HDC _hdc)
 			else if (Chat2 == 5)
 				TextOut(_hdc, 150, 550, L"잠깐, 아까부터 아무것도 없다니", 17);
 			else if (Chat2 == 6)
+			{
 				TextOut(_hdc, 150, 550, L"내가 있었잖아", 7);
+				if (!ObjectManager::GetInstance()->GetPlayer()->GetBossOn())
+				{
+					// ** EnemyList에 보스를 추가한다.
+					BossList->push_back(CreateEnemy<Boss>(500, -50, 46, 67, 724));
+	
+					ObjectManager::GetInstance()->GetPlayer()->SetBossOn(true);
+				}
+			}
 			else if (Chat2 == 7)
 				TextOut(_hdc, 150, 550, L"그렇게 걱정하지 않아도...", 15);
 			else if (Chat2 == 8)
@@ -126,9 +149,14 @@ void Chat::Render(HDC _hdc)
 			else if (Chat2 == 19)
 				TextOut(_hdc, 150, 550, L"반딧불이라니까!", 8);
 			else if (Chat2 == 20)
+			{
+				// 채팅모드를 종료시켜 채팅과 나오는 이미지를 제거
 				ObjectManager::GetInstance()->GetPlayer()->SetChat(false);
-		}
+				// 보스모드를 실행시켜 보스의 패턴을 진행할 수 있도록 한다.
+				ObjectManager::GetInstance()->GetPlayer()->SetBossMode(true);
 
+			}
+		}
 	}
 	else
 	{
@@ -140,4 +168,14 @@ void Chat::Render(HDC _hdc)
 void Chat::Release()
 {
 
+}
+
+template <typename T>
+Object* Chat::CreateEnemy(float _x, float _y, float _a, float _b, float _z)
+{
+	Bridge* pBridge = new T;
+	// 좌표, 크기 , 체력
+	Object* pEnemy = ObjectFactory<Enemy>::CreateObject(_x, _y, _a, _b, _z, pBridge);
+
+	return pEnemy;
 }

@@ -17,7 +17,7 @@ LV2_Bullet::~LV2_Bullet()
 
 void LV2_Bullet::Initialize()
 {
-	Speed = 4.0f;
+	Speed = 7.0f;
 
 	DrawKey = "guidedBullet";
 
@@ -40,22 +40,22 @@ int LV2_Bullet::Update(Transform& _rTransInfo)
 		_rTransInfo.Position.x += vx * Speed;
 		_rTransInfo.Position.y += vy * Speed;
 		
-					Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
+				Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
 
-					if (Target)
-					{
-						_rTransInfo.Direction = MathManager::GetDirection(_rTransInfo.Position, Target->GetPosition());
-						ATon = true;
+				if (Target)
+				{
+					_rTransInfo.Direction = MathManager::GetDirection(_rTransInfo.Position, Target->GetPosition());
+					ATon = true;
 
-						_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-						_rTransInfo.Position.y += _rTransInfo.Direction.y;
-					}
+					_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
+					_rTransInfo.Position.y += _rTransInfo.Direction.y;
+				}
 
-					if (ATon)
-					{
-						_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-						_rTransInfo.Position.y += _rTransInfo.Direction.y;
-					}
+				if (ATon)
+				{
+					_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
+					_rTransInfo.Position.y += _rTransInfo.Direction.y;
+				}
 
 
 

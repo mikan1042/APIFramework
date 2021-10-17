@@ -14,12 +14,16 @@ private:
 	Object* m_Schedule;
 	Object* m_uHp;
 	Object* m_Chat;
+	Object* PlayerL;
+	Object* BossH;
 
+	vector<Object*>* BossList;
 	vector<Object*>* EnemyList;
 	vector<Object*>* EnemyList1;
 	vector<Object*>* EnemyList2;
 	vector<Object*>* BulletList;
 	vector<Object*>* EnemyBulletList;
+	vector<Object*>* EnemyBulletList1;
 	vector<Object*>* ItemList;
 	vector<Object*>* PlayerBoom;
 	vector<Object*>* ObjectList;

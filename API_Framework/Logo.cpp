@@ -38,6 +38,7 @@ void Logo::Initialize()
 	// ** Ã¼·Â,ÆøÅº UI
 	ImageList["Hp"] = (new Bitmap)->LoadBmp(L"../Resource/Hp.bmp");
 	ImageList["U_Boom"] = (new Bitmap)->LoadBmp(L"../Resource/Boom.bmp");
+	ImageList["BossHp"] = (new Bitmap)->LoadBmp(L"../Resource/BossHp.bmp");
 
 
 

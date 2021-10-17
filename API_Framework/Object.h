@@ -16,8 +16,12 @@ protected:
 	string DrawKey;
 	bool Active;
 	bool Chat;
+	bool GodMode;
+	bool BossMode;
+	bool BossOn;
 	float Speed;
 	float Hp;
+
 
 	int Power, Boom;
 	int Chat1;
@@ -45,6 +49,15 @@ public:
 	bool GetChat() { return Chat; }
 	void SetChat(bool _Chat) { Chat = _Chat; }
 
+	bool GetGodMode() { return GodMode; }
+	void SetGodMode(bool _GodMode) { GodMode = _GodMode; }
+
+	bool GetBossMode() { return BossMode; }
+	void SetBossMode(bool _BossMode) { BossMode = _BossMode; }
+
+	bool GetBossOn() { return BossOn; }
+	void SetBossOn(bool _BossOn) { BossOn = _BossOn; }
+
 	int GetChat1() { return Chat1; }
 	void SetChat1(int _Chat1) { Chat1 = _Chat1; }
 
@@ -63,6 +76,7 @@ public:
 	// ** ÁÂÇ¥¸¦ Setting (Vector3)
 	void SetPosition(Vector3 _position) { TransInfo.Position = _position; }
 
+
 	// ** ÁÂÇ¥¸¦ Setting (_x, _y)
 	void SetPosition(float _x, float _y) { TransInfo.Position.x = _x; TransInfo.Position.y = _y; }
 
@@ -70,6 +84,8 @@ public:
 
 	void SetScale(float _x, float _y) { TransInfo.Scale.x = _x; TransInfo.Scale.y = _y; }
 	void SetScale(Vector3 _Scale) { TransInfo.Scale = _Scale; }
+
+	void SetSpeed(float _Speed) { Speed = _Speed; }
 
 	// ** ÁÂÇ¥¸¦ Vector3·Î out
 	Vector3 GetPosition() { return TransInfo.Position; }

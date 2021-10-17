@@ -6,6 +6,7 @@ class Bridge
 {
 protected:
 	float angle;
+	float Speed;
 	string DrawKey;
 	Object* RealObject;
 public:
@@ -16,6 +17,7 @@ public:
 public:
 	void SetObject(Object* _pObject) { RealObject = _pObject; }
 	void Setangle(float _angle) { angle = _angle; }
+	void SetSpeed(float _Speed) { Speed = _Speed; }
 public:
 	Bridge();
 	virtual ~Bridge();

@@ -181,6 +181,21 @@
     <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy2">
       <UniqueIdentifier>{5fe5fe76-8629-4af4-96a3-c3fc6face966}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Enemy\EnemyBridge\BossHp">
+      <UniqueIdentifier>{f67373d3-2630-4500-8778-72c7e011a568}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet">
+      <UniqueIdentifier>{350cff7e-9478-48d4-a522-047fc4da3dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet1">
+      <UniqueIdentifier>{a7389cb9-9cf6-44ee-8db2-7ccd7f7592ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet2">
+      <UniqueIdentifier>{4df58f55-a1f1-4347-992b-302f3536ae87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet1">
+      <UniqueIdentifier>{eade587f-56cb-46af-ad4a-f9ad1c9e71cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -342,6 +357,24 @@
     <ClInclude Include="FairyEnemy2.h">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy2</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerLife.h">
+      <Filter>소스 파일\02. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHp.h">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\BossHp</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_Bullet.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_Bullet1.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet1</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_Bullet2.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet2</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster_Bullet1.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -469,6 +502,24 @@
     </ClCompile>
     <ClCompile Include="FairyEnemy2.cpp">
       <Filter>소스 파일\02. Object\Enemy\EnemyBridge\FairyEnemy2</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerLife.cpp">
+      <Filter>소스 파일\02. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHp.cpp">
+      <Filter>소스 파일\02. Object\Enemy\EnemyBridge\BossHp</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Bullet.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Bullet1.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet1</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Bullet2.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet2</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster_Bullet1.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
