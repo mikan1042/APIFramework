@@ -566,7 +566,7 @@ void Stage::Update()
 				// 체력이 0이하일 경우
 				if (Hp <= 0)
 				{
-					if ((*iter2)->GetPower() > -7)
+					if ((*iter2)->GetPower() > -5)
 					{
 						int Bhp = (*iter2)->GetPower();
 						(*iter2)->SetPower(--Bhp);
@@ -575,19 +575,10 @@ void Stage::Update()
 					}
 					else
 					{
-						cout << (*iter2)->GetPower() << endl;
-					srand((unsigned)time(NULL));
-					int Ritem = (rand() % 100) + 1;
-
-
-					if (Ritem == 1)
-						ItemList->push_back(CreateItem<Boom>((*iter2)->GetPosition(), "Boom"));
-					else if (Ritem >= 2)
-						ItemList->push_back(CreateItem<Power>((*iter2)->GetPosition(), "Power"));
-
-
-					//적을 제거한다.
-					iter2 = BossList->erase(iter2);
+						ObjectManager::GetInstance()->GetPlayer()->SetWin(true);
+						ObjectManager::GetInstance()->GetPlayer()->SetChat(true);
+						ObjectManager::GetInstance()->GetPlayer()->SetChat1(true);
+						ObjectManager::GetInstance()->GetPlayer()->SetBossMode(false);
 					}
 
 				}
@@ -708,10 +699,6 @@ void Stage::Render(HDC _hdc)
 {
 	Back_Ground->Render(ImageList["Buffer"]->GetMemDC());
 
-	for (vector<Object*>::iterator iter = BossList->begin();
-		iter != BossList->end(); ++iter)
-		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
-
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
@@ -758,6 +745,10 @@ void Stage::Render(HDC _hdc)
 
 	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
 	BossH->Render(ImageList["Buffer"]->GetMemDC());
+
+	for (vector<Object*>::iterator iter = BossList->begin();
+		iter != BossList->end(); ++iter)
+		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
 
 

@@ -40,6 +40,13 @@ void Logo::Initialize()
 	ImageList["U_Boom"] = (new Bitmap)->LoadBmp(L"../Resource/Boom.bmp");
 	ImageList["BossHp"] = (new Bitmap)->LoadBmp(L"../Resource/BossHp.bmp");
 
+	ImageList["Test"] = (new Bitmap)->LoadBmp(L"../Resource/Test.bmp");
+	ImageList["LNB"] = (new Bitmap)->LoadBmp(L"../Resource/LNB.bmp");
+
+
+
+	ImageList["Ligle"] = (new Bitmap)->LoadBmp(L"../Resource/Ligle_sp.bmp");
+	ImageList["Boss_Ld"] = (new Bitmap)->LoadBmp(L"../Resource/Boss_Ld.bmp");
 
 
 

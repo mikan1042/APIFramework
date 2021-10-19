@@ -51,6 +51,7 @@ void Player::Initialize()
 	GodMode = false;
 	BossMode = false;
 	BossOn = false;
+	Win = false;
 	angle = 0;
 
 	Offset = Vector3(0.0f, 0.0f);

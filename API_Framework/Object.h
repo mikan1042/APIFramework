@@ -19,6 +19,7 @@ protected:
 	bool GodMode;
 	bool BossMode;
 	bool BossOn;
+	bool Win;
 	float Speed;
 	float Hp;
 
@@ -57,6 +58,9 @@ public:
 
 	bool GetBossOn() { return BossOn; }
 	void SetBossOn(bool _BossOn) { BossOn = _BossOn; }
+
+	bool GetWin() { return Win; }
+	void SetWin(bool _Win) { Win = _Win; }
 
 	int GetChat1() { return Chat1; }
 	void SetChat1(int _Chat1) { Chat1 = _Chat1; }

@@ -196,6 +196,9 @@
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet1">
       <UniqueIdentifier>{eade587f-56cb-46af-ad4a-f9ad1c9e71cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1">
+      <UniqueIdentifier>{80d07e69-de0a-4569-981f-b3445881123a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -375,6 +378,9 @@
     <ClInclude Include="Monster_Bullet1.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet1</Filter>
     </ClInclude>
+    <ClInclude Include="Ellipse_Bullet1.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -520,6 +526,9 @@
     </ClCompile>
     <ClCompile Include="Monster_Bullet1.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Monster_Bullet1</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse_Bullet1.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

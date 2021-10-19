@@ -1,20 +1,20 @@
 #pragma once
-#include "EnemyBridge.h"
+#include "BulletBridge.h"
 
-class Boss : public EnemyBridge
+class Ellipse_Bullet1 : public BulletBridge
 {
-
+public:
+	Object* Target;
+	Object* Player;
+	Object* MB;
+	bool AT;
 public:
 	virtual void Initialize()override;
 	virtual int Update(Transform& _rTransInfo)override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
-
 public:
-	Vector3 Getangle(float _x);
-
-public:
-	Boss();
-	virtual ~Boss();
+	Ellipse_Bullet1();
+	virtual ~Ellipse_Bullet1();
 };
 

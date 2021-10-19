@@ -9,6 +9,13 @@ protected:
 	float Speed;
 	string DrawKey;
 	Object* RealObject;
+
+	ULONGLONG AmTime;
+
+	int Anime;
+
+
+
 public:
 	virtual void Initialize()PURE;
 	virtual int Update(Transform& _rTransInfo)PURE;

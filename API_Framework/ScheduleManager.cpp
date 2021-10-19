@@ -13,6 +13,7 @@
 #include "Monster_Bullet.h"
 #include "monster_Bullet1.h"
 #include "Ellipse_Bullet.h"
+#include "Ellipse_Bullet1.h"
 #include "Boss_Bullet.h"
 #include "Boss_Bullet1.h"
 #include "Boss_Bullet2.h"
@@ -32,15 +33,26 @@ void ScheduleManager::Initialize()
 	Time2 = GetTickCount64();
 	Time3 = GetTickCount64();
 	Time4 = GetTickCount64();
+	Time5 = GetTickCount64();
+	Time6 = GetTickCount64();
+	Time7 = GetTickCount64();
 	Time1Count = 0.0f;
 	Time2Count = 0.0f;
 	Time3Count = 0.0f;
+	Time6Count = 0.0f;
+	angle1 = 0;
+	angle2 = 72;
+	angle3 = 144;
+	angle4 = 216;
+	angle5 = 288;
 	a = 0;
 	b = 0;
 }
 
 int ScheduleManager::Update()
 {	
+	ObjectManager::GetInstance()->GetPlayer()->SetChat(true);
+
 	// 1초마다 실행한다
 	if (Time1 + 1000 <= GetTickCount64())
 	{
@@ -54,8 +66,8 @@ int ScheduleManager::Update()
 			for (vector<Object*>::iterator iter = BossList->begin();
 				iter != BossList->end(); ++iter)
 			{	
-				// if ((*iter)->GetPower() == 0)								0
-				// 	this->BossAT1();
+				 if ((*iter)->GetPower() == 0)								
+				 	this->BossAT1();
 			}
 		}
 	
@@ -136,19 +148,25 @@ int ScheduleManager::Update()
 			for (vector<Object*>::iterator iter = BossList->begin();
 				iter != BossList->end(); ++iter)
 			{
-				// if ((*iter)->GetPower() == -1)						-1
-				// {
-				// 	this->BossAT1();
-				// 	this->BossAT1_1();
-				// }
-				// else if ((*iter)->GetPower() == -2)			
-				// {
-				// 	this->BossAT2();
-				// }
-				 if ((*iter)->GetPower() == 0)
+				 if ((*iter)->GetPower() == -1)						
 				 {
-				 	this->BossAT2_1();
+				 	this->BossAT1();
+				 	this->BossAT1_1();
 				 }
+				 else if ((*iter)->GetPower() == -2)			
+				 {
+				 	this->BossAT2();
+				 }
+				 if ((*iter)->GetPower() == -3)
+				 {
+					 this->BossAT1();
+				 	this->BossAT2_1();
+				
+				 }
+					 if ((*iter)->GetPower() == -4)
+					 {
+					 	this->BossAT1();
+					 }
 
 				
 			}
@@ -160,7 +178,76 @@ int ScheduleManager::Update()
 	}
 
 
-	
+	if (Time5 + 200 <= GetTickCount64())
+	{
+		if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
+		{
+			for (vector<Object*>::iterator iter = BossList->begin();
+				iter != BossList->end(); ++iter)
+			{
+				if ((*iter)->GetPower() == -4)
+				{
+					this->BossAT3();
+				}
+			}
+
+
+		}
+			Time5 = GetTickCount64();
+
+	}
+
+	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
+	{
+
+
+
+
+
+
+		
+
+		// ** 보스의 공격 패턴			보스의 이동방향 설정
+		for (vector<Object*>::iterator iter = BossList->begin();
+			iter != BossList->end(); ++iter)
+		{
+			// ** 보스의 공격 패턴
+			if ((*iter)->GetPower() == -5)
+			{
+				if (Time6 + 10 <= GetTickCount64())
+				{
+					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle1, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle2, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle3, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle4, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle5, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+
+					if (angle1 < 360) angle1 += 6;
+					else angle1 = 0;
+					if (angle2 < 360) angle2 += 6;
+					else angle2 = 0;
+					if (angle3 < 360) angle3 += 6;
+					else angle3 = 0;
+					if (angle4 < 360) angle4 += 6;
+					else angle4 = 0;
+					if (angle5 < 360) angle5 += 6;
+					else angle5 = 0;
+
+
+					Time6 = GetTickCount64();
+				}
+		}
+
+			// ** 보스의 이동 패턴을 실행한다.
+			if (Time6 + 5300 <= GetTickCount64())
+			{
+
+			}
+	}
+
+		
+
+	}
 
 
 
@@ -412,6 +499,19 @@ void ScheduleManager::BossAT2_1()
 		}
 	}
 }
+
+void ScheduleManager::BossAT3()
+{
+	for (vector<Object*>::iterator iter = BossList->begin();
+		iter != BossList->end(); ++iter)
+	{
+		{
+			// EnemyBulletList에 요정의 공격을 추가한다. 
+			EnemyBulletList1->push_back(CreateBullet<Monster_Bullet>(0, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+		}
+	}
+}
+
 
 
 Vector3 ScheduleManager::Getangle(float _x)

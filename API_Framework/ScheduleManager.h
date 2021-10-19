@@ -24,12 +24,21 @@ public:
 	ULONGLONG Time2;
 	ULONGLONG Time3;
 	ULONGLONG Time4;
+	ULONGLONG Time5;
+	ULONGLONG Time6;
+	ULONGLONG Time7;
 
 	float angle;
+	float angle1;
+	float angle2;
+	float angle3;
+	float angle4;
+	float angle5;
 
 	float Time1Count;
 	float Time2Count;
 	float Time3Count;
+	float Time6Count;
 
 	int a;
 	int b;
@@ -52,6 +61,7 @@ public:
 	void BossAT1_1 ();
 	void BossAT2();
 	void BossAT2_1();
+	void BossAT3();
 
 
 	// 이동값 받아오기

@@ -148,6 +148,7 @@
     <ClInclude Include="Boss_Bullet2.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="Ellipse_Bullet.h" />
+    <ClInclude Include="Ellipse_Bullet1.h" />
     <ClInclude Include="FairyEnemy1.h" />
     <ClInclude Include="FairyEnemy2.h" />
     <ClInclude Include="ItemBirdge.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="Boss_Bullet2.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Ellipse_Bullet.cpp" />
+    <ClCompile Include="Ellipse_Bullet1.cpp" />
     <ClCompile Include="FairyEnemy1.cpp" />
     <ClCompile Include="FairyEnemy2.cpp" />
     <ClCompile Include="ItemBirdge.cpp" />
