@@ -43,8 +43,6 @@ void Player::Initialize()
 
 	// ** 플레이어의 모습
 	Player_Swap = false;
-	// ** 유카리 모드일때 공격
-	Yukari_AT = false;
 	
 	BoomOn = false;
 	Chat = false;
@@ -70,6 +68,7 @@ void Player::Initialize()
 
 int Player::Update()
 {
+	// 플레이어의 무적판정
 	if (ObjectManager::GetInstance()->GetPlayer()->GetGodMode())
 	{
 		if (Time2 + 2000 <= GetTickCount64())
@@ -101,9 +100,10 @@ int Player::Update()
 
 	// ** 쉬프트 키를 누르고 있을경우 캐릭터가 교체 ** //
 	if (GetAsyncKeyState(VK_SHIFT))
-		Player_Swap = true;
+		ObjectManager::GetInstance()->GetPlayer()->SetPlayer_Swap(true);
 	else
-		Player_Swap = false;
+		ObjectManager::GetInstance()->GetPlayer()->SetPlayer_Swap(false);
+	;
 
 
 	// 이야기진행여부
@@ -114,126 +114,126 @@ int Player::Update()
 	else
 	{
 	// 캐릭터가 레이무 일 경우 ** //
-	if (!Player_Swap)
-	{
-		//** 레이무 기본 설정 ** //
-		Speed = 5.0f;
-
-		 
-		// ** Z키를 누를경우
-		if (GetAsyncKeyState('Z'))
+		if (!Player_Swap)
 		{
-			// // ** 파워가 1이상 30 이하일 경우
-			// if (Power > 1 || Power < 30)
-			// {
-			// 	// ** 0.2초마다 실행한다.
-			// 	if (Time1 + 200 <= GetTickCount64())
-			// 	{
-			// 		// ** BulletLIst에 탄막을 추가한다.
-			// 		BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
-			// 		Time1 = GetTickCount64();
-			// 	}
-			// }
-			// ** 파워가 31이상 60 이하일 경우
-			if (Power > 1)
-			{
-				
-				// ** 0.2초마다 실행한다.
-				if (Time1 + 200 <= GetTickCount64())
-				{
-					// ** BulletList에 탄막을 추가한다. 
-					BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
-					BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f)));
-					BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f)));
-					Time1 = GetTickCount64();
-				}
-			}
-		}
-		// ** X키를 누를경우
-		if (GetAsyncKeyState('X'))
-		{
-			// 폭탄이 있는경우
-			if (Boom > 0)
-			{
-				// 폭탄 트리거가 false일 경우
-				if (!BoomOn)
-				{
-				//폭탄이 중복해서 생성되지 못하도록 입력 딜레이를 준다. 
-					//폭탄을 생성한다.
-					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-					PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+			//** 레이무 기본 설정 ** //
+			Speed = 5.0f;
 
-					// 폭탄의 개수를 하나 줄인다
-					--Boom;
-					// 줄인 폭탄의 개수를 보내준다.
-					ObjectManager::GetInstance()->GetPlayer()->SetBoom(Boom);
-					// 폭탄 트리거를 true를 시켜 연속해서 폭탄을 사용하지 못하게 막는다
-					BoomOn = true;
-					ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
-				}
-				// 폭탄 트리거가 true일 경우
-				else
+			 
+			// ** Z키를 누를경우
+			if (GetAsyncKeyState('Z'))
+			{
+				// // ** 파워가 1이상 30 이하일 경우
+				// if (Power > 1 || Power < 30)
+				// {
+				// 	// ** 0.2초마다 실행한다.
+				// 	if (Time1 + 200 <= GetTickCount64())
+				// 	{
+				// 		// ** BulletLIst에 탄막을 추가한다.
+				// 		BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
+				// 		Time1 = GetTickCount64();
+				// 	}
+				// }
+				// ** 파워가 31이상 60 이하일 경우
+				if (Power > 1)
 				{
-					// 폭탄을 사용한뒤 2초후 다시 폭탄을 사용할 수 있도록 한다.
-					if (Time2 + 2000 <= GetTickCount64())
+					
+					// ** 0.2초마다 실행한다.
+					if (Time1 + 200 <= GetTickCount64())
 					{
-						//다시 폭탄을 사용할 수 있도록 트리거를 false로 변경한다.
-						BoomOn = false;
-						Time2 = GetTickCount64();
+						// ** BulletList에 탄막을 추가한다. 
+						BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
+						BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f)));
+						BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f)));
+						Time1 = GetTickCount64();
 					}
 				}
-
 			}
-
-		}
-
-	}
-	// ** 캐릭터가 유카리 일 경우 ** //
-	else
-	{
-		//** 유카리 기본 설정 ** //
-		Speed = 1.5f;
-
-
-
-
-		// ** Z키를 누를경우 공격 ** //
-		if (GetAsyncKeyState('Z'))
-		{
-
-			// ** 0.2초마다 실행한다.
-			if (Time1 + 200 <= GetTickCount64())
+			// ** X키를 누를경우
+			if (GetAsyncKeyState('X'))
 			{
-				// ** 유카리의 공격 모드를 true로 변경
-				Yukari_AT = true;
-
-				// ** Target의 위치를 잡아준다.
-				Target = ObjectManager::GetInstance()->GetTarget(TransInfo.Position);
-
-				// ** EnemyhList가 없을경우 
-				if (EnemyList != nullptr)
-					// ** 유카리 공격모드를 false로 변경
-					Yukari_AT = false;
-
-				if (Target)
+				// 폭탄이 있는경우
+				if (Boom > 0)
 				{
-					TransInfo.Direction = MathManager::GetDirection(TransInfo.Position, Target->GetPosition());
+					// 폭탄 트리거가 false일 경우
+					if (!BoomOn)
+					{
+					//폭탄이 중복해서 생성되지 못하도록 입력 딜레이를 준다. 
+						//폭탄을 생성한다.
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
 
-					TransInfo.Position.x += TransInfo.Direction.x * Speed;
-					TransInfo.Position.x += TransInfo.Direction.x * Speed;
+						// 폭탄의 개수를 하나 줄인다
+						--Boom;
+						// 줄인 폭탄의 개수를 보내준다.
+						ObjectManager::GetInstance()->GetPlayer()->SetBoom(Boom);
+						// 폭탄 트리거를 true를 시켜 연속해서 폭탄을 사용하지 못하게 막는다
+						BoomOn = true;
+						ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
+					}
+					// 폭탄 트리거가 true일 경우
+					else
+					{
+						// 폭탄을 사용한뒤 2초후 다시 폭탄을 사용할 수 있도록 한다.
+						if (Time2 + 2000 <= GetTickCount64())
+						{
+							//다시 폭탄을 사용할 수 있도록 트리거를 false로 변경한다.
+							BoomOn = false;
+							Time2 = GetTickCount64();
+						}
+					}
 
 				}
 
-				Time1 = GetTickCount64();
-
 			}
+
 		}
+		// ** 캐릭터가 유카리 일 경우 ** //
 		else
-			Yukari_AT = false;
-	}
+		{
+			//** 유카리 기본 설정 ** //
+			Speed = 1.5f;
+
+
+
+
+			// ** Z키를 누를경우 공격 ** //
+			//		if (GetAsyncKeyState('Z'))
+			//		{
+			//		
+			//			// ** 0.2초마다 실행한다.
+			//			if (Time1 + 200 <= GetTickCount64())
+			//			{
+			//					// ** 유카리의 공격 모드를 true로 변경
+			//					Yukari_AT = true;
+			//					
+			//					// ** Target의 위치를 잡아준다.
+			//					Target = ObjectManager::GetInstance()->GetTarget(TransInfo.Position);
+			//					
+			//					// ** EnemyhList가 없을경우 
+			//					if (EnemyList != nullptr)
+			//						// ** 유카리 공격모드를 false로 변경
+			//						Yukari_AT = false;
+			//					
+			//					if (Target)
+			//					{
+			//						TransInfo.Direction = MathManager::GetDirection(TransInfo.Position, Target->GetPosition());
+			//					
+			//						TransInfo.Position.x += TransInfo.Direction.x * Speed;
+			//						TransInfo.Position.x += TransInfo.Direction.x * Speed;
+			//					
+			//					}
+			//					
+			//					Time1 = GetTickCount64();
+			//		
+			//			}
+			//		}
+			//		else
+			//		 	Yukari_AT = false;
+		}
 	}
 
 
@@ -291,34 +291,34 @@ void Player::Render(HDC _hdc)
 			int(TransInfo.Scale.y),
 			RGB(255, 0, 255));
 
-		if (!Yukari_AT)
-		{
-			TransparentBlt(_hdc,
-				int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-				int(TransInfo.Position.y - (TransInfo.Scale.y / 2)- 60),
-				int(32),
-				int(43),
-				ImageList["Off"]->GetMemDC(),
-				int(TransInfo.Scale.x * Frame),
-				int(TransInfo.Scale.y * 0),
-				int(32),
-				int(43),
-				RGB(255, 0, 255));
-		}
-		//	else
-		//	{
-		//		TransparentBlt(_hdc,
-		//			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-		//			int(TransInfo.Position.y - (TransInfo.Scale.y / 2) - 60),
-		//			int(33),
-		//			int(33),
-		//			ImageList["On"]->GetMemDC(),
-		//			int(TransInfo.Scale.x * Frame),
-		//			int(TransInfo.Scale.y * 0),
-		//			int(33),
-		//			int(33),
-		//			RGB(255, 0, 255));
-		//	}
+		// if (!Yukari_AT)
+		// {
+		// 	TransparentBlt(_hdc,
+		// 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
+		// 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2)- 60),
+		// 		int(32),
+		// 		int(43),
+		// 		ImageList["Off"]->GetMemDC(),
+		// 		int(TransInfo.Scale.x * Frame),
+		// 		int(TransInfo.Scale.y * 0),
+		// 		int(32),
+		// 		int(43),
+		// 		RGB(255, 0, 255));
+		// }
+		// else
+		// {
+		// 	TransparentBlt(_hdc,
+		// 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
+		// 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) - 60),
+		// 		int(33),
+		// 		int(33),
+		// 		ImageList["On"]->GetMemDC(),
+		// 		int(TransInfo.Scale.x * Frame),
+		// 		int(TransInfo.Scale.y * 0),
+		// 		int(33),
+		// 		int(33),
+		// 		RGB(255, 0, 255));
+		// }
 	}
 }
 

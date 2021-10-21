@@ -199,6 +199,12 @@
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1">
       <UniqueIdentifier>{80d07e69-de0a-4569-981f-b3445881123a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Bullet">
+      <UniqueIdentifier>{be78ecd3-8eee-4865-9830-bc2e8181d6c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Char">
+      <UniqueIdentifier>{64a962e1-3127-4bec-8f61-0eb6ba6b5698}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -287,9 +293,6 @@
     </ClInclude>
     <ClInclude Include="LV2_Bullet.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV2_Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="Yukari_Bullet.h">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
       <Filter>소스 파일\02. Object\Stage_Back\BackGround</Filter>
@@ -381,6 +384,12 @@
     <ClInclude Include="Ellipse_Bullet1.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1</Filter>
     </ClInclude>
+    <ClInclude Include="Yukari_Bullet.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Y_Char.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Char</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -439,9 +448,6 @@
     </ClCompile>
     <ClCompile Include="LV2_Bullet.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Reimu_Bullet\LV2_Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="Yukari_Bullet.cpp">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>소스 파일\02. Object\Stage_Back\BackGround</Filter>
@@ -529,6 +535,12 @@
     </ClCompile>
     <ClCompile Include="Ellipse_Bullet1.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1</Filter>
+    </ClCompile>
+    <ClCompile Include="Yukari_Bullet.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Y_Char.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Char</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

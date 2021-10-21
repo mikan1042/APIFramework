@@ -25,7 +25,10 @@ void LV2_Bullet::Initialize()
 
 	Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
 
+
 	EnemyList = ObjectManager::GetInstance()->GetEnemyList();
+	EnemyList1 = ObjectManager::GetInstance()->GetEnemyList1();
+	EnemyList2 = ObjectManager::GetInstance()->GetEnemyList2();
 
 	ATon = false;
 
@@ -33,6 +36,26 @@ void LV2_Bullet::Initialize()
 
 int LV2_Bullet::Update(Transform& _rTransInfo)
 {
+		for (vector<Object*>::iterator iter = EnemyList->begin();
+			iter != EnemyList->end(); ++iter)
+		{
+			if((*iter)->GetPosition().y < 90)
+				Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
+		}
+		for (vector<Object*>::iterator iter = EnemyList1->begin();
+			iter != EnemyList1->end(); ++iter)
+		{
+			if ((*iter)->GetPosition().y < 90)
+				Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
+		}
+		for (vector<Object*>::iterator iter = EnemyList2->begin();
+			iter != EnemyList2->end(); ++iter)
+		{
+			if ((*iter)->GetPosition().y < 90)
+				Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
+		}
+
+
 	// 대각선으로 날아가도록 좌표를 설정한다.
 		float vx = cos(-angle * PI / 180.0f);
 		float vy = sin(-angle * PI / 180.0f);
@@ -40,22 +63,31 @@ int LV2_Bullet::Update(Transform& _rTransInfo)
 		_rTransInfo.Position.x += vx * Speed;
 		_rTransInfo.Position.y += vy * Speed;
 		
-				Target = ObjectManager::GetInstance()->GetTarget(RealObject->GetPosition());
 
-				if (Target)
-				{
-					_rTransInfo.Direction = MathManager::GetDirection(_rTransInfo.Position, Target->GetPosition());
-					ATon = true;
 
-					_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-					_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;;
-				}
 
-				if (ATon)
-				{
-					_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-					_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;;
-				}
+
+
+
+		if (Target)
+		{
+			_rTransInfo.Direction = MathManager::GetDirection(_rTransInfo.Position, Target->GetPosition());
+			ATon = true;
+
+			_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
+			_rTransInfo.Position.y += _rTransInfo.Direction.y;
+		}
+		else
+		{
+			_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
+			_rTransInfo.Position.y += _rTransInfo.Direction.y;
+		}
+
+		if (ATon)
+		{
+			_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
+			_rTransInfo.Position.y += _rTransInfo.Direction.y;
+		}
 
 
 

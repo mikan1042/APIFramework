@@ -19,6 +19,7 @@
 #include "UI_Hp.h"
 #include "Chat.h"
 #include "BossHp.h"
+#include "Y_Char.h"
 
 
 Stage::Stage() : m_pPlayer(nullptr)
@@ -84,6 +85,9 @@ void Stage::Initialize()
 	BossH = new BossHp;
 	BossH->Initialize();
 
+	YukariBullet = new Y_Char;
+	YukariBullet->Initialize();
+
 
 
 
@@ -110,6 +114,9 @@ void Stage::Update()
 	m_Chat->Update();
 
 	PlayerL->Update();
+
+	YukariBullet->Update();
+
 
 	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
 	BossH->Update();
@@ -191,35 +198,35 @@ void Stage::Update()
 		// ** 플레이어와 요정의 공격의 충돌
 		for (vector<Object*>::iterator iter = EnemyBulletList->begin();
 			iter != EnemyBulletList->end();)
-	{	
+		{	
 
-		// 요정의 탄막과 플레이어가 부딪혔을경우
- 		if (CollisionManager::RectCollision((*iter), PlayerL))
-		{
-			// 요정의 탄막을 제거한다.
-			iter = EnemyBulletList->erase(iter);
+			// 요정의 탄막과 플레이어가 부딪혔을경우
+ 			if (CollisionManager::RectCollision((*iter), PlayerL))
+			{
+				// 요정의 탄막을 제거한다.
+				iter = EnemyBulletList->erase(iter);
 
-			// ** 플레이어의 HP를 받아온다
-			int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
-			// ** HP를 1줄인다
-			--pHp;
-			// ** 변경한 HP값을 보내준다.
-			ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
-			// ** 플레이어의 위치를 재조정한다.
-			ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+				// ** 플레이어의 HP를 받아온다
+				int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
+				// ** HP를 1줄인다
+				--pHp;
+				// ** 변경한 HP값을 보내준다.
+				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
+				// ** 플레이어의 위치를 재조정한다.
+				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+			}
+			// 요정의 탄막이 화면밖을 벗어났을 경우
+			else if ((*iter)->GetPosition().x > 950||
+					(*iter)->GetPosition().x < -150 ||
+					(*iter)->GetPosition().y < -150 ||
+					(*iter)->GetPosition().y > 870)
+			{
+				// 요정의 탄막을 제거한다.
+				iter = EnemyBulletList->erase(iter);
+			}
+			else
+				++iter;
 		}
-		// 요정의 탄막이 화면밖을 벗어났을 경우
-		else if ((*iter)->GetPosition().x > 800||
-				(*iter)->GetPosition().x < 50 ||
-				(*iter)->GetPosition().y < 0 ||
-				(*iter)->GetPosition().y > 720)
-		{
-			// 요정의 탄막을 제거한다.
-			iter = EnemyBulletList->erase(iter);
-		}
-		else
-			++iter;
-	}
 		for (vector<Object*>::iterator iter = EnemyBulletList1->begin();
 			iter != EnemyBulletList1->end();)
 		{
@@ -240,10 +247,10 @@ void Stage::Update()
 				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
 			}
 			// 요정의 탄막이 화면밖을 벗어났을 경우
-			else if ((*iter)->GetPosition().x > 800 ||
-				(*iter)->GetPosition().x < 50 ||
-				(*iter)->GetPosition().y < 0 ||
-				(*iter)->GetPosition().y > 720)
+			else if ((*iter)->GetPosition().x > 950 ||
+				(*iter)->GetPosition().x < -150 ||
+				(*iter)->GetPosition().y < -150 ||
+				(*iter)->GetPosition().y > 870)
 			{
 				// 요정의 탄막을 제거한다.
 				iter = EnemyBulletList1->erase(iter);
@@ -414,7 +421,7 @@ void Stage::Update()
 		// ** iResult == 1이면 총알은 삭제됨.
 		int iResult = (*iter)->Update();
 
- 		if ((*iter)->GetPosition().y <= 10)
+ 		if ((*iter)->GetPosition().y <= 10 || (*iter)->GetPosition().x <= 60 || (*iter)->GetPosition().x >= 785)
 			iResult = 1;
 
 		// ** Enemy 리스트의 progress
@@ -742,6 +749,9 @@ void Stage::Render(HDC _hdc)
 	m_uHp->Render(ImageList["Buffer"]->GetMemDC());
 
 	m_Chat->Render(ImageList["Buffer"]->GetMemDC());
+
+	YukariBullet->Render(ImageList["Buffer"]->GetMemDC());
+
 
 	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
 	BossH->Render(ImageList["Buffer"]->GetMemDC());

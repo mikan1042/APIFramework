@@ -19,6 +19,7 @@ protected:
 	bool GodMode;
 	bool BossMode;
 	bool BossOn;
+	bool Player_Swap;
 	bool Win;
 	float Speed;
 	float Hp;
@@ -58,6 +59,9 @@ public:
 
 	bool GetBossOn() { return BossOn; }
 	void SetBossOn(bool _BossOn) { BossOn = _BossOn; }
+
+	bool GetPlayer_Swap() { return Player_Swap; }
+	void SetPlayer_Swap(bool _Player_Swap) { Player_Swap = _Player_Swap; }
 
 	bool GetWin() { return Win; }
 	void SetWin(bool _Win) { Win = _Win; }

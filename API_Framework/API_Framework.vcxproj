@@ -199,6 +199,7 @@
     <ClInclude Include="UI_Hp.h" />
     <ClInclude Include="Yukari_Bullet.h" />
     <ClInclude Include="aaa.h" />
+    <ClInclude Include="Y_Char.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp" />
@@ -250,6 +251,7 @@
     <ClCompile Include="Start.cpp" />
     <ClCompile Include="UI_Hp.cpp" />
     <ClCompile Include="Yukari_Bullet.cpp" />
+    <ClCompile Include="Y_Char.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="API_Framework.rc" />

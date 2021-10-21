@@ -19,6 +19,7 @@ private:
 
 	// ** 캐릭터의 변경 여부
 	bool Player_Swap;
+	bool Yukari;
 
 	// ** 유카리 모드일때 공격
 	bool Yukari_AT;

@@ -8,9 +8,7 @@ public:
 	ULONGLONG Time1;
 	vector<Object*>* EnemyList;
 	vector<Object*>* EnemyList1;
-
-	float vx;
-	float vy;
+	vector<Object*>* EnemyList2;
 
 public:
 	virtual void Initialize()override;
