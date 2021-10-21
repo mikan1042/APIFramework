@@ -23,6 +23,8 @@ void Boss::Initialize()
 	ImageList = Object::GetImageList();
 
 	AmTime = GetTickCount64();
+	BossMove = GetTickCount64();
+	BossM = true;
 
 	Anime = 0;
 
@@ -41,27 +43,35 @@ int Boss::Update(Transform& _rTransInfo)
 	}
 
 
+
+
+
+
 	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
 	{
 		if (Speed == 0.0f)
 		{
-			Speed = 5.0f;
-			//	_rTransInfo.Direction = Getangle(float(rand() % 300 + 0));
-				_rTransInfo.Direction = Getangle(-500);
-		}
-		else if (Speed < 0)
-		{
-			Speed = 0;
-		}
-		else if (Speed > 0)
-		{
-		 Speed -= 0.05f;
-		}
+			if (BossMove + 5000 <= GetTickCount64())
+			{
+				Speed = 5.0f;
+				_rTransInfo.Direction = Getangle(float(rand() % -300 + 0));
 
+				BossMove = GetTickCount64();
+			}
+		}
+		else if (Speed < 0.0f)
+		{
+		 	Speed = 0.0f;
+		}
+		else if (Speed > 0.0f)
+		{
+		  Speed -= 0.06f;
+		}
 
 		 if (_rTransInfo.Position.x < 90) { _rTransInfo.Position.x = 90; }
 		 if (_rTransInfo.Position.x > 600) { _rTransInfo.Position.x = 600; }
-		 if (_rTransInfo.Position.y < 50) { _rTransInfo.Position.y = 50; }
+		 if (_rTransInfo.Position.y < 70) { _rTransInfo.Position.y = 70; }
+		 if (_rTransInfo.Position.y > 200) { _rTransInfo.Position.y = 200; }
 
 
 
@@ -113,6 +123,8 @@ Vector3 Boss::Getangle(float _x)
 {
 	float vx = cos(-_x * PI / 180.0f);
 	float vy = sin(-_x * PI / 180.0f);
+
+	cout << _x << endl;
 
 	Vector3 VV(vx, vy);
 	return VV;

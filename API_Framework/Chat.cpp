@@ -22,6 +22,7 @@ void Chat::Initialize()
 
 	Chat2 = 1;
 	Time1 = GetTickCount64();
+	BossStop = false;
 
 	BossList = ObjectManager::GetInstance()->GetBossList();
 
@@ -31,19 +32,23 @@ int Chat::Update()
 {
 	Chat1 = ObjectManager::GetInstance()->GetPlayer()->GetChat();
 
-	for (vector<Object*>::iterator iter = BossList->begin();
-		iter != BossList->end(); ++iter)
+	if (!BossStop)
 	{
-		if ((*iter)->GetPosition().y > 130)
+		for (vector<Object*>::iterator iter = BossList->begin();
+			iter != BossList->end(); ++iter)
 		{
-			(*iter)->SetDirection(Vector3(0.0f, 0.0f));
+			if ((*iter)->GetPosition().y > 130)
+			{
+				(*iter)->SetDirection(Vector3(0.0f, 0.0f));
+				BossStop = true;
+			}
 		}
 	}
 
 
 	if (GetAsyncKeyState('Z'))
 	{
-		if (Time1 + 200 <= GetTickCount64())
+		if (Time1 + 100 <= GetTickCount64())
 			++Chat2;
 		Time1 = GetTickCount64();
 	}

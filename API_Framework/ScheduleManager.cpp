@@ -51,8 +51,7 @@ void ScheduleManager::Initialize()
 
 int ScheduleManager::Update()
 {	
-	ObjectManager::GetInstance()->GetPlayer()->SetChat(true);
-
+	
 	// 1초마다 실행한다
 	if (Time1 + 1000 <= GetTickCount64())
 	{
@@ -214,7 +213,7 @@ int ScheduleManager::Update()
 			// ** 보스의 공격 패턴
 			if ((*iter)->GetPower() == -5)
 			{
-				if (Time6 + 10 <= GetTickCount64())
+				if (Time6 + 30 <= GetTickCount64())
 				{
 					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle1, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle2, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));

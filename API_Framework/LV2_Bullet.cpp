@@ -48,13 +48,13 @@ int LV2_Bullet::Update(Transform& _rTransInfo)
 					ATon = true;
 
 					_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-					_rTransInfo.Position.y += _rTransInfo.Direction.y;
+					_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;;
 				}
 
 				if (ATon)
 				{
 					_rTransInfo.Position.x += _rTransInfo.Direction.x * Speed;
-					_rTransInfo.Position.y += _rTransInfo.Direction.y;
+					_rTransInfo.Position.y += _rTransInfo.Direction.y * Speed;;
 				}
 
 

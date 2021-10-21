@@ -17,6 +17,7 @@ public:
 	vector<Object*>* BossList;
 
 	bool Chat1;
+	bool BossStop;
 	int Chat2;
 
 public:

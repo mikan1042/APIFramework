@@ -12,7 +12,8 @@ public:
 
 public:
 	Vector3 Getangle(float _x);
-
+	ULONGLONG BossMove;
+	bool BossM;
 public:
 	Boss();
 	virtual ~Boss();
