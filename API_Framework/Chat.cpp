@@ -269,6 +269,14 @@ void Chat::Render(HDC _hdc)
 					TextOut(_hdc, 150, 515, L"유카리", 3);
 					TextOut(_hdc, 150, 550, L"그래도 걱정 같은 걸 하는 건 당신답지 않아.", 25);
 				}
+				else if (Chat2 == 58)
+				{
+					// 채팅모드를 종료시켜 채팅과 나오는 이미지를 제거
+					ObjectManager::GetInstance()->GetPlayer()->SetChat(false);
+					TransparentBlt(ImageList["Buffer"]->GetMemDC(), 60, 300, 724, 122, ImageList["GC"]->GetMemDC(), 0, 0, 724, 122, RGB(255, 0, 255));
+
+
+				}
 			}
 		}
 

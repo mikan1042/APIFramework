@@ -29,6 +29,8 @@ void Logo::Initialize()
 	
 	// ** 시작 화면
 	ImageList["Logo"] = (new Bitmap)->LoadBmp(L"../Resource/Logo.bmp");
+	ImageList["GG"] = (new Bitmap)->LoadBmp(L"../Resource/GameOver.bmp");
+	ImageList["GC"] = (new Bitmap)->LoadBmp(L"../Resource/GameClear.bmp");
 
 	// ** Buffer 및 배경
 	ImageList["Buffer"] = (new Bitmap)->LoadBmp(L"../Resource/Buffer.bmp");
@@ -111,6 +113,10 @@ void Logo::Initialize()
 
 	ImageList["on_off_Back"] = (new Bitmap)->LoadBmp(L"../Resource/on_off_Back.bmp");
 	ImageList["on_off_Button"] = (new Bitmap)->LoadBmp(L"../Resource/on_off_Button.bmp");
+
+
+	ImageList["Number"] = (new Bitmap)->LoadBmp(L"../Resource/Number.bmp");
+
 
 	Object::SetImageList(ImageList);
 

@@ -18,6 +18,8 @@
 #include "Boss_Bullet1.h"
 #include "Boss_Bullet2.h"
 
+#include "SoundManager.h"
+
 
 
 
@@ -50,26 +52,26 @@ void ScheduleManager::Initialize()
 }
 
 int ScheduleManager::Update()
-{	
-	
+{
+
 	// 1초마다 실행한다
 	if (Time1 + 1000 <= GetTickCount64())
 	{
 		++Time1Count;
-	
+
 		// 플레이어에 보스모드가 true일 경우 
 		if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
 		{
 			Time3Count += 0.5f;
-	
+
 			for (vector<Object*>::iterator iter = BossList->begin();
 				iter != BossList->end(); ++iter)
-			{	
-				 if ((*iter)->GetPower() == 0)								
-				 	this->BossAT1();
+			{
+				if ((*iter)->GetPower() == 0)
+					this->BossAT1();
 			}
 		}
-	
+
 		Time1 = GetTickCount64();
 	}
 
@@ -136,43 +138,43 @@ int ScheduleManager::Update()
 		}
 		Time2 = GetTickCount64();
 	}
-	 // 3초마다 실행한다.
+	// 3초마다 실행한다.
 
 	if (Time3 + 3000 <= GetTickCount64())
 	{
 		Time3Count += 1.0f;
-	
+
 		if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
 		{
 			for (vector<Object*>::iterator iter = BossList->begin();
 				iter != BossList->end(); ++iter)
 			{
-				 if ((*iter)->GetPower() == -1)						
-				 {
-				 	this->BossAT1();
-				 	this->BossAT1_1();
-				 }
-				 else if ((*iter)->GetPower() == -2)			
-				 {
-				 	this->BossAT2();
-				 }
-				 if ((*iter)->GetPower() == -3)
-				 {
-					 this->BossAT1();
-				 	this->BossAT2_1();
-				
-				 }
-					 if ((*iter)->GetPower() == -4)
-					 {
-					 	this->BossAT1();
-					 }
+				if ((*iter)->GetPower() == -1)
+				{
+					this->BossAT1();
+					this->BossAT1_1();
+				}
+				else if ((*iter)->GetPower() == -2)
+				{
+					this->BossAT2();
+				}
+				if ((*iter)->GetPower() == -3)
+				{
+					this->BossAT1();
+					this->BossAT2_1();
 
-				
+				}
+				if ((*iter)->GetPower() == -4)
+				{
+					this->BossAT1();
+				}
+
+
 			}
 		}
-	
-	
-	
+
+
+
 		Time3 = GetTickCount64();
 	}
 
@@ -192,7 +194,7 @@ int ScheduleManager::Update()
 
 
 		}
-			Time5 = GetTickCount64();
+		Time5 = GetTickCount64();
 
 	}
 
@@ -204,7 +206,7 @@ int ScheduleManager::Update()
 
 
 
-		
+
 
 		// ** 보스의 공격 패턴			보스의 이동방향 설정
 		for (vector<Object*>::iterator iter = BossList->begin();
@@ -215,6 +217,8 @@ int ScheduleManager::Update()
 			{
 				if (Time6 + 30 <= GetTickCount64())
 				{
+					SoundManager::GetInstance()->OnPlaySound("Smonster_at");
+
 					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle1, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle2, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 					EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet1>(angle3, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
@@ -235,16 +239,16 @@ int ScheduleManager::Update()
 
 					Time6 = GetTickCount64();
 				}
-		}
+			}
 
 			// ** 보스의 이동 패턴을 실행한다.
 			if (Time6 + 5300 <= GetTickCount64())
 			{
 
 			}
-	}
+		}
 
-		
+
 
 	}
 
@@ -284,8 +288,9 @@ void ScheduleManager::Fairymove2(int _x, int _y, float _t, float _tt)
 	{
 		(*iter)->SetDirection(Vector3(1.0f, 0.0f));
 
-		if ((*iter)->GetPosition().y == _y &&  (*iter)->GetPosition().x == _x)
+		if ((*iter)->GetPosition().y == _y && (*iter)->GetPosition().x == _x)
 		{
+			SoundManager::GetInstance()->OnPlaySound("monster_at");
 			// EnemyBulletList에 요정의 공격을 추가한다. 
 			EnemyBulletList->push_back(CreateBullet<Monster_Bullet>(0, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 		}
@@ -300,7 +305,7 @@ void ScheduleManager::Fairymove3(int _x, int _y, float _t, float _tt)
 	if (Time2Count >= _t && Time2Count < _tt)
 		// 요정을 랜덤으로 생성한다.
 		EnemyList2->push_back(CreateEnemy<FairyEnemy2>(_x, _y, 25, 25, 1));
-	
+
 	for (vector<Object*>::iterator iter = EnemyList2->begin();
 		iter != EnemyList2->end(); ++iter)
 	{
@@ -308,6 +313,7 @@ void ScheduleManager::Fairymove3(int _x, int _y, float _t, float _tt)
 
 		if ((*iter)->GetPosition().y == _y && (*iter)->GetPosition().x == _x)
 		{
+			SoundManager::GetInstance()->OnPlaySound("monster_at");
 			// EnemyBulletList에 요정의 공격을 추가한다. 
 			EnemyBulletList->push_back(CreateBullet<Monster_Bullet>(0, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 		}
@@ -317,32 +323,32 @@ void ScheduleManager::Fairymove3(int _x, int _y, float _t, float _tt)
 }
 
 // ** 요정이 두줄로 내려와 조준공격
-void ScheduleManager::Fairy1(int _x, int _y , float _t, float _tt)
+void ScheduleManager::Fairy1(int _x, int _y, float _t, float _tt)
 {
 	// 카운트와 비교해서 요정을 생성한다.
-	if(Time2Count >= _t  && Time2Count < _tt)
-	// 요정을 랜덤으로 생성한다.
-	EnemyList->push_back(CreateEnemy<FairyEnemy>(_x, _y, 25, 25, 1));
+	if (Time2Count >= _t && Time2Count < _tt)
+		// 요정을 랜덤으로 생성한다.
+		EnemyList->push_back(CreateEnemy<FairyEnemy>(_x, _y, 25, 25, 1));
 
 	// EnemyList를 순회한다.
 	for (vector<Object*>::iterator iter = EnemyList->begin();
 		iter != EnemyList->end(); ++iter)
 	{
 		// List에 있는 Object의 Y좌표가 120을 넘어갔을때
-		 if ((*iter)->GetPosition().y > 120 && (*iter)->GetPosition().x == _x)
-		 {
-			 // EnemyBulletList에 요정의 공격을 추가한다. 
-			 EnemyBulletList->push_back(CreateBullet<Monster_Bullet>(0,(*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+		if ((*iter)->GetPosition().y > 120 && (*iter)->GetPosition().x == _x)
+		{
+			// EnemyBulletList에 요정의 공격을 추가한다. 
+			EnemyBulletList->push_back(CreateBullet<Monster_Bullet>(0, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 
-			 // Object의 이동방향을 변경시켜 이동시킨다
-			 (*iter)->SetDirection(Getangle(230.0f));
+			// Object의 이동방향을 변경시켜 이동시킨다
+			(*iter)->SetDirection(Getangle(230.0f));
 
-		 }
-		 if ((*iter)->GetPosition().x < (_x - 60))
-		 {
-			 // Object의 이동방향을 변경시켜 이동시킨다
-			 (*iter)->SetDirection(Getangle(210.0f));
-		 }
+		}
+		if ((*iter)->GetPosition().x < (_x - 60))
+		{
+			// Object의 이동방향을 변경시켜 이동시킨다
+			(*iter)->SetDirection(Getangle(210.0f));
+		}
 	}
 }
 
@@ -369,11 +375,11 @@ void ScheduleManager::Fairy2(int _x, int _y, float _t, float _tt)
 
 		}
 
-		 if ((*iter)->GetPosition().x > (_x + 60))
-		 {
-		 	// Object의 이동방향을 0으로 초기화 시켜 움직이지 못하게한다.
-		 	(*iter)->SetDirection(Getangle(-10.0f));
-		 }
+		if ((*iter)->GetPosition().x > (_x + 60))
+		{
+			// Object의 이동방향을 0으로 초기화 시켜 움직이지 못하게한다.
+			(*iter)->SetDirection(Getangle(-10.0f));
+		}
 	}
 }
 
@@ -382,8 +388,8 @@ void ScheduleManager::Fairy3(int _x, int _y, float _t, float _tt)
 {
 	// 카운트와 비교해서 요정을 생성한다.
 	if (Time2Count >= _t && Time2Count < _tt)
-	// 요정을 랜덤으로 생성한다.
-	EnemyList1->push_back(CreateEnemy<FairyEnemy1>(_x, _y, 25, 25, 10));
+		// 요정을 랜덤으로 생성한다.
+		EnemyList1->push_back(CreateEnemy<FairyEnemy1>(_x, _y, 25, 25, 10));
 
 	// EnemyList를 순회한다.
 	for (vector<Object*>::iterator iter = EnemyList1->begin();
@@ -396,9 +402,11 @@ void ScheduleManager::Fairy3(int _x, int _y, float _t, float _tt)
 			// angle을 선언
 			int angle;
 
-				// 원탄을 발사하기 위해 탄막을 60개 생성
+			// 원탄을 발사하기 위해 탄막을 60개 생성
+			SoundManager::GetInstance()->OnPlaySound("monster_at");
 			for (int i = 0; i < 60; i++)
 			{
+
 				// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
 				angle = i * 6;
 				// EnemyBulletList에 요정의 공격을 추가한다. 
@@ -419,16 +427,18 @@ void ScheduleManager::BossAT1()
 	{
 		// 기본적인 원탄공격 (1페이지)
 			// angle을 선언
-			int angle;
+		int angle;
 
-			// 원탄을 발사하기 위해 탄막을 60개 생성
-			for (int i = 0; i < 60; i++)
-			{
-				// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
-				angle = i * 6;
-				// EnemyBulletList에 요정의 공격을 추가한다. 
-				EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet>(angle, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
-			}
+		SoundManager::GetInstance()->OnPlaySound("monster_at");
+		// 원탄을 발사하기 위해 탄막을 60개 생성
+		for (int i = 0; i < 60; i++)
+		{
+
+			// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
+			angle = i * 6;
+			// EnemyBulletList에 요정의 공격을 추가한다. 
+			EnemyBulletList->push_back(CreateBullet<Ellipse_Bullet>(angle, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+		}
 
 
 	}
@@ -443,9 +453,11 @@ void ScheduleManager::BossAT1_1()
 			// angle을 선언
 		float sp;
 
+		SoundManager::GetInstance()->OnPlaySound("monster_at");
 		// 원탄을 발사하기 위해 탄막을 60개 생성
 		for (int i = 1; i < 15; i++)
 		{
+
 			// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
 			sp = i * 0.7f;
 			// EnemyBulletList에 요정의 공격을 추가한다. 
@@ -466,16 +478,18 @@ void ScheduleManager::BossAT2()
 	// angle을 선언
 		int angle;
 
+		SoundManager::GetInstance()->OnPlaySound("monster_at");
 		// 원탄을 발사하기 위해 탄막을 60개 생성
 		for (int i = 0; i < 60; i++)
 		{
+
 			// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
 			angle = i * 6;
 			// EnemyBulletList에 요정의 공격을 추가한다. 
 			EnemyBulletList1->push_back(CreateBullet<Boss_Bullet1>(angle, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 		}
 
-		
+
 	}
 }
 
@@ -488,9 +502,11 @@ void ScheduleManager::BossAT2_1()
 // angle을 선언
 		int angle;
 
+		SoundManager::GetInstance()->OnPlaySound("monster_at");
 		// 원탄을 발사하기 위해 탄막을 60개 생성
 		for (int i = 0; i < 60; i++)
 		{
+
 			// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
 			angle = i * 6;
 			EnemyBulletList->push_back(CreateBullet<Boss_Bullet2>(angle, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
@@ -505,6 +521,8 @@ void ScheduleManager::BossAT3()
 		iter != BossList->end(); ++iter)
 	{
 		{
+			SoundManager::GetInstance()->OnPlaySound("monster_at");
+
 			// EnemyBulletList에 요정의 공격을 추가한다. 
 			EnemyBulletList1->push_back(CreateBullet<Monster_Bullet>(0, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
 		}
@@ -546,8 +564,8 @@ Object* ScheduleManager::CreateBullet(float _x, float _s, Vector3 _vPos, Vector3
 template <typename T>
 Object* ScheduleManager::CreateEnemy(float _x, float _y, float _a, float _b, float _z)
 {
-	Bridge* pBridge = new T;									
-													// 좌표, 크기 , 체력
+	Bridge* pBridge = new T;
+	// 좌표, 크기 , 체력
 	Object* pEnemy = ObjectFactory<Enemy>::CreateObject(_x, _y, _a, _b, _z, pBridge);
 
 	return pEnemy;

@@ -15,6 +15,7 @@
 #include "Boss.h"
 #include "Power.h"
 #include "Reimu_Boom.h"
+#include "SoundManager.h"
 
 Player::Player()
 {
@@ -43,7 +44,7 @@ void Player::Initialize()
 
 	// ** 플레이어의 모습
 	Player_Swap = false;
-	
+
 	BoomOn = false;
 	Chat = false;
 	GodMode = false;
@@ -109,17 +110,17 @@ int Player::Update()
 	// 이야기진행여부
 	if (ObjectManager::GetInstance()->GetPlayer()->GetChat())
 	{
-	
+
 	}
 	else
 	{
-	// 캐릭터가 레이무 일 경우 ** //
-		if (!Player_Swap)
+		// 캐릭터가 레이무 일 경우 ** //
+		if (!ObjectManager::GetInstance()->GetPlayer()->GetPlayer_Swap())
 		{
 			//** 레이무 기본 설정 ** //
 			Speed = 5.0f;
 
-			 
+
 			// ** Z키를 누를경우
 			if (GetAsyncKeyState('Z'))
 			{
@@ -137,14 +138,15 @@ int Player::Update()
 				// ** 파워가 31이상 60 이하일 경우
 				if (Power > 1)
 				{
-					
+
 					// ** 0.2초마다 실행한다.
-					if (Time1 + 200 <= GetTickCount64())
+					if (Time1 + 150 <= GetTickCount64())
 					{
+						SoundManager::GetInstance()->OnPlaySound("reimu_at");
 						// ** BulletList에 탄막을 추가한다. 
-						BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
-						BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f)));
-						BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f)));
+						BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f), TransInfo.Position));
+						BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f), TransInfo.Position));
+						BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f), TransInfo.Position));
 						Time1 = GetTickCount64();
 					}
 				}
@@ -158,13 +160,15 @@ int Player::Update()
 					// 폭탄 트리거가 false일 경우
 					if (!BoomOn)
 					{
-					//폭탄이 중복해서 생성되지 못하도록 입력 딜레이를 준다. 
-						//폭탄을 생성한다.
-						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
-						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f)));
+						SoundManager::GetInstance()->OnPlaySound("boom");
+
+						//폭탄이 중복해서 생성되지 못하도록 입력 딜레이를 준다. 
+							//폭탄을 생성한다.
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
 
 						// 폭탄의 개수를 하나 줄인다
 						--Boom;
@@ -196,73 +200,47 @@ int Player::Update()
 		{
 			//** 유카리 기본 설정 ** //
 			Speed = 1.5f;
+			if (GetAsyncKeyState('Z'))
+			{
+				if (Power > 1)
+				{
+					if (Time1 + 150 <= GetTickCount64())
+					{
+						BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), (Vector3(TransInfo.Position.x - 10.0f, TransInfo.Position.y + 10.0f))));
+						BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), (Vector3(TransInfo.Position.x + 10.0f, TransInfo.Position.y + 10.0f))));
+						BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), TransInfo.Position));
+						Time1 = GetTickCount64();
+
+					}
+				}
+			}
 
 
-
-
-			// ** Z키를 누를경우 공격 ** //
-			//		if (GetAsyncKeyState('Z'))
-			//		{
-			//		
-			//			// ** 0.2초마다 실행한다.
-			//			if (Time1 + 200 <= GetTickCount64())
-			//			{
-			//					// ** 유카리의 공격 모드를 true로 변경
-			//					Yukari_AT = true;
-			//					
-			//					// ** Target의 위치를 잡아준다.
-			//					Target = ObjectManager::GetInstance()->GetTarget(TransInfo.Position);
-			//					
-			//					// ** EnemyhList가 없을경우 
-			//					if (EnemyList != nullptr)
-			//						// ** 유카리 공격모드를 false로 변경
-			//						Yukari_AT = false;
-			//					
-			//					if (Target)
-			//					{
-			//						TransInfo.Direction = MathManager::GetDirection(TransInfo.Position, Target->GetPosition());
-			//					
-			//						TransInfo.Position.x += TransInfo.Direction.x * Speed;
-			//						TransInfo.Position.x += TransInfo.Direction.x * Speed;
-			//					
-			//					}
-			//					
-			//					Time1 = GetTickCount64();
-			//		
-			//			}
-			//		}
-			//		else
-			//		 	Yukari_AT = false;
 		}
-	}
 
 
+		// ** 캐릭터가 화면을 벗어나지 못하게 하기위해 설정 ** //
+		{
+			if (TransInfo.Position.x <= 60)
+				TransInfo.Position.x = 60;
+			if (TransInfo.Position.x >= 785)
+				TransInfo.Position.x = 785;
+			if (TransInfo.Position.y >= 670)
+				TransInfo.Position.y = 670;
+			if (TransInfo.Position.y <= 25)
+				TransInfo.Position.y = 25;
+		}
 
 
-
-
-
-
-	// ** 캐릭터가 화면을 벗어나지 못하게 하기위해 설정 ** //
-	{
-		if (TransInfo.Position.x <= 60)
-			TransInfo.Position.x = 60;
-		if (TransInfo.Position.x >= 785)
-			TransInfo.Position.x = 785;
-		if (TransInfo.Position.y >= 670)
-			TransInfo.Position.y = 670;
-		if (TransInfo.Position.y <= 25)
-			TransInfo.Position.y = 25;
-	}
-
-
-	return 0;
+			return 0;
+		}
+	
 }
 
 void Player::Render(HDC _hdc)
 {
 	// ** 레이무 인 경우 출력방식 ** //
-	if (!Player_Swap)
+	if (!ObjectManager::GetInstance()->GetPlayer()->GetPlayer_Swap())
 	{
 		TransparentBlt(_hdc,
 			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
@@ -324,16 +302,16 @@ void Player::Render(HDC _hdc)
 
 void Player::Release()
 {
-	
+
 }
 
 
 template <typename T>
-Object* Player::CreateBullet(float _x, Vector3 _sPos)
+Object* Player::CreateBullet(float _x, Vector3 _sPos, Vector3 _vPos)
 {
 	Bridge* pBridge = new T;
 
-	Object* pBullet = ObjectFactory<Bullet>::CreateObject(TransInfo.Position, _sPos, _x, pBridge);
+	Object* pBullet = ObjectFactory<Bullet>::CreateObject(_vPos, _sPos, _x, pBridge);
 
 	return pBullet;
 }

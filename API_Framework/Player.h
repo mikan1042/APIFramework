@@ -25,6 +25,7 @@ private:
 	bool Yukari_AT;
 
 	vector<Object*>* BulletList;
+	vector<Object*>* YBulletList;
 	vector<Object*>* EnemyList;
 	vector<Object*>* ItemList;
 	vector<Object*>* PlayerBoom;
@@ -36,7 +37,7 @@ public:
 	virtual int Update()override;
 	virtual void Render(HDC _hdc)override;
 	virtual void Release()override;
-	
+
 	virtual Object* Clone()override { return new Player(*this); }
 public:
 	bool GetJumpState() const { return bJump; }
@@ -44,7 +45,7 @@ public:
 	int GetSwing() { return Frame; }
 
 	template <typename T>
-	Object* CreateBullet(float _x, Vector3 _sPos);
+	Object* CreateBullet(float _x, Vector3 _sPos, Vector3 _vPos);
 
 	template <typename T>
 	Object* CreateEnemy(float _x, float _y, float _a, float _b, float _z);

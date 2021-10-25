@@ -19,8 +19,7 @@
 #include "UI_Hp.h"
 #include "Chat.h"
 #include "BossHp.h"
-#include "Y_Char.h"
-
+#include "SoundManager.h"
 
 Stage::Stage() : m_pPlayer(nullptr)
 {
@@ -34,6 +33,20 @@ Stage::~Stage()
 
 void Stage::Initialize()
 {
+	SoundManager::GetInstance()->Initialize();
+
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/th08_01.wav", "BGM");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/reimu_at.wav", "reimu_at");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/boom.wav", "boom");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/monster_at.wav", "monster_at");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/Smonster_at.wav", "Smonster_at");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/item.wav", "item");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/reimu_die.wav", "reimu_die");
+
+	SoundManager::GetInstance()->OnPlaySound("BGM");
+
+
+
 	m_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	// ** 오브젝트 매니저에서 총알 리스트를 받아옴. (포인터로...)
 	BulletList = ObjectManager::GetInstance()->GetBulletList();
@@ -53,6 +66,9 @@ void Stage::Initialize()
 
 	// **  오브젝트 매니저에서 몬스터탄막 리스트를 받아옴. (포인터로...)
 	PlayerBoom = ObjectManager::GetInstance()->GetPlayerBoom();
+
+
+
 
 
 	// ** 이미지 리스트를 받아온다.
@@ -80,15 +96,14 @@ void Stage::Initialize()
 	m_Chat->Initialize();
 
 	PlayerL = new PlayerLife;
-	PlayerL ->Initialize();
+	PlayerL->Initialize();
 
 	BossH = new BossHp;
 	BossH->Initialize();
 
-	YukariBullet = new Y_Char;
-	YukariBullet->Initialize();
 
-
+	for (int i = 0; i < 10; ++i)
+		Sc[i] = 0;
 
 
 
@@ -102,6 +117,19 @@ void Stage::Initialize()
 
 void Stage::Update()
 {
+	SoundManager::GetInstance()->StramingUpdate();
+
+	for (int i = 0; i < 10; ++i)
+	{
+		if (Sc[i] > 9)
+		{
+			Sc[i] = 0;
+			++Sc[i + 1];
+		}
+
+	}
+
+
 	// ** 업데이트를 실행시켜준다.
 	m_Schedule->Update();
 
@@ -115,11 +143,8 @@ void Stage::Update()
 
 	PlayerL->Update();
 
-	YukariBullet->Update();
-
-
 	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
-	BossH->Update();
+		BossH->Update();
 
 
 
@@ -142,6 +167,8 @@ void Stage::Update()
 				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
 				// ** 플레이어의 위치를 재조정한다.
 				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+
+				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
 			}
 		}
 		// ** 적과 플레이어의 충돌
@@ -159,6 +186,7 @@ void Stage::Update()
 				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
 				// ** 플레이어의 위치를 재조정한다.
 				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
 			}
 		}
 		// ** 적과 플레이어의 충돌
@@ -176,32 +204,34 @@ void Stage::Update()
 				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
 				// ** 플레이어의 위치를 재조정한다.
 				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
 			}
 		}
 		// ** 적과 플레이어의 충돌
 		for (vector<Object*>::iterator iter = EnemyList2->begin();
 			iter != EnemyList2->end(); ++iter)
+		{
+			// ** 적과 플레이어가 충돌했을경우
+			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
-				// ** 적과 플레이어가 충돌했을경우
-				if (CollisionManager::RectCollision((*iter), PlayerL))
-				{
-					// ** 플레이어의 HP를 받아온다
-					int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
-					// ** HP를 1줄인다
-					--pHp;
-					// ** 변경한 HP값을 보내준다.
-					ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
-					// ** 플레이어의 위치를 재조정한다.
-					ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
-				}
+				// ** 플레이어의 HP를 받아온다
+				int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
+				// ** HP를 1줄인다
+				--pHp;
+				// ** 변경한 HP값을 보내준다.
+				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
+				// ** 플레이어의 위치를 재조정한다.
+				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
 			}
+		}
 		// ** 플레이어와 요정의 공격의 충돌
 		for (vector<Object*>::iterator iter = EnemyBulletList->begin();
 			iter != EnemyBulletList->end();)
-		{	
+		{
 
 			// 요정의 탄막과 플레이어가 부딪혔을경우
- 			if (CollisionManager::RectCollision((*iter), PlayerL))
+			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
 				// 요정의 탄막을 제거한다.
 				iter = EnemyBulletList->erase(iter);
@@ -214,12 +244,13 @@ void Stage::Update()
 				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
 				// ** 플레이어의 위치를 재조정한다.
 				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
 			}
 			// 요정의 탄막이 화면밖을 벗어났을 경우
-			else if ((*iter)->GetPosition().x > 950||
-					(*iter)->GetPosition().x < -150 ||
-					(*iter)->GetPosition().y < -150 ||
-					(*iter)->GetPosition().y > 870)
+			else if ((*iter)->GetPosition().x > 950 ||
+				(*iter)->GetPosition().x < -150 ||
+				(*iter)->GetPosition().y < -150 ||
+				(*iter)->GetPosition().y > 870)
 			{
 				// 요정의 탄막을 제거한다.
 				iter = EnemyBulletList->erase(iter);
@@ -245,6 +276,7 @@ void Stage::Update()
 				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
 				// ** 플레이어의 위치를 재조정한다.
 				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
+				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
 			}
 			// 요정의 탄막이 화면밖을 벗어났을 경우
 			else if ((*iter)->GetPosition().x > 950 ||
@@ -316,7 +348,7 @@ void Stage::Update()
 			else
 				++iter1;
 		}
-			++iter;
+		++iter;
 	}
 	// ** 플레이어의 폭탄과 적의 충돌								** 몬스터가 화면밖을 벗어날 경우 삭제
 	for (vector<Object*>::iterator iter = EnemyList->begin();
@@ -421,7 +453,7 @@ void Stage::Update()
 		// ** iResult == 1이면 총알은 삭제됨.
 		int iResult = (*iter)->Update();
 
- 		if ((*iter)->GetPosition().y <= 10 || (*iter)->GetPosition().x <= 60 || (*iter)->GetPosition().x >= 785)
+		if ((*iter)->GetPosition().y <= 10 || (*iter)->GetPosition().x <= 60 || (*iter)->GetPosition().x >= 785)
 			iResult = 1;
 
 		// ** Enemy 리스트의 progress
@@ -435,26 +467,34 @@ void Stage::Update()
 				float Hp = (*iter2)->GetHp();
 				// ** 몬스터 체력 감소
 				--Hp;
+				//점수를 100증가
+				++Sc[2];
 				// 체력이 0이하일 경우
 				if (Hp <= 0)
 				{
 					srand((unsigned)time(NULL));
 					int Ritem = (rand() % 100) + 1;
 
+					//점수를 100증가
+					++Sc[2];
 
-					if(Ritem == 1)
-					ItemList->push_back(CreateItem<Boom>((*iter2)->GetPosition(),"Boom"));
+
+
+					if (Ritem == 1)
+						ItemList->push_back(CreateItem<Boom>((*iter2)->GetPosition(), "Boom"));
 					else if (Ritem >= 2)
-					ItemList->push_back(CreateItem<Power>((*iter2)->GetPosition(), "Power"));
+						ItemList->push_back(CreateItem<Power>((*iter2)->GetPosition(), "Power"));
 
 
 					//적을 제거한다.
 					iter2 = EnemyList->erase(iter2);
 
+
+
 				}
 				else
-				//줄어든 Hp의 값을 보내준다.
-				(*iter2)->SetHp(Hp);
+					//줄어든 Hp의 값을 보내준다.
+					(*iter2)->SetHp(Hp);
 
 
 				// ** 삭제할 오브젝트로 지정한뒤
@@ -480,11 +520,18 @@ void Stage::Update()
 				float Hp = (*iter2)->GetHp();
 				// ** 몬스터 체력 감소
 				--Hp;
+				//점수를 100증가
+				++Sc[2];
+
 				// 체력이 0이하일 경우
 				if (Hp <= 0)
 				{
 					srand((unsigned)time(NULL));
 					int Ritem = (rand() % 100) + 1;
+
+					//점수를 100증가
+					++Sc[2];
+
 
 
 					if (Ritem == 1)
@@ -525,11 +572,17 @@ void Stage::Update()
 				float Hp = (*iter2)->GetHp();
 				// ** 몬스터 체력 감소
 				--Hp;
+				//점수를 100증가
+				++Sc[2];
+
 				// 체력이 0이하일 경우
 				if (Hp <= 0)
 				{
 					srand((unsigned)time(NULL));
 					int Ritem = (rand() % 100) + 1;
+
+					//점수를 100증가
+					++Sc[2];
 
 
 					if (Ritem == 1)
@@ -570,9 +623,15 @@ void Stage::Update()
 				float Hp = (*iter2)->GetHp();
 				// ** 몬스터 체력 감소
 				Hp -= 2;
+				//점수를 100증가
+				++Sc[2];
+
 				// 체력이 0이하일 경우
 				if (Hp <= 0)
 				{
+					//점수를 100증가
+					++Sc[2];
+
 					if ((*iter2)->GetPower() > -5)
 					{
 						int Bhp = (*iter2)->GetPower();
@@ -613,10 +672,10 @@ void Stage::Update()
 		else
 			++iter;
 	}
+	// ** 플레이어의 탄막과 요정의 충돌
+	
 
-
-
-	 // ** 플레이어의 폭탄과 요정의 공격의 충돌
+	// ** 플레이어의 폭탄과 요정의 공격의 충돌
 	for (vector<Object*>::iterator iter = EnemyBulletList->begin();
 		iter != EnemyBulletList->end();)
 	{
@@ -645,7 +704,7 @@ void Stage::Update()
 		if (iResult == 1)
 			iter = EnemyBulletList->erase(iter);
 		else
-		++iter;
+			++iter;
 	}
 	for (vector<Object*>::iterator iter = EnemyBulletList1->begin();
 		iter != EnemyBulletList1->end();)
@@ -684,18 +743,6 @@ void Stage::Update()
 
 
 
-		
-	// ** HP가 0이 되었을 경우												임시
-	if (ObjectManager::GetInstance()->GetPlayer()->GetHp() <= 0)
-	{
-
-	}
-
-
-
-
-
-
 
 
 
@@ -721,7 +768,7 @@ void Stage::Render(HDC _hdc)
 	for (vector<Object*>::iterator iter = ItemList->begin();
 		iter != ItemList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
-	
+
 	for (vector<Object*>::iterator iter = BulletList->begin();
 		iter != BulletList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
@@ -738,7 +785,7 @@ void Stage::Render(HDC _hdc)
 		iter != PlayerBoom->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
-	
+
 	m_pPlayer->Render(ImageList["Buffer"]->GetMemDC());
 
 	m_pButton->Render(ImageList["Buffer"]->GetMemDC());
@@ -750,15 +797,24 @@ void Stage::Render(HDC _hdc)
 
 	m_Chat->Render(ImageList["Buffer"]->GetMemDC());
 
-	YukariBullet->Render(ImageList["Buffer"]->GetMemDC());
-
 
 	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
-	BossH->Render(ImageList["Buffer"]->GetMemDC());
+		BossH->Render(ImageList["Buffer"]->GetMemDC());
 
 	for (vector<Object*>::iterator iter = BossList->begin();
 		iter != BossList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
+
+
+	for (int i = 0; i < 10; ++i)
+		TransparentBlt(ImageList["Buffer"]->GetMemDC(), (1105) - (i * 25), 60, 32, 42.5, ImageList["Number"]->GetMemDC(), (63 * Sc[i]), 0, 64, 85, RGB(255, 0, 255));
+
+	// ** HP가 0이 되었을 경우											
+	if (ObjectManager::GetInstance()->GetPlayer()->GetHp() <= 0)
+		TransparentBlt(ImageList["Buffer"]->GetMemDC(), 60, 300, 724, 122, ImageList["GG"]->GetMemDC(), 0, 0, 724, 122, RGB(255, 0, 255));
+
+
+
 
 
 
@@ -767,7 +823,7 @@ void Stage::Render(HDC _hdc)
 		WindowsWidth,
 		WindowsHeight,
 		ImageList["Buffer"]->GetMemDC(),
-		0, 0, 
+		0, 0,
 		SRCCOPY);
 }
 

@@ -16,7 +16,6 @@ private:
 	Object* m_Chat;
 	Object* PlayerL;
 	Object* BossH;
-	Object* YukariBullet;
 
 	vector<Object*>* BossList;
 	vector<Object*>* EnemyList;
@@ -28,6 +27,9 @@ private:
 	vector<Object*>* ItemList;
 	vector<Object*>* PlayerBoom;
 	vector<Object*>* ObjectList;
+
+	int Sc[10];
+
 
 	map<string, Bitmap*> ImageList;
 

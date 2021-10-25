@@ -69,6 +69,7 @@ public:
 	int GetChat1() { return Chat1; }
 	void SetChat1(int _Chat1) { Chat1 = _Chat1; }
 
+
 	void SetDrawKey(string _D) { DrawKey = _D; }
 	string GetDrawKey() { return DrawKey; }
 

@@ -154,9 +154,6 @@
     <Filter Include="소스 파일\02. Object\Item\ItemBirdge\Boom">
       <UniqueIdentifier>{19608574-fa5c-4806-82f3-3978f76fcb30}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\99. Manager\ScoreManager">
-      <UniqueIdentifier>{12f6228d-317e-4cb7-a7e6-05bc3d7b66d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\02. Object\ScheduleManager">
       <UniqueIdentifier>{b164ce41-8c27-451e-88a0-28c678a7894f}</UniqueIdentifier>
     </Filter>
@@ -199,11 +196,11 @@
     <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1">
       <UniqueIdentifier>{80d07e69-de0a-4569-981f-b3445881123a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Bullet">
-      <UniqueIdentifier>{be78ecd3-8eee-4865-9830-bc2e8181d6c6}</UniqueIdentifier>
+    <Filter Include="소스 파일\99. Manager\SoundManager">
+      <UniqueIdentifier>{87964feb-76bd-4d6f-9541-3aff93bd9514}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Char">
-      <UniqueIdentifier>{64a962e1-3127-4bec-8f61-0eb6ba6b5698}</UniqueIdentifier>
+    <Filter Include="소스 파일\99. Manager\ScoreManager">
+      <UniqueIdentifier>{b202d153-09a2-4abc-b921-318ba35cb9d4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -336,9 +333,6 @@
     <ClInclude Include="Boom.h">
       <Filter>소스 파일\02. Object\Item\ItemBirdge\Boom</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreManager.h">
-      <Filter>소스 파일\99. Manager\ScoreManager</Filter>
-    </ClInclude>
     <ClInclude Include="ScheduleManager.h">
       <Filter>소스 파일\02. Object\ScheduleManager</Filter>
     </ClInclude>
@@ -384,11 +378,17 @@
     <ClInclude Include="Ellipse_Bullet1.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1</Filter>
     </ClInclude>
-    <ClInclude Include="Yukari_Bullet.h">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Bullet</Filter>
+    <ClInclude Include="SoundManager.h">
+      <Filter>소스 파일\99. Manager\SoundManager</Filter>
     </ClInclude>
-    <ClInclude Include="Y_Char.h">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Char</Filter>
+    <ClInclude Include="Struct1.h">
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include.h">
+      <Filter>헤더 파일\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Yukari_Bullet.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -488,9 +488,6 @@
     <ClCompile Include="Boom.cpp">
       <Filter>소스 파일\02. Object\Item\ItemBirdge\Boom</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreManager.cpp">
-      <Filter>소스 파일\99. Manager\ScoreManager</Filter>
-    </ClCompile>
     <ClCompile Include="ScheduleManager.cpp">
       <Filter>소스 파일\02. Object\ScheduleManager</Filter>
     </ClCompile>
@@ -536,11 +533,11 @@
     <ClCompile Include="Ellipse_Bullet1.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Ellipse_Bullet1</Filter>
     </ClCompile>
-    <ClCompile Include="Yukari_Bullet.cpp">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Bullet</Filter>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>소스 파일\99. Manager\SoundManager</Filter>
     </ClCompile>
-    <ClCompile Include="Y_Char.cpp">
-      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet\Y_Char</Filter>
+    <ClCompile Include="Yukari_Bullet.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

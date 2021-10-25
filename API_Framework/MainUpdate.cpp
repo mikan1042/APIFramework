@@ -3,6 +3,8 @@
 #include "Enemy.h"
 #include "SceneManager.h"
 #include "InputManager.h"
+#include "SoundManager.h"
+#include "ObjectManager.h"
 
 
 MainUpdate::MainUpdate()
@@ -25,6 +27,7 @@ void MainUpdate::Initialize()
 
 void MainUpdate::Update()
 {
+	if(!ObjectManager::GetInstance()->GetPlayer()->GetHp() <= 0)
 	SceneManager::GetInstance()->Update();
 
 	InputManager::GetInstance()->CheckKey();
