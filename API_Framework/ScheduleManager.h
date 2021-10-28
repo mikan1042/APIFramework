@@ -62,6 +62,7 @@ public:
 	void BossAT2();
 	void BossAT2_1();
 	void BossAT3();
+	void BossAT4();
 
 
 	// 이동값 받아오기

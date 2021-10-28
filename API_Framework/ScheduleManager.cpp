@@ -17,6 +17,7 @@
 #include "Boss_Bullet.h"
 #include "Boss_Bullet1.h"
 #include "Boss_Bullet2.h"
+#include "Boss_Bullet3.h"
 
 #include "SoundManager.h"
 
@@ -53,7 +54,6 @@ void ScheduleManager::Initialize()
 
 int ScheduleManager::Update()
 {
-
 	// 1초마다 실행한다
 	if (Time1 + 1000 <= GetTickCount64())
 	{
@@ -68,7 +68,7 @@ int ScheduleManager::Update()
 				iter != BossList->end(); ++iter)
 			{
 				if ((*iter)->GetPower() == 0)
-					this->BossAT1();
+					 this->BossAT1();
 			}
 		}
 
@@ -153,6 +153,7 @@ int ScheduleManager::Update()
 				{
 					this->BossAT1();
 					this->BossAT1_1();
+					
 				}
 				else if ((*iter)->GetPower() == -2)
 				{
@@ -504,12 +505,12 @@ void ScheduleManager::BossAT2_1()
 
 		SoundManager::GetInstance()->OnPlaySound("monster_at");
 		// 원탄을 발사하기 위해 탄막을 60개 생성
-		for (int i = 0; i < 60; i++)
+		for (int i = 0; i < 9; i++)
 		{
 
 			// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
-			angle = i * 6;
-			EnemyBulletList->push_back(CreateBullet<Boss_Bullet2>(angle, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+			angle = i * 40;
+			EnemyBulletList->push_back(CreateBullet<Boss_Bullet3>(angle, (*iter)->GetPosition(), Vector3(62.0f, 62.0f)));
 
 		}
 	}
@@ -521,10 +522,32 @@ void ScheduleManager::BossAT3()
 		iter != BossList->end(); ++iter)
 	{
 		{
-			SoundManager::GetInstance()->OnPlaySound("monster_at");
+			SoundManager::GetInstance()->OnPlaySound("Smonster_at");
 
 			// EnemyBulletList에 요정의 공격을 추가한다. 
 			EnemyBulletList1->push_back(CreateBullet<Monster_Bullet>(0, (*iter)->GetPosition(), Vector3(16.0f, 16.0f)));
+		}
+	}
+}
+
+void ScheduleManager::BossAT4()
+{
+	for (vector<Object*>::iterator iter = BossList->begin();
+		iter != BossList->end(); ++iter)
+	{
+		// 기본적인 원탄공격 (1페이지)
+	// angle을 선언
+		int angle;
+
+		SoundManager::GetInstance()->OnPlaySound("monster_at");
+		// 원탄을 발사하기 위해 탄막을 60개 생성
+		for (int i = 0; i < 9; i++)
+		{
+
+			// 생성할때마다 발사각을 다르게하기위해서 angle에 i * 6을 해서 탄막간의 angle값을 전부 변경한다.
+			angle = i * 40;
+			// EnemyBulletList에 요정의 공격을 추가한다. 
+			EnemyBulletList1->push_back(CreateBullet<Boss_Bullet3>(angle, (*iter)->GetPosition(), Vector3(62.0f, 62.0f)));
 		}
 	}
 }

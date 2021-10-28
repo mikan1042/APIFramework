@@ -29,6 +29,11 @@ void Logo::Initialize()
 	
 	// ** 시작 화면
 	ImageList["Logo"] = (new Bitmap)->LoadBmp(L"../Resource/Logo.bmp");
+	ImageList["Menu"] = (new Bitmap)->LoadBmp(L"../Resource/Menu.bmp");
+	ImageList["Start"] = (new Bitmap)->LoadBmp(L"../Resource/Start.bmp");
+	ImageList["Start1"] = (new Bitmap)->LoadBmp(L"../Resource/Start1.bmp");
+	ImageList["Quit"] = (new Bitmap)->LoadBmp(L"../Resource/Quit.bmp");
+	ImageList["Quit1"] = (new Bitmap)->LoadBmp(L"../Resource/Quit1.bmp");
 	ImageList["GG"] = (new Bitmap)->LoadBmp(L"../Resource/GameOver.bmp");
 	ImageList["GC"] = (new Bitmap)->LoadBmp(L"../Resource/GameClear.bmp");
 
@@ -62,6 +67,8 @@ void Logo::Initialize()
 	ImageList["Chat"] = (new Bitmap)->LoadBmp(L"../Resource/Chat.bmp");
 	// ** 레이무의 일러스트
 	ImageList["C_Reimu"] = (new Bitmap)->LoadBmp(L"../Resource/C_Reimu.bmp");
+	// ** 유카리의 일러스트
+	ImageList["C_Yukari"] = (new Bitmap)->LoadBmp(L"../Resource/C_Yukari.bmp");
 	// ** 리글의 일러스트
 	ImageList["C_Ligle"] = (new Bitmap)->LoadBmp(L"../Resource/C_Ligle.bmp");
 
@@ -76,7 +83,7 @@ void Logo::Initialize()
 
 	// ** 레이무 기본 공격 **//
 	ImageList["NomalBullet"] = (new Bitmap)->LoadBmp(L"../Resource/NomalBullet.bmp");
-	ImageList["guidedBullet"] = (new Bitmap)->LoadBmp(L"../Resource/guidedBullet.bmp");
+	ImageList["guidedBullet"] = (new Bitmap)->LoadBmp(L"../Resource/guidedBullet1.bmp");
 
 	// ** 레이무 폭탄 공격 **//
 	ImageList["Reimu_Boom"] = (new Bitmap)->LoadBmp(L"../Resource/player_Boom.bmp");
@@ -104,6 +111,7 @@ void Logo::Initialize()
 	
 	// ** 요정의 공격 **//
 	ImageList["Enemy_Bullet"] = (new Bitmap)->LoadBmp(L"../Resource/Enemy_Bullet.bmp");
+	ImageList["Enemy_Bullet1"] = (new Bitmap)->LoadBmp(L"../Resource/Enemy_Bullet1.bmp");
 
 
 
@@ -116,6 +124,7 @@ void Logo::Initialize()
 
 
 	ImageList["Number"] = (new Bitmap)->LoadBmp(L"../Resource/Number.bmp");
+	ImageList["MAX"] = (new Bitmap)->LoadBmp(L"../Resource/MAX.bmp");
 
 
 	Object::SetImageList(ImageList);
@@ -125,12 +134,17 @@ void Logo::Initialize()
 	p_Start = new Start;
 	p_Start->Initialize();
 
+	Time1 = GetTickCount64();
+
 }
 
 void Logo::Update()
 {
-	if (GetAsyncKeyState('A'))
+	if (Time1 + 2000 <= GetTickCount64())
+	{
 		SceneManager::GetInstance()->SetScene(SCENEID::MENU);
+		Time1 = GetTickCount64();
+	}
 }
  
 void Logo::Render(HDC _hdc)

@@ -21,6 +21,8 @@
 #include "BossHp.h"
 #include "SoundManager.h"
 
+
+
 Stage::Stage() : m_pPlayer(nullptr)
 {
 
@@ -36,16 +38,18 @@ void Stage::Initialize()
 	SoundManager::GetInstance()->Initialize();
 
 	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/th08_01.wav", "BGM");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/th08_02.wav", "BGM1");
 	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/reimu_at.wav", "reimu_at");
 	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/boom.wav", "boom");
 	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/monster_at.wav", "monster_at");
 	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/Smonster_at.wav", "Smonster_at");
 	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/item.wav", "item");
 	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/reimu_die.wav", "reimu_die");
+	SoundManager::GetInstance()->LoadSoundDate("../Resource/Sound/se_pldead00.wav", "se_pldead00");
 
 	SoundManager::GetInstance()->OnPlaySound("BGM");
 
-
+	
 
 	m_pPlayer = ObjectManager::GetInstance()->GetPlayer();
 	// ** 오브젝트 매니저에서 총알 리스트를 받아옴. (포인터로...)
@@ -105,6 +109,18 @@ void Stage::Initialize()
 	for (int i = 0; i < 10; ++i)
 		Sc[i] = 0;
 
+	for (int i = 0; i < 10; ++i)
+		HSc[i] = 0;
+
+	HSc[2] = 4;
+	HSc[3] = 2;
+	HSc[4] = 6;
+	HSc[5] = 1;
+
+	BHp = 5;
+
+
+
 
 
 
@@ -159,6 +175,7 @@ void Stage::Update()
 			// ** 적과 플레이어가 충돌했을경우
 			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
+				SoundManager::GetInstance()->OnPlaySound("se_pldead00");
 				// ** 플레이어의 HP를 받아온다
 				int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
 				// ** HP를 1줄인다
@@ -178,6 +195,7 @@ void Stage::Update()
 			// ** 적과 플레이어가 충돌했을경우
 			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
+				SoundManager::GetInstance()->OnPlaySound("se_pldead00");
 				// ** 플레이어의 HP를 받아온다
 				int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
 				// ** HP를 1줄인다
@@ -196,6 +214,7 @@ void Stage::Update()
 			// ** 적과 플레이어가 충돌했을경우
 			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
+				SoundManager::GetInstance()->OnPlaySound("se_pldead00");
 				// ** 플레이어의 HP를 받아온다
 				int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
 				// ** HP를 1줄인다
@@ -214,6 +233,7 @@ void Stage::Update()
 			// ** 적과 플레이어가 충돌했을경우
 			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
+				SoundManager::GetInstance()->OnPlaySound("se_pldead00");
 				// ** 플레이어의 HP를 받아온다
 				int pHp = ObjectManager::GetInstance()->GetPlayer()->GetHp();
 				// ** HP를 1줄인다
@@ -233,6 +253,7 @@ void Stage::Update()
 			// 요정의 탄막과 플레이어가 부딪혔을경우
 			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
+				SoundManager::GetInstance()->OnPlaySound("se_pldead00");
 				// 요정의 탄막을 제거한다.
 				iter = EnemyBulletList->erase(iter);
 
@@ -243,8 +264,8 @@ void Stage::Update()
 				// ** 변경한 HP값을 보내준다.
 				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
 				// ** 플레이어의 위치를 재조정한다.
-				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
 				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
+				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
 			}
 			// 요정의 탄막이 화면밖을 벗어났을 경우
 			else if ((*iter)->GetPosition().x > 950 ||
@@ -265,6 +286,7 @@ void Stage::Update()
 			// 요정의 탄막과 플레이어가 부딪혔을경우
 			if (CollisionManager::RectCollision((*iter), PlayerL))
 			{
+				SoundManager::GetInstance()->OnPlaySound("se_pldead00");
 				// 요정의 탄막을 제거한다.
 				iter = EnemyBulletList1->erase(iter);
 
@@ -275,8 +297,8 @@ void Stage::Update()
 				// ** 변경한 HP값을 보내준다.
 				ObjectManager::GetInstance()->GetPlayer()->SetHp(pHp);
 				// ** 플레이어의 위치를 재조정한다.
-				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
 				ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
+				ObjectManager::GetInstance()->GetPlayer()->SetPosition(Vector3(420.0f, 640.0f));
 			}
 			// 요정의 탄막이 화면밖을 벗어났을 경우
 			else if ((*iter)->GetPosition().x > 950 ||
@@ -305,13 +327,23 @@ void Stage::Update()
 
 			if (Key == "Power")
 			{
+				SoundManager::GetInstance()->OnPlaySound("item");
+				
 				int Pow = m_pPlayer->GetPower();
 				++Pow;
 				m_pPlayer->SetPower(Pow);
 				cout << "파워" << endl;
+				if(Pow > 10) ++Sc[2];
 			}
 			if (Key == "Boom")
+			{
+				SoundManager::GetInstance()->OnPlaySound("item");
+
+				int Booom = m_pPlayer->GetBoom();
+				++Booom;
+				m_pPlayer->SetBoom(Booom);
 				cout << "폭탄" << endl;
+			}
 
 			iter = ItemList->erase(iter);
 		}
@@ -638,6 +670,14 @@ void Stage::Update()
 						(*iter2)->SetPower(--Bhp);
 						Hp = 724;
 						(*iter2)->SetHp(Hp);
+					
+						if ((*iter2)->GetPower() == 0)	BHp = 5;
+						if ((*iter2)->GetPower() == -1)	BHp = 4;
+						if ((*iter2)->GetPower() == -2)	BHp = 3;
+						if ((*iter2)->GetPower() == -3)	BHp = 2;
+						if ((*iter2)->GetPower() == -4)	BHp = 1;
+						if ((*iter2)->GetPower() == -5)	BHp = 100;
+
 					}
 					else
 					{
@@ -672,7 +712,6 @@ void Stage::Update()
 		else
 			++iter;
 	}
-	// ** 플레이어의 탄막과 요정의 충돌
 	
 
 	// ** 플레이어의 폭탄과 요정의 공격의 충돌
@@ -690,10 +729,10 @@ void Stage::Update()
 				iResult = 1;
 				break;
 			}
-			else if ((*iter)->GetPosition().x > 800 ||
-				(*iter)->GetPosition().x < 50 ||
-				(*iter)->GetPosition().y < 0 ||
-				(*iter)->GetPosition().y > 720)
+			else if ((*iter)->GetPosition().x > 1000 ||
+				(*iter)->GetPosition().x < -250 ||
+				(*iter)->GetPosition().y < -250 ||
+				(*iter)->GetPosition().y > 900)
 			{
 				iResult = 1;
 				break;
@@ -720,10 +759,10 @@ void Stage::Update()
 				iResult = 1;
 				break;
 			}
-			else if ((*iter)->GetPosition().x > 800 ||
-				(*iter)->GetPosition().x < 50 ||
-				(*iter)->GetPosition().y < 0 ||
-				(*iter)->GetPosition().y > 720)
+			else if ((*iter)->GetPosition().x > 1000 ||
+				(*iter)->GetPosition().x < -250 ||
+				(*iter)->GetPosition().y < -250 ||
+				(*iter)->GetPosition().y > 900)
 			{
 				iResult = 1;
 				break;
@@ -790,24 +829,40 @@ void Stage::Render(HDC _hdc)
 
 	m_pButton->Render(ImageList["Buffer"]->GetMemDC());
 
+	m_Chat->Render(ImageList["Buffer"]->GetMemDC());
 
 	State_Back->Render(ImageList["Buffer"]->GetMemDC());
-
+	
 	m_uHp->Render(ImageList["Buffer"]->GetMemDC());
 
-	m_Chat->Render(ImageList["Buffer"]->GetMemDC());
 
 
 	if (ObjectManager::GetInstance()->GetPlayer()->GetBossMode())
+	{
 		BossH->Render(ImageList["Buffer"]->GetMemDC());
+		TransparentBlt(ImageList["Buffer"]->GetMemDC(), 50, 60, 32, 42.5, ImageList["Number"]->GetMemDC(), 63 * BHp, 0, 64, 85, RGB(255, 0, 255));
+
+	}
 
 	for (vector<Object*>::iterator iter = BossList->begin();
 		iter != BossList->end(); ++iter)
 		(*iter)->Render(ImageList["Buffer"]->GetMemDC());
 
 
+
+
 	for (int i = 0; i < 10; ++i)
 		TransparentBlt(ImageList["Buffer"]->GetMemDC(), (1105) - (i * 25), 60, 32, 42.5, ImageList["Number"]->GetMemDC(), (63 * Sc[i]), 0, 64, 85, RGB(255, 0, 255));
+
+	for (int i = 0; i < 10; ++i)
+		TransparentBlt(ImageList["Buffer"]->GetMemDC(), (1120) - (i * 25), 23, 32, 42.5, ImageList["Number"]->GetMemDC(), (63 * HSc[i]), 0, 64, 85, RGB(255, 0, 255));
+
+	if(m_pPlayer->GetPower() < 10)
+	TransparentBlt(ImageList["Buffer"]->GetMemDC(), 880, 170, 32, 42.5, ImageList["Number"]->GetMemDC(), 63 * (m_pPlayer->GetPower()) - 1, 0, 64, 85, RGB(255, 0, 255));
+	else
+	TransparentBlt(ImageList["Buffer"]->GetMemDC(), 880, 174, 48 * 1.5f, 15 * 1.5f, ImageList["MAX"]->GetMemDC(), 0, 0, 48, 15, RGB(255, 0, 255));
+
+
 
 	// ** HP가 0이 되었을 경우											
 	if (ObjectManager::GetInstance()->GetPlayer()->GetHp() <= 0)

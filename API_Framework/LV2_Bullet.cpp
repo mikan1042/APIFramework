@@ -32,6 +32,7 @@ void LV2_Bullet::Initialize()
 
 	ATon = false;
 
+	Anime = 0;
 }
 
 int LV2_Bullet::Update(Transform& _rTransInfo)
@@ -64,7 +65,14 @@ int LV2_Bullet::Update(Transform& _rTransInfo)
 		_rTransInfo.Position.y += vy * Speed;
 		
 
+		if (AmTime + 100 <= GetTickCount64())
+		{
+			Anime += 18;
+			AmTime = GetTickCount64();
 
+			if (Anime >= 288)
+				Anime = 0;
+		}
 
 
 
@@ -98,14 +106,14 @@ int LV2_Bullet::Update(Transform& _rTransInfo)
 void LV2_Bullet::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc, // ** 최종 출력 위치
-		int(RealObject->GetPosition().x - (RealObject->GetScale().x / 2)),
-		int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2)),
-		int(RealObject->GetScale().x),
-		int(RealObject->GetScale().y),
+		int(RealObject->GetPosition().x - (18 / 2)),
+		int(RealObject->GetPosition().y - (18 / 2)),
+		int(18),
+		int(18),
 		ImageList[DrawKey]->GetMemDC(),
-		0, 0,
-		int(RealObject->GetScale().x),
-		int(RealObject->GetScale().y),
+		Anime, 0,
+		int(18),
+		int(18),
 		RGB(255, 0, 255));
 }
 

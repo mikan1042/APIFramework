@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 
+
 class Object;
 class Stage : public Scene
 {
@@ -29,6 +30,8 @@ private:
 	vector<Object*>* ObjectList;
 
 	int Sc[10];
+	int HSc[10];
+	int BHp;
 
 
 	map<string, Bitmap*> ImageList;

@@ -148,6 +148,7 @@
     <ClInclude Include="Boss_Bullet.h" />
     <ClInclude Include="Boss_Bullet1.h" />
     <ClInclude Include="Boss_Bullet2.h" />
+    <ClInclude Include="Boss_Bullet3.h" />
     <ClInclude Include="Chat.h" />
     <ClInclude Include="Ellipse_Bullet.h" />
     <ClInclude Include="Ellipse_Bullet1.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScheduleManager.h" />
+    <ClInclude Include="ScoreManager.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="Stage_Back.h" />
@@ -212,6 +214,7 @@
     <ClCompile Include="Boss_Bullet.cpp" />
     <ClCompile Include="Boss_Bullet1.cpp" />
     <ClCompile Include="Boss_Bullet2.cpp" />
+    <ClCompile Include="Boss_Bullet3.cpp" />
     <ClCompile Include="Chat.cpp" />
     <ClCompile Include="Ellipse_Bullet.cpp" />
     <ClCompile Include="Ellipse_Bullet1.cpp" />
@@ -248,6 +251,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScheduleManager.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="Stage_Back.cpp" />

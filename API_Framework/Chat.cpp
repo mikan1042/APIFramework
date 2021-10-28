@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include "Enemy.h"
 #include "ObjectFactory.h"
+#include "SoundManager.h"
 
 Chat::Chat()
 {
@@ -25,6 +26,7 @@ void Chat::Initialize()
 	BossStop = false;
 
 	BossList = ObjectManager::GetInstance()->GetBossList();
+	Y = 250;
 
 }
 
@@ -46,6 +48,7 @@ int Chat::Update()
 	}
 
 
+	if (Chat1)
 	if (GetAsyncKeyState('Z'))
 	{
 		if (Time1 + 100 <= GetTickCount64())
@@ -64,10 +67,22 @@ void Chat::Render(HDC _hdc)
 	{
 		// 그림 출력
 		{
+		// 유카리
+		TransparentBlt(_hdc,
+			20,
+			Y,
+			128 * 1.3f,
+			256 * 1.3f,
+			ImageList["C_Yukari"]->GetMemDC(),
+			0,
+			0,
+			128,
+			256,
+			RGB(255, 0, 255));
 		// 레이무
 		TransparentBlt(_hdc,
-			120,
-			250,
+			160,
+			Y,
 			128 * 1.3f,
 			256 * 1.3f,
 			ImageList["C_Reimu"]->GetMemDC(),
@@ -77,10 +92,11 @@ void Chat::Render(HDC _hdc)
 			256,
 			RGB(255, 0, 255));
 
+
 		// 리글
 		TransparentBlt(_hdc,
 			550,
-			250,
+			Y,
 			128 * 1.3f,
 			261 * 1.3f,
 			ImageList["C_Ligle"]->GetMemDC(),
@@ -93,7 +109,7 @@ void Chat::Render(HDC _hdc)
 		// 채팅배경
 		TransparentBlt(_hdc,
 			70,
-			250,
+			Y,
 			700,
 			500,
 			ImageList["Chat"]->GetMemDC(),
@@ -112,32 +128,38 @@ void Chat::Render(HDC _hdc)
 				{
 					TextOut(_hdc, 150, 515, L"레이무", 3);
 					TextOut(_hdc, 150, 550, L"거봐! 아무것도 없잖아", 12);
+					Chat2 == 1;
 				}
 				else if (Chat2 == 2)
 				{
 					TextOut(_hdc, 150, 515, L"유카리", 3);
 					TextOut(_hdc, 150, 550, L"밤은 이제 막 시작되었을뿐이야...", 19);
+					Chat2 == 2;
 				}
 				else if (Chat2 == 3)
 				{
 					TextOut(_hdc, 150, 515, L"유카리", 3);
 					TextOut(_hdc, 150, 550, L"서두르지 말라고", 8);
+					Chat2 == 3;
 				}
 				else if (Chat2 == 4)
 				{
 					TextOut(_hdc, 150, 515, L"레이무", 3);
 					TextOut(_hdc, 150, 550, L"서둘러 날 데리고 나왔으면서", 15);
 					TextOut(_hdc, 150, 570, L"서두르지 말고 자시고가 어딨어!", 17);
+					Chat2 == 4;
 				}
 				else if (Chat2 == 5)
 				{
 					TextOut(_hdc, 150, 515, L"레이무", 3);
 					TextOut(_hdc, 150, 550, L"보수는 비싸게 받을거니까 기억해둬", 18);
+					Chat2 == 5;
 				}
 				else if (Chat2 == 6)
 				{
 					TextOut(_hdc, 150, 515, L"???", 3);
 					TextOut(_hdc, 150, 550, L"잠깐, 아까부터 아무것도 없다니", 17);
+					Chat2 == 6;
 				}
 				else if (Chat2 == 7)
 				{
@@ -149,6 +171,11 @@ void Chat::Render(HDC _hdc)
 						BossList->push_back(CreateEnemy<Boss>(500, -50, 34, 59, 724));
 
 						ObjectManager::GetInstance()->GetPlayer()->SetBossOn(true);
+
+						SoundManager::GetInstance()->VolumeBGM();
+
+						SoundManager::GetInstance()->OnPlaySound("BGM1");
+
 					}
 				}
 				else if (Chat2 == 8)
@@ -223,7 +250,7 @@ void Chat::Render(HDC _hdc)
 					// 보스모드를 실행시켜 보스의 패턴을 진행할 수 있도록 한다.
 					ObjectManager::GetInstance()->GetPlayer()->SetBossMode(true);
 
-					Chat2 = 50;
+					
 
 				}
 			}
@@ -234,10 +261,11 @@ void Chat::Render(HDC _hdc)
 		{
 			if (ObjectManager::GetInstance()->GetPlayer()->GetWin())
 			{
-				if (Chat2 == 51)
+				if (Chat2 >= 21 && Chat2 <= 51)
 				{
 					TextOut(_hdc, 150, 515, L"유카리", 3);
 					TextOut(_hdc, 150, 550, L"정말이지, 밤은 벌레가 많아서 싫어.", 20);
+					Chat2 = 52;
 				}
 				else if (Chat2 == 52)
 				{
@@ -269,13 +297,11 @@ void Chat::Render(HDC _hdc)
 					TextOut(_hdc, 150, 515, L"유카리", 3);
 					TextOut(_hdc, 150, 550, L"그래도 걱정 같은 걸 하는 건 당신답지 않아.", 25);
 				}
-				else if (Chat2 == 58)
+				else if (Chat2 >= 58)
 				{
 					// 채팅모드를 종료시켜 채팅과 나오는 이미지를 제거
-					ObjectManager::GetInstance()->GetPlayer()->SetChat(false);
 					TransparentBlt(ImageList["Buffer"]->GetMemDC(), 60, 300, 724, 122, ImageList["GC"]->GetMemDC(), 0, 0, 724, 122, RGB(255, 0, 255));
-
-
+					Y = 1400;
 				}
 			}
 		}

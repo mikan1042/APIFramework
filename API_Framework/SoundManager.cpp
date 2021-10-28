@@ -102,20 +102,6 @@ void SoundManager::VolumeDown()
 
 void SoundManager::VolumeBGM()
 {
-
 	map<string, SOUNDINFO*>::iterator iter1 = SoundList.find("BGM");
-	iter1->second->SoundChannel->setVolume(0.5f);
-
-	map<string, SOUNDINFO*>::iterator iter2 = SoundList.find("reimu_at");
-	iter2->second->SoundChannel->setVolume(0.3f);
-
-	map<string, SOUNDINFO*>::iterator iter3 = SoundList.find("monster_at");
-	iter3->second->SoundChannel->setVolume(0.1f);
-
-	map<string, SOUNDINFO*>::iterator iter4 = SoundList.find("reimu_die");
-	iter4->second->SoundChannel->setVolume(0.3f);
-
-	map<string, SOUNDINFO*>::iterator iter5 = SoundList.find("item");
-	iter5->second->SoundChannel->setVolume(0.2f);
-
+	iter1->second->SoundChannel->setVolume(0.0f);
 }

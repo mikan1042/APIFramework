@@ -202,6 +202,9 @@
     <Filter Include="소스 파일\99. Manager\ScoreManager">
       <UniqueIdentifier>{b202d153-09a2-4abc-b921-318ba35cb9d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet3">
+      <UniqueIdentifier>{33a35925-a2bf-4936-bfd1-c8cbb4ccb6bf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="API_Framework.h">
@@ -390,6 +393,12 @@
     <ClInclude Include="Yukari_Bullet.h">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
     </ClInclude>
+    <ClInclude Include="Boss_Bullet3.h">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet3</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreManager.h">
+      <Filter>소스 파일\99. Manager\ScoreManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Framework.cpp">
@@ -538,6 +547,12 @@
     </ClCompile>
     <ClCompile Include="Yukari_Bullet.cpp">
       <Filter>소스 파일\02. Object\Bullet\BulletBridge\Yukari_Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Bullet3.cpp">
+      <Filter>소스 파일\02. Object\Bullet\BulletBridge\Boss_Bullet3</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreManager.cpp">
+      <Filter>소스 파일\99. Manager\ScoreManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -67,15 +67,10 @@ int Boss::Update(Transform& _rTransInfo)
 		{
 		  Speed -= 0.06f;
 		}
-
 		 if (_rTransInfo.Position.x < 90) { _rTransInfo.Position.x = 90; }
 		 if (_rTransInfo.Position.x > 600) { _rTransInfo.Position.x = 600; }
 		 if (_rTransInfo.Position.y < 70) { _rTransInfo.Position.y = 70; }
 		 if (_rTransInfo.Position.y > 200) { _rTransInfo.Position.y = 200; }
-
-
-
-
 	}
 
 
@@ -91,7 +86,7 @@ void Boss::Render(HDC _hdc)
 {
 	TransparentBlt(_hdc, // ** 최종 출력 위치
 		int(RealObject->GetPosition().x - (RealObject->GetScale().x / 2)),
-		int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2)),
+		int(RealObject->GetPosition().y - (RealObject->GetScale().y / 2) + 20),
 		int(RealObject->GetScale().x),
 		int(RealObject->GetScale().y),
 		ImageList[DrawKey]->GetMemDC(),
@@ -102,7 +97,7 @@ void Boss::Render(HDC _hdc)
 
 	TransparentBlt(_hdc, // ** 최종 출력 위치
 		int(RealObject->GetPosition().x - (RealObject->GetScale().x / 2)),
-		int(670),
+		int(690),
 		int(45),
 		int(16),
 		ImageList["Boss_Ld"]->GetMemDC(),

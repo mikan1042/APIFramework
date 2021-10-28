@@ -30,7 +30,7 @@ Player::~Player()
 void Player::Initialize()
 {
 	TransInfo.Position = Vector3(420.0f, 640.0f);
-	TransInfo.Scale = Vector3(33.0f, 49.0f);
+	TransInfo.Scale = Vector3(28.0f, 43.0f);
 
 	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
 	Collider.Scale = Vector3(TransInfo.Scale.x, TransInfo.Scale.y);
@@ -61,23 +61,44 @@ void Player::Initialize()
 	PlayerBoom = ObjectManager::GetInstance()->GetPlayerBoom();
 	EnemyBulletList = ObjectManager::GetInstance()->GetEnemyBulletList();
 
-	Power = 31;
+	Power = 1;
 	Boom = 3;
-	Hp = 3;
+	Hp = 5;
+
+	Anime = 0;
+	Anime1 = 0;
+	God = 0;
 
 }
 
 int Player::Update()
 {
+
+	if (AmTime + 170 <= GetTickCount64())
+	{
+		Anime += 28;
+		Anime1 += 32;
+		AmTime = GetTickCount64();
+
+		if (Anime >= 112)
+			Anime = 0;
+		if (Anime1 >= 128)
+			Anime1 = 0;
+	}
+
 	// 플레이어의 무적판정
 	if (ObjectManager::GetInstance()->GetPlayer()->GetGodMode())
 	{
-		if (Time2 + 2000 <= GetTickCount64())
+		if (Time2 + 1000 <= GetTickCount64())
 		{
-			ObjectManager::GetInstance()->GetPlayer()->SetGodMode(false);
+			++God;
 			Time2 = GetTickCount64();
 		}
+		if(God == 2)
+			ObjectManager::GetInstance()->GetPlayer()->SetGodMode(false);
 	}
+	else
+		God = 0;
 
 	// 충돌 좌표 = 현재 좌표 
 	Collider.Position = Vector3(TransInfo.Position.x, TransInfo.Position.y);
@@ -86,25 +107,20 @@ int Player::Update()
 
 	DWORD dwKey = InputManager::GetInstance()->GetKey();
 
-	// ** 왼쪽으로 이동 ** //
 	if (dwKey & KEY_LEFT)
 		TransInfo.Position.x -= Speed;
-	// ** 오른쪽으로 이동 ** //
 	if (dwKey & KEY_RIGHT)
 		TransInfo.Position.x += Speed;
-	// ** 위로 이동 ** //
 	if (dwKey & KEY_UP)
 		TransInfo.Position.y -= Speed;
-	// ** 아래로 이동 ** //
 	if (dwKey & KEY_DOWN)
 		TransInfo.Position.y += Speed;
 
-	// ** 쉬프트 키를 누르고 있을경우 캐릭터가 교체 ** //
 	if (GetAsyncKeyState(VK_SHIFT))
 		ObjectManager::GetInstance()->GetPlayer()->SetPlayer_Swap(true);
 	else
 		ObjectManager::GetInstance()->GetPlayer()->SetPlayer_Swap(false);
-	;
+	
 
 
 	// 이야기진행여부
@@ -124,29 +140,20 @@ int Player::Update()
 			// ** Z키를 누를경우
 			if (GetAsyncKeyState('Z'))
 			{
-				// // ** 파워가 1이상 30 이하일 경우
-				// if (Power > 1 || Power < 30)
-				// {
-				// 	// ** 0.2초마다 실행한다.
-				// 	if (Time1 + 200 <= GetTickCount64())
-				// 	{
-				// 		// ** BulletLIst에 탄막을 추가한다.
-				// 		BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f)));
-				// 		Time1 = GetTickCount64();
-				// 	}
-				// }
-				// ** 파워가 31이상 60 이하일 경우
-				if (Power > 1)
+				// ** 파워가 1이상 30 이하일 경우
+				if (Power >= 1)
 				{
-
 					// ** 0.2초마다 실행한다.
-					if (Time1 + 150 <= GetTickCount64())
+					if (Time1 + 200 <= GetTickCount64())
 					{
 						SoundManager::GetInstance()->OnPlaySound("reimu_at");
-						// ** BulletList에 탄막을 추가한다. 
+						// ** BulletLIst에 탄막을 추가한다.
 						BulletList->push_back(CreateBullet<LV1_Bullet>(0, Vector3(13.0f, 14.0f), TransInfo.Position));
-						BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f), TransInfo.Position));
-						BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f), TransInfo.Position));
+						if (Power >= 10)
+						{
+							BulletList->push_back(CreateBullet<LV2_Bullet>(60, Vector3(13.0f, 14.0f), TransInfo.Position));
+							BulletList->push_back(CreateBullet<LV2_Bullet>(120, Vector3(13.0f, 14.0f), TransInfo.Position));
+						}
 						Time1 = GetTickCount64();
 					}
 				}
@@ -202,21 +209,67 @@ int Player::Update()
 			Speed = 1.5f;
 			if (GetAsyncKeyState('Z'))
 			{
-				if (Power > 1)
+				if (Power >= 1)
 				{
 					if (Time1 + 150 <= GetTickCount64())
 					{
-						BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), (Vector3(TransInfo.Position.x - 10.0f, TransInfo.Position.y + 10.0f))));
-						BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), (Vector3(TransInfo.Position.x + 10.0f, TransInfo.Position.y + 10.0f))));
+						SoundManager::GetInstance()->OnPlaySound("reimu_at");
+						if (Power >= 10)
+						{
+							BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), (Vector3(TransInfo.Position.x - 10.0f, TransInfo.Position.y + 10.0f))));
+							BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), (Vector3(TransInfo.Position.x + 10.0f, TransInfo.Position.y + 10.0f))));
+						}
 						BulletList->push_back(CreateBullet<Yukari_Bullet>(0, Vector3(16.0f, 15.0f), TransInfo.Position));
-						Time1 = GetTickCount64();
 
+						Time1 = GetTickCount64();
 					}
 				}
+			}
+			if (GetAsyncKeyState('X'))
+			{
+				// 폭탄이 있는경우
+				if (Boom > 0)
+				{
+					// 폭탄 트리거가 false일 경우
+					if (!BoomOn)
+					{
+						SoundManager::GetInstance()->OnPlaySound("boom");
+
+						//폭탄이 중복해서 생성되지 못하도록 입력 딜레이를 준다. 
+							//폭탄을 생성한다.
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+						PlayerBoom->push_back(CreateBullet<Reimu_Boom>(float(rand() % (130) + 40), Vector3(86.0f, 85.0f), TransInfo.Position));
+
+						// 폭탄의 개수를 하나 줄인다
+						--Boom;
+						// 줄인 폭탄의 개수를 보내준다.
+						ObjectManager::GetInstance()->GetPlayer()->SetBoom(Boom);
+						// 폭탄 트리거를 true를 시켜 연속해서 폭탄을 사용하지 못하게 막는다
+						BoomOn = true;
+						ObjectManager::GetInstance()->GetPlayer()->SetGodMode(true);
+					}
+					// 폭탄 트리거가 true일 경우
+					else
+					{
+						// 폭탄을 사용한뒤 2초후 다시 폭탄을 사용할 수 있도록 한다.
+						if (Time2 + 2000 <= GetTickCount64())
+						{
+							//다시 폭탄을 사용할 수 있도록 트리거를 false로 변경한다.
+							BoomOn = false;
+							Time2 = GetTickCount64();
+						}
+					}
+
+				}
+
 			}
 
 
 		}
+	}
 
 
 		// ** 캐릭터가 화면을 벗어나지 못하게 하기위해 설정 ** //
@@ -232,8 +285,9 @@ int Player::Update()
 		}
 
 
+
 			return 0;
-		}
+		
 	
 }
 
@@ -248,8 +302,8 @@ void Player::Render(HDC _hdc)
 			int(TransInfo.Scale.x),
 			int(TransInfo.Scale.y),
 			ImageList["Reimu"]->GetMemDC(),
-			int(TransInfo.Scale.x * Frame),
-			int(TransInfo.Scale.y * 0),
+			Anime,
+			0,
 			int(TransInfo.Scale.x),
 			int(TransInfo.Scale.y),
 			RGB(255, 0, 255));
@@ -258,45 +312,18 @@ void Player::Render(HDC _hdc)
 	else
 	{
 		TransparentBlt(_hdc,
-			int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-			int(TransInfo.Position.y - (TransInfo.Scale.y / 2)),
-			int(TransInfo.Scale.x),
-			int(TransInfo.Scale.y),
+			int(TransInfo.Position.x - (32/2)),
+			int(TransInfo.Position.y - (45/2)),
+			int(32),
+			int(45),
 			ImageList["Yukari"]->GetMemDC(),
-			int(TransInfo.Scale.x * Frame),
-			int(TransInfo.Scale.y * 0),
-			int(TransInfo.Scale.x),
-			int(TransInfo.Scale.y),
+			Anime1,
+			0,
+			int(32),
+			int(45),
 			RGB(255, 0, 255));
 
-		// if (!Yukari_AT)
-		// {
-		// 	TransparentBlt(_hdc,
-		// 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-		// 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2)- 60),
-		// 		int(32),
-		// 		int(43),
-		// 		ImageList["Off"]->GetMemDC(),
-		// 		int(TransInfo.Scale.x * Frame),
-		// 		int(TransInfo.Scale.y * 0),
-		// 		int(32),
-		// 		int(43),
-		// 		RGB(255, 0, 255));
-		// }
-		// else
-		// {
-		// 	TransparentBlt(_hdc,
-		// 		int(TransInfo.Position.x - (TransInfo.Scale.x / 2)),
-		// 		int(TransInfo.Position.y - (TransInfo.Scale.y / 2) - 60),
-		// 		int(33),
-		// 		int(33),
-		// 		ImageList["On"]->GetMemDC(),
-		// 		int(TransInfo.Scale.x * Frame),
-		// 		int(TransInfo.Scale.y * 0),
-		// 		int(33),
-		// 		int(33),
-		// 		RGB(255, 0, 255));
-		// }
+
 	}
 }
 

@@ -7,6 +7,7 @@ class Logo : public Scene
 private:
 	map<string, Bitmap*> ImageList;
 	Object* p_Start;
+	ULONGLONG Time1;
 public:
 	virtual void Initialize()override;
 	virtual void Update()override;

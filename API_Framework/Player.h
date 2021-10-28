@@ -31,6 +31,12 @@ private:
 	vector<Object*>* PlayerBoom;
 	vector<Object*>* EnemyBulletList;
 
+	ULONGLONG AmTime;
+
+	int Anime;
+	int Anime1;
+	int God;
+
 
 public:
 	virtual void Initialize()override;

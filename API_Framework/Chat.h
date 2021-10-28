@@ -19,6 +19,7 @@ public:
 	bool Chat1;
 	bool BossStop;
 	int Chat2;
+	int Y;
 
 public:
 	template <typename T>
